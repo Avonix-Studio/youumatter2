@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls src/app/data/)",
+      "Bash(ls src/data/)",
+      "Bash(curl -sSL -o alpine.min.js \"https://cdn.jsdelivr.net/npm/alpinejs@3.13.10/dist/cdn.min.js\")",
+      "Bash(curl -sSL -o swiper.min.js \"https://cdn.jsdelivr.net/npm/swiper@11.0.7/swiper-bundle.min.js\")",
+      "Bash(curl -sSL -o swiper.min.css \"https://cdn.jsdelivr.net/npm/swiper@11.0.7/swiper-bundle.min.css\")",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)"
+    ]
+  }
+}

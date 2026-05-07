@@ -1,0 +1,10 @@
+CLAUDE.md
+figma_Youumatter_code
+
+# OS
+.DS_Store
+
+# Tooling
+node_modules/
+npm-debug.log
+.cache/

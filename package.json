@@ -1,0 +1,13 @@
+{
+  "name": "youumatter2",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Tailwind toolchain for the youumatter2 WordPress theme.",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/main.css --watch",
+    "build": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/main.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
