@@ -8,7 +8,8 @@
       "Bash(curl -sSL -o swiper.min.css \"https://cdn.jsdelivr.net/npm/swiper@11.0.7/swiper-bundle.min.css\")",
       "Bash(npm --version)",
       "Bash(npm install *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(php -l front-page.php)"
     ]
   }
 }
