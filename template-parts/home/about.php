@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
+$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.png';
 
 $beliefs = array(
 	array( 'k' => '01', 't' => __( "Therapy isn't fixing.", 'youumatter2' ),    's' => __( "It's meeting yourself with less armour.", 'youumatter2' ) ),
