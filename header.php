@@ -41,5 +41,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	get_template_part( 'template-parts/header/nav-desktop' );
 	get_template_part( 'template-parts/header/nav-mobile-drawer' );
 	?>
-</div>
-<?php /* Wrapper closed: drawer is fixed-positioned, no need to enclose page content. */ ?>
+<?php /* Alpine wrapper stays open until footer.php so sticky positioning has room. */ ?>

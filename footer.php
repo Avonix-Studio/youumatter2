@@ -21,6 +21,8 @@ $show_newsletter = (bool) get_theme_mod( 'yum2_footer_show_newsletter', true );
 
 <?php get_template_part( 'template-parts/shared/bottom-nav' ); ?>
 
+</div><?php /* Closes the Alpine wrapper opened in header.php. */ ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
