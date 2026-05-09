@@ -145,6 +145,55 @@
   }
 
   /**
+   * Alpine component for the desktop floating TOC pill (single-post only).
+   * Tracks the current visible h2 via IntersectionObserver and the page's
+   * scroll progress (0..1) for the circular ring.
+   *
+   * Items array is passed in from the partial via x-data="yum2FloatingToc(...)".
+   */
+  window.yum2FloatingToc = function (items) {
+    return {
+      open: false,
+      current: 0,
+      items: Array.isArray(items) ? items : [],
+      progress: 0,
+      _observer: null,
+      init: function () {
+        var self = this;
+        this.computeProgress();
+        window.addEventListener('scroll', function () { self.computeProgress(); }, { passive: true });
+        window.addEventListener('resize', function () { self.computeProgress(); }, { passive: true });
+
+        // Observe h2 ids matching our items list to update `current`.
+        if ('IntersectionObserver' in window && this.items.length) {
+          var headings = this.items
+            .map(function (it) { return document.getElementById(it.id); })
+            .filter(Boolean);
+          if (!headings.length) return;
+          this._observer = new IntersectionObserver(
+            function (entries) {
+              var visible = entries
+                .filter(function (e) { return e.isIntersecting; })
+                .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+              if (visible[0]) {
+                var idx = self.items.findIndex(function (it) { return it.id === visible[0].target.id; });
+                if (idx !== -1) self.current = idx;
+              }
+            },
+            { rootMargin: '-96px 0px -60% 0px', threshold: [0, 1] }
+          );
+          headings.forEach(function (h) { self._observer.observe(h); });
+        }
+      },
+      computeProgress: function () {
+        var html = document.documentElement;
+        var max = html.scrollHeight - window.innerHeight;
+        this.progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      },
+    };
+  };
+
+  /**
    * Copy a value to the clipboard. Reads from the data-yum2-copy attribute
    * of the triggering button, falling back to window.location.href.
    *

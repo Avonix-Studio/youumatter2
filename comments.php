@@ -14,6 +14,12 @@ if ( post_password_required() ) {
 }
 
 $comment_count = (int) get_comments_number();
+$error_kind    = isset( $_GET['comment_error'] ) ? sanitize_key( wp_unslash( $_GET['comment_error'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+// Pre-fill the author name if it came back through ?ca=...
+if ( ! empty( $_GET['ca'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$_COOKIE[ 'comment_author_' . COOKIEHASH ] = sanitize_text_field( wp_unslash( $_GET['ca'] ) );
+}
 ?>
 
 <section id="comments" class="relative px-5 md:px-8 pt-12 md:pt-16 pb-14 md:pb-20 border-t border-forest/10 bg-white">
@@ -34,6 +40,13 @@ $comment_count = (int) get_comments_number();
 				<?php echo esc_html( (string) $comment_count ); ?>
 			</span>
 		</div>
+
+		<?php if ( 'email' === $error_kind ) : ?>
+			<div role="alert" class="mb-5 px-5 py-3 rounded-[14px] border border-terracotta/40 bg-terracotta/10 text-terracotta" style="font-size:13.5px;line-height:1.55;">
+				<strong class="text-terracotta"><?php esc_html_e( 'Almost there.', 'youumatter2' ); ?></strong>
+				<?php esc_html_e( 'Please add a valid email so we can let you know if your comment is replied to. Your address stays private.', 'youumatter2' ); ?>
+			</div>
+		<?php endif; ?>
 
 		<?php
 		if ( comments_open() ) {

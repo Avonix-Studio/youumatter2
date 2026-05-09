@@ -470,15 +470,20 @@ function yum2_comment_form_fields( $fields ) {
 
 	$commenter = wp_get_current_commenter();
 
+	// Author opens a grid row; email closes it. Lays them side-by-side on
+	// >=sm and stacked on mobile, with a single top margin between the
+	// textarea above and the row.
 	$fields['author'] = sprintf(
-		'<p class="comment-form-author flex-1"><label class="sr-only" for="author">%s</label><input id="author" name="author" type="text" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>',
+		'<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">' .
+			'<p class="comment-form-author m-0"><label class="sr-only" for="author">%s</label><input id="author" name="author" type="text" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>',
 		esc_html__( 'Your name', 'youumatter2' ),
 		esc_attr( $commenter['comment_author'] ),
 		esc_attr__( 'Your name', 'youumatter2' )
 	);
 
 	$fields['email'] = sprintf(
-		'<p class="comment-form-email flex-1"><label class="sr-only" for="email">%s</label><input id="email" name="email" type="email" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>',
+			'<p class="comment-form-email m-0"><label class="sr-only" for="email">%s</label><input id="email" name="email" type="email" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>' .
+		'</div>',
 		esc_html__( 'Email (kept private)', 'youumatter2' ),
 		esc_attr( $commenter['comment_author_email'] ),
 		esc_attr__( 'Email (kept private)', 'youumatter2' )
@@ -493,9 +498,76 @@ add_filter( 'comment_form_default_fields', 'yum2_comment_form_fields' );
  */
 function yum2_comment_form_textarea( $field ) {
 	return sprintf(
-		'<p class="comment-form-comment"><label class="sr-only" for="comment">%s</label><textarea id="comment" name="comment" rows="3" placeholder="%s" required class="w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-4 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors resize-none" style="font-family:\'Newsreader\',serif;font-size:15px;line-height:1.55;"></textarea></p>',
+		'<p class="comment-form-comment m-0"><label class="sr-only" for="comment">%s</label><textarea id="comment" name="comment" rows="3" placeholder="%s" required class="w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-4 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors resize-none" style="font-family:\'Newsreader\',serif;font-size:15px;line-height:1.55;"></textarea></p>',
 		esc_html__( 'Share a thought', 'youumatter2' ),
 		esc_attr__( 'Share a thought…', 'youumatter2' )
 	);
 }
 add_filter( 'comment_form_field_comment', 'yum2_comment_form_textarea' );
+
+/**
+ * Catch missing/invalid email at submit time and redirect back to the
+ * post with ?comment_error=email so the comments section can show a
+ * styled inline error instead of WP's default unstyled wp_die page.
+ *
+ * Logged-in users have their email set from their account, so we skip
+ * the validation for them.
+ *
+ * @param int $comment_post_id
+ */
+function yum2_validate_email_pre_comment( $comment_post_id ) {
+	if ( is_user_logged_in() ) {
+		return;
+	}
+
+	$email = isset( $_POST['email'] ) ? trim( wp_unslash( $_POST['email'] ) ) : '';
+	if ( '' !== $email && is_email( $email ) ) {
+		return;
+	}
+
+	$post_url = get_permalink( $comment_post_id );
+	if ( ! $post_url ) {
+		return;
+	}
+
+	$qs = array( 'comment_error' => 'email' );
+	if ( ! empty( $_POST['author'] ) ) {
+		$qs['ca'] = sanitize_text_field( wp_unslash( $_POST['author'] ) );
+	}
+	if ( ! empty( $_POST['comment'] ) ) {
+		// Stash the comment text in a transient so the user doesn't lose
+		// what they typed. 30-minute window, keyed on the IP.
+		$key = 'yum2_pending_' . md5( ( $_SERVER['REMOTE_ADDR'] ?? 'unknown' ) . '|' . $comment_post_id );
+		set_transient( $key, sanitize_textarea_field( wp_unslash( $_POST['comment'] ) ), 30 * MINUTE_IN_SECONDS );
+	}
+
+	wp_safe_redirect( add_query_arg( $qs, $post_url ) . '#respond' );
+	exit;
+}
+add_action( 'pre_comment_on_post', 'yum2_validate_email_pre_comment' );
+
+/**
+ * Re-populate the comment textarea on error redirect so the user
+ * doesn't have to re-type their thought.
+ */
+function yum2_repopulate_comment_text( $args ) {
+	if ( empty( $_GET['comment_error'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		return $args;
+	}
+	$key   = 'yum2_pending_' . md5( ( $_SERVER['REMOTE_ADDR'] ?? 'unknown' ) . '|' . get_the_ID() );
+	$saved = get_transient( $key );
+	if ( false === $saved || '' === $saved ) {
+		return $args;
+	}
+	delete_transient( $key );
+	$saved_attr = esc_attr( $saved );
+	if ( isset( $args['comment_field'] ) ) {
+		$args['comment_field'] = preg_replace(
+			'#(<textarea[^>]*\bname=["\']comment["\'][^>]*>)(</textarea>)#',
+			'$1' . $saved_attr . '$2',
+			$args['comment_field']
+		);
+	}
+	return $args;
+}
+add_filter( 'comment_form_defaults', 'yum2_repopulate_comment_text' );

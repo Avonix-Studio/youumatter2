@@ -62,6 +62,8 @@ while ( have_posts() ) :
 
 		<?php get_template_part( 'template-parts/home/gentle-invitation' ); ?>
 
+		<?php get_template_part( 'template-parts/post/floating-toc' ); ?>
+
 	</main>
 
 	<?php
