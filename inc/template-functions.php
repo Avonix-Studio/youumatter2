@@ -169,69 +169,79 @@ add_filter( 'get_custom_logo', 'yum2_fix_svg_custom_logo' );
  * ----------------------------------------------------------------*/
 
 /**
- * Parse the rendered post content for h2/h3 headings, inject deterministic
- * IDs, and return both the modified HTML and a TOC array suitable for the
- * sidebar + mobile floating bar.
+ * Parse rendered post content for h2/h3 headings, inject deterministic
+ * IDs, and return both the modified HTML and a TOC array.
  *
- * Cached on the post object via a static so multiple calls in the same
- * request (sidebar TOC, mobile TOC, content output) share work.
+ * Implementation note: a regex pass beats DOMDocument here. WP content
+ * sometimes contains tags that DOMDocument's strict HTML parser chokes
+ * on, and getElementById() needs a DTD we can't easily provide. The
+ * regex is heading-only, runs once per cache miss, and fails quietly.
  *
- * @param string|null $content Optional pre-fetched HTML. Defaults to apply_filters('the_content', get_the_content()).
+ * Cached on the post id + content hash so the sidebar TOC, mobile TOC,
+ * and content output share work.
+ *
+ * @param string|null $content Pre-fetched HTML. Defaults to apply_filters('the_content', ...).
  * @param int|null    $post_id Defaults to current loop post.
  * @return array{html:string, toc:array<int,array{id:string,text:string,level:int}>}
  */
 function yum2_post_toc( $content = null, $post_id = null ) {
 	static $cache = array();
+	static $busy  = false;
 
 	$post_id = $post_id ?: get_the_ID();
 	if ( ! $post_id ) {
 		return array( 'html' => (string) $content, 'toc' => array() );
 	}
 
-	$cache_key = $post_id . '|' . md5( (string) $content );
+	if ( null === $content ) {
+		// Re-entry guard: yum2_apply_toc_ids hooks the_content, and calling
+		// apply_filters('the_content') here would trigger it. Skip the
+		// recursion and fetch the raw content instead; we'll inject IDs.
+		if ( $busy ) {
+			return array( 'html' => '', 'toc' => array() );
+		}
+		$busy    = true;
+		$content = apply_filters( 'the_content', get_post_field( 'post_content', $post_id ) );
+		$busy    = false;
+	}
+
+	$content = (string) $content;
+
+	$cache_key = $post_id . '|' . md5( $content );
 	if ( isset( $cache[ $cache_key ] ) ) {
 		return $cache[ $cache_key ];
 	}
 
-	if ( null === $content ) {
-		$content = apply_filters( 'the_content', get_post_field( 'post_content', $post_id ) );
-	}
-
-	$content = (string) $content;
 	if ( '' === trim( $content ) ) {
 		$cache[ $cache_key ] = array( 'html' => $content, 'toc' => array() );
 		return $cache[ $cache_key ];
 	}
 
-	$dom = new DOMDocument( '1.0', 'UTF-8' );
-	libxml_use_internal_errors( true );
-	$dom->loadHTML(
-		'<?xml encoding="UTF-8"><div id="yum2-content-root">' . $content . '</div>',
-		LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
-	);
-	libxml_clear_errors();
-
 	$toc      = array();
 	$used_ids = array();
-	$xpath    = new DOMXPath( $dom );
-	$nodes    = $xpath->query( '//h2 | //h3' );
 
-	if ( $nodes && $nodes->length > 0 ) {
-		foreach ( $nodes as $node ) {
-			$text = trim( $node->textContent );
+	$updated = preg_replace_callback(
+		'#<(h[23])([^>]*)>(.*?)</\1>#is',
+		function ( $m ) use ( &$toc, &$used_ids ) {
+			$tag   = strtolower( $m[1] );
+			$attrs = $m[2];
+			$inner = $m[3];
+
+			$text = trim( wp_strip_all_tags( $inner ) );
 			if ( '' === $text ) {
-				continue;
+				return $m[0];
 			}
 
-			$id = $node->getAttribute( 'id' );
-			if ( '' === $id ) {
-				$id = sanitize_title( $text );
+			// Reuse existing id when present.
+			$existing_id = '';
+			if ( preg_match( '#\bid=(["\'])(.*?)\1#i', $attrs, $idm ) ) {
+				$existing_id = $idm[2];
 			}
+
+			$id = $existing_id ?: sanitize_title( $text );
 			if ( '' === $id ) {
 				$id = 'section-' . ( count( $toc ) + 1 );
 			}
-
-			// Disambiguate duplicates.
 			$base = $id;
 			$n    = 2;
 			while ( in_array( $id, $used_ids, true ) ) {
@@ -240,27 +250,30 @@ function yum2_post_toc( $content = null, $post_id = null ) {
 			}
 			$used_ids[] = $id;
 
-			$node->setAttribute( 'id', $id );
-
 			$toc[] = array(
 				'id'    => $id,
 				'text'  => $text,
-				'level' => 'h3' === $node->nodeName ? 3 : 2,
+				'level' => 'h3' === $tag ? 3 : 2,
 			);
-		}
+
+			if ( $existing_id === $id ) {
+				return $m[0];
+			}
+
+			$attrs_clean = '' !== $existing_id
+				? preg_replace( '#\sid=(["\']).*?\1#i', '', $attrs )
+				: $attrs;
+
+			return '<' . $tag . ' id="' . esc_attr( $id ) . '"' . $attrs_clean . '>' . $inner . '</' . $tag . '>';
+		},
+		$content
+	);
+
+	if ( null === $updated ) {
+		$updated = $content;
 	}
 
-	$root  = $dom->getElementById( 'yum2-content-root' );
-	$html  = '';
-	if ( $root ) {
-		foreach ( $root->childNodes as $child ) {
-			$html .= $dom->saveHTML( $child );
-		}
-	} else {
-		$html = $content;
-	}
-
-	$cache[ $cache_key ] = array( 'html' => $html, 'toc' => $toc );
+	$cache[ $cache_key ] = array( 'html' => $updated, 'toc' => $toc );
 	return $cache[ $cache_key ];
 }
 
@@ -281,23 +294,31 @@ function yum2_inject_mid_cta( $content ) {
 		return $content;
 	}
 
-	preg_match_all( '#</h2>#i', $content, $matches, PREG_OFFSET_CAPTURE );
-	if ( empty( $matches[0] ) ) {
+	try {
+		if ( ! preg_match_all( '#</h2>#i', $content, $matches, PREG_OFFSET_CAPTURE ) ) {
+			return $content;
+		}
+		if ( empty( $matches[0] ) ) {
+			return $content;
+		}
+
+		$target_index = count( $matches[0] ) >= 2 ? 1 : 0;
+		$insert_at    = $matches[0][ $target_index ][1] + strlen( '</h2>' );
+
+		ob_start();
+		get_template_part( 'template-parts/post/mid-cta' );
+		$cta_html = trim( (string) ob_get_clean() );
+		if ( '' === $cta_html ) {
+			return $content;
+		}
+
+		return substr( $content, 0, $insert_at ) . $cta_html . substr( $content, $insert_at );
+	} catch ( \Throwable $e ) {
+		if ( function_exists( 'error_log' ) ) {
+			error_log( '[youumatter2] mid-cta inject failed: ' . $e->getMessage() );
+		}
 		return $content;
 	}
-
-	// Insert after the SECOND closing h2; if there's only one, after that one.
-	$target_index = count( $matches[0] ) >= 2 ? 1 : 0;
-	$insert_at    = $matches[0][ $target_index ][1] + strlen( '</h2>' );
-
-	ob_start();
-	get_template_part( 'template-parts/post/mid-cta' );
-	$cta_html = trim( (string) ob_get_clean() );
-	if ( '' === $cta_html ) {
-		return $content;
-	}
-
-	return substr( $content, 0, $insert_at ) . $cta_html . substr( $content, $insert_at );
 }
 add_filter( 'the_content', 'yum2_inject_mid_cta', 12 );
 
@@ -312,8 +333,15 @@ function yum2_apply_toc_ids( $content ) {
 	if ( ! is_singular( 'post' ) || ! in_the_loop() || ! is_main_query() ) {
 		return $content;
 	}
-	$result = yum2_post_toc( $content );
-	return $result['html'];
+	try {
+		$result = yum2_post_toc( $content );
+		return $result['html'];
+	} catch ( \Throwable $e ) {
+		if ( function_exists( 'error_log' ) ) {
+			error_log( '[youumatter2] toc-id inject failed: ' . $e->getMessage() );
+		}
+		return $content;
+	}
 }
 add_filter( 'the_content', 'yum2_apply_toc_ids', 14 );
 

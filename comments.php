@@ -45,8 +45,9 @@ $comment_count = (int) get_comments_number();
 					'title_reply_after'  => '',
 					'comment_notes_before' => '',
 					'comment_notes_after'  => '',
-					'submit_button'      => '<button type="submit" class="%4$s" style="font-size:13.5px;font-weight:600;">' . esc_html__( 'Post comment', 'youumatter2' ) . ' <span aria-hidden>→</span></button>',
+					'submit_button'      => '<button name="%1$s" type="submit" id="%2$s" class="%3$s" style="font-size:13.5px;font-weight:600;">%4$s <span aria-hidden>&rarr;</span></button>',
 					'class_submit'       => 'inline-flex items-center justify-center gap-2 bg-forest hover:bg-forest/90 disabled:opacity-50 text-cream rounded-[14px] h-[48px] px-6 transition-colors shrink-0 mt-3',
+					'label_submit'       => __( 'Post comment', 'youumatter2' ),
 					'submit_field'       => '<p class="form-submit mt-3 flex flex-col sm:flex-row sm:items-center gap-3">%1$s %2$s</p>',
 					'logged_in_as'       => '',
 				)
