@@ -145,6 +145,34 @@
   }
 
   /**
+   * Copy a value to the clipboard. Reads from the data-yum2-copy attribute
+   * of the triggering button, falling back to window.location.href.
+   *
+   * Used by template-parts/post/share.php's "Copy link" button. The Alpine
+   * binding handles the visual "Copied!" toast separately.
+   *
+   * @param {HTMLElement} btn
+   */
+  window.yum2.copyLink = function (btn) {
+    var value = (btn && btn.getAttribute && btn.getAttribute('data-yum2-copy')) || window.location.href;
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).catch(function () {});
+      return;
+    }
+    // Legacy fallback: hidden textarea + execCommand.
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = value;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+  };
+
+  /**
    * Open the Calendly popup for a given event URL.
    *
    * @param {string} url Calendly event URL.
