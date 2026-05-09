@@ -46,6 +46,7 @@ function yum2_setup() {
 			'primary' => __( 'Primary Menu', 'youumatter2' ),
 			'mobile'  => __( 'Mobile Menu', 'youumatter2' ),
 			'footer'  => __( 'Footer Menu', 'youumatter2' ),
+			'legal'   => __( 'Legal Menu', 'youumatter2' ),
 		)
 	);
 

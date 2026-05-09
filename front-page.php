@@ -18,6 +18,7 @@ get_header();
 	get_template_part( 'template-parts/home/you-might-be-feeling' );
 	get_template_part( 'template-parts/home/about' );
 	get_template_part( 'template-parts/home/how-it-works' );
+	get_template_part( 'template-parts/home/gentle-invitation' );
 	?>
 </main>
 

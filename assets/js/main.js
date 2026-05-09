@@ -53,9 +53,71 @@
     window.yum2.feelingSwiper = swiper;
   }
 
+  /**
+   * Scroll progress: writes 0..1 to --yum2-scroll on <html> and toggles
+   * .yum2-scrolled past 8px so the sticky header can darken its background.
+   */
+  function initScrollProgress() {
+    var html = document.documentElement;
+    var update = function () {
+      var max = html.scrollHeight - window.innerHeight;
+      var ratio = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      html.style.setProperty('--yum2-scroll', String(ratio));
+      html.classList.toggle('yum2-scrolled', window.scrollY > 8);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
+  /**
+   * Focus trap for the mobile drawer. Stores the previously focused
+   * element, focuses the first focusable child of `panel`, and intercepts
+   * Tab / Shift-Tab to cycle inside the panel until released.
+   *
+   * @param {HTMLElement} panel
+   * @returns {() => void} release function — restores prior focus.
+   */
+  window.yum2.trapFocus = function (panel) {
+    if (!panel) return function () {};
+    var prevFocus = document.activeElement;
+    var selector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    var focusables = function () {
+      return Array.prototype.slice
+        .call(panel.querySelectorAll(selector))
+        .filter(function (el) { return el.offsetParent !== null; });
+    };
+    var first = focusables()[0];
+    if (first) first.focus();
+
+    var onKey = function (e) {
+      if (e.key !== 'Tab') return;
+      var nodes = focusables();
+      if (!nodes.length) return;
+      var firstNode = nodes[0];
+      var lastNode = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === firstNode) {
+        e.preventDefault();
+        lastNode.focus();
+      } else if (!e.shiftKey && document.activeElement === lastNode) {
+        e.preventDefault();
+        firstNode.focus();
+      }
+    };
+    panel.addEventListener('keydown', onKey);
+
+    return function release() {
+      panel.removeEventListener('keydown', onKey);
+      if (prevFocus && typeof prevFocus.focus === 'function') {
+        prevFocus.focus();
+      }
+    };
+  };
+
   function start() {
     startAlpine();
     initFeelingSwiper();
+    initScrollProgress();
   }
 
   if (document.readyState === 'loading') {

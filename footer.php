@@ -1,6 +1,6 @@
 <?php
 /**
- * Site footer.
+ * Site footer. Newsletter + contact strip + meta band, then mobile bottom-nav.
  *
  * @package youumatter2
  */
@@ -8,13 +8,18 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$show_newsletter = (bool) get_theme_mod( 'yum2_footer_show_newsletter', true );
 ?>
 
-<footer class="site-footer bg-forest text-cream mt-24">
-	<div class="mx-auto max-w-7xl px-4 md:px-6 py-12 text-sm">
-		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( get_bloginfo( 'name' ) ); ?>.</p>
-	</div>
-</footer>
+<?php if ( $show_newsletter ) : ?>
+	<?php get_template_part( 'template-parts/footer/newsletter' ); ?>
+<?php endif; ?>
+
+<?php get_template_part( 'template-parts/footer/contact-strip' ); ?>
+<?php get_template_part( 'template-parts/footer/meta' ); ?>
+
+<?php get_template_part( 'template-parts/shared/bottom-nav' ); ?>
 
 <?php wp_footer(); ?>
 </body>
