@@ -74,7 +74,7 @@
   /* Constrain WP's custom-logo output. WordPress emits the image at its
      natural width/height; without these, large source files blow out the
      header bar and footer. Site Identity in Customizer uploads here. */
-  .custom-logo-link { display: inline-flex; align-items: center; }
+  a.custom-logo-link { display: inline-flex; align-items: center; flex-shrink: 0; }
   .custom-logo {
     height: auto;
     width: auto;

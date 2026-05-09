@@ -62,3 +62,44 @@ function yum2_handle_subscribe() {
 }
 add_action( 'admin_post_yum2_subscribe', 'yum2_handle_subscribe' );
 add_action( 'admin_post_nopriv_yum2_subscribe', 'yum2_handle_subscribe' );
+
+/**
+ * Repair the_custom_logo() output for SVG attachments.
+ *
+ * WordPress core uses wp_get_attachment_image_src() for the custom logo,
+ * which returns false for SVGs (no raster dimensions), so the markup
+ * comes back empty. We rebuild it with a clean <img> the .custom-logo
+ * CSS rules can size.
+ *
+ * @param string $html Original markup from get_custom_logo().
+ * @return string
+ */
+function yum2_fix_svg_custom_logo( $html ) {
+	$logo_id = (int) get_theme_mod( 'custom_logo' );
+	if ( ! $logo_id ) {
+		return $html;
+	}
+
+	$mime = (string) get_post_mime_type( $logo_id );
+	if ( 'image/svg+xml' !== $mime && 'image/svg' !== $mime ) {
+		return $html;
+	}
+
+	$src = wp_get_attachment_url( $logo_id );
+	if ( ! $src ) {
+		return $html;
+	}
+
+	$alt = (string) get_post_meta( $logo_id, '_wp_attachment_image_alt', true );
+	if ( '' === $alt ) {
+		$alt = get_bloginfo( 'name' );
+	}
+
+	return sprintf(
+		'<a href="%1$s" class="custom-logo-link" rel="home"><img class="custom-logo" src="%2$s" alt="%3$s" loading="eager" decoding="async" /></a>',
+		esc_url( home_url( '/' ) ),
+		esc_url( $src ),
+		esc_attr( $alt )
+	);
+}
+add_filter( 'get_custom_logo', 'yum2_fix_svg_custom_logo' );

@@ -45,15 +45,13 @@ $location      = (string) yum2_get_contact( 'clinic_address' );
 	class="fixed inset-x-0 top-0 z-50 md:hidden bg-cream border-b border-forest/15 shadow-[0_8px_40px_rgba(0,0,0,0.1)]"
 >
 	<div class="flex items-center justify-between h-16 px-5 border-b border-forest/15">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
-			<?php
-			if ( has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl' ) );
-			}
-			?>
-		</a>
+		<?php if ( has_custom_logo() ) : ?>
+			<?php the_custom_logo(); ?>
+		<?php else : ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
+				<?php get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl' ) ); ?>
+			</a>
+		<?php endif; ?>
 		<button
 			type="button"
 			@click="open = false"

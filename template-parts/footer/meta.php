@@ -21,15 +21,15 @@ $copyright = str_replace( '%year%', $year, $copyright );
 	<div class="max-w-6xl mx-auto">
 		<div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 pb-6">
 			<div>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center mb-3" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
-					<?php
-					if ( has_custom_logo() ) {
-						the_custom_logo();
-					} else {
-						get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl' ) );
-					}
-					?>
-				</a>
+				<div class="inline-flex items-center mb-3">
+					<?php if ( has_custom_logo() ) : ?>
+						<?php the_custom_logo(); ?>
+					<?php else : ?>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
+							<?php get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl' ) ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
 				<?php if ( '' !== $tagline ) : ?>
 					<p class="text-forest/65 max-w-sm" style="font-size:13px;line-height:1.6;">
 						<?php echo esc_html( $tagline ); ?>

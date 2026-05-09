@@ -17,15 +17,14 @@ $show_pill      = $show_pill_mod && yum2_get_contact( 'accepting_clients' ) && !
 	<div aria-hidden class="absolute left-0 bottom-0 h-[2px] bg-forest pointer-events-none transition-[width] duration-150 ease-out" style="width: calc(var(--yum2-scroll, 0) * 100%);"></div>
 
 	<div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-[74px]">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center shrink-0" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
-			<?php
-			if ( has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl md:text-2xl' ) );
-			}
-			?>
-		</a>
+		<?php if ( has_custom_logo() ) : ?>
+			<?php // the_custom_logo() emits its own <a class="custom-logo-link">; don't double-wrap. ?>
+			<?php the_custom_logo(); ?>
+		<?php else : ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center shrink-0" aria-label="<?php esc_attr_e( 'youumatter2 home', 'youumatter2' ); ?>">
+				<?php get_template_part( 'template-parts/shared/wordmark', null, array( 'class' => 'text-xl md:text-2xl' ) ); ?>
+			</a>
+		<?php endif; ?>
 
 		<nav class="yum2-nav hidden md:flex items-center absolute left-1/2 -translate-x-1/2" aria-label="<?php esc_attr_e( 'Primary', 'youumatter2' ); ?>">
 			<?php
