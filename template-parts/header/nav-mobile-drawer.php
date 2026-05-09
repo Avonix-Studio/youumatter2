@@ -31,8 +31,7 @@ $location      = (string) yum2_get_contact( 'clinic_address' );
 	x-show="open"
 	x-cloak
 	x-ref="panel"
-	@click.outside="open = false"
-	@click="if ($event.target.tagName === 'A') open = false"
+	@click="if ($event.target.closest('a')) open = false"
 	x-transition:enter="transition ease-out duration-300"
 	x-transition:enter-start="-translate-y-full"
 	x-transition:enter-end="translate-y-0"

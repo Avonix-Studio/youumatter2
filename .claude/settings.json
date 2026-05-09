@@ -13,7 +13,8 @@
       "Bash(mkdir -p \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts/home\" \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts/shared\")",
       "Bash(grep -o \"[^,{}]*bg-cream[^,{}]*{[^}]*}\" assets/css/main.css)",
       "Bash(php -l header.php)",
-      "Bash(php -l footer.php)"
+      "Bash(php -l footer.php)",
+      "Bash(php -l template-parts/header/nav-mobile-drawer.php)"
     ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
