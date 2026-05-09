@@ -1,9 +1,12 @@
 /**
- * Block-editor stylesheet. Compiled to assets/css/editor.css and loaded
- * via add_editor_style() so Sanya sees actual rendering inside Gutenberg.
+ * Block-editor stylesheet. Compiled to assets/css/editor.css and loaded via
+ * add_editor_style() so Sanya sees actual rendering inside Gutenberg.
  *
- * Imports the same Tailwind layers as the front-end build, but wraps the
- * prose rules so they target the editor canvas (.editor-styles-wrapper).
+ * Selectors are bare (no .editor-styles-wrapper prefix). WordPress handles
+ * scoping automatically: in Gutenberg's iframe mode the rules apply directly
+ * to the iframe body; in non-iframe contexts WP prefixes element selectors
+ * with .editor-styles-wrapper for us. Manually prefixing breaks both modes
+ * because Tailwind's purge drops unused class selectors.
  */
 
 @tailwind base;
@@ -11,7 +14,7 @@
 @tailwind utilities;
 
 @layer base {
-  /* Self-hosted fonts: same @font-face declarations as the front-end. */
+  /* Self-hosted fonts. */
   @font-face {
     font-family: 'Newsreader';
     font-style: normal;
@@ -55,125 +58,210 @@
     src: url('../fonts/plus-jakarta-sans/PlusJakartaSans-600.woff2') format('woff2');
   }
 
-  .editor-styles-wrapper {
+  body {
     background: theme('colors.cream');
     color: theme('colors.ink');
     font-family: theme('fontFamily.body');
-  }
-
-  .editor-styles-wrapper h1,
-  .editor-styles-wrapper h2,
-  .editor-styles-wrapper h3,
-  .editor-styles-wrapper h4 {
-    font-family: theme('fontFamily.heading');
-    color: theme('colors.forest');
-    font-weight: 600;
-    letter-spacing: -0.015em;
-  }
-
-  .editor-styles-wrapper h2 {
-    font-size: 2rem;
-    line-height: 1.2;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .editor-styles-wrapper h3 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .editor-styles-wrapper p,
-  .editor-styles-wrapper li {
     font-size: 1.0625rem;
     line-height: 1.75;
   }
 
-  .editor-styles-wrapper blockquote {
+  /* Headings: forest green, Newsreader, with clear visual hierarchy. */
+  h1, h2, h3, h4, h5, h6 {
     font-family: theme('fontFamily.heading');
-    font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-left: 3px solid theme('colors.terracotta');
-    padding-left: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: theme('colors.ink');
+    color: theme('colors.forest');
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
   }
+  /* Editor post-title h1 (the big "Add title" field). */
+  h1 { font-size: 2.5rem; line-height: 1.1; }
+  h2 { font-size: 2rem; line-height: 1.2; margin-top: 2rem; margin-bottom: 0.75rem; }
+  h3 { font-size: 1.5rem; line-height: 1.3; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+  h4 { font-size: 1.25rem; line-height: 1.35; }
 
-  .editor-styles-wrapper ul > li::marker,
-  .editor-styles-wrapper ol > li::marker {
+  p { font-size: 1.0625rem; line-height: 1.75; }
+
+  /* Lists: visible bullets / numbers. The block editor strips list-style
+     by default in some configs; explicitly restore them. */
+  ul {
+    list-style: disc outside;
+    padding-left: 1.5rem;
+    margin: 1.25em 0;
+  }
+  ol {
+    list-style: decimal outside;
+    padding-left: 1.5rem;
+    margin: 1.25em 0;
+  }
+  ul > li,
+  ol > li {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    padding-left: 0.25rem;
+  }
+  ul > li::marker,
+  ol > li::marker {
     color: theme('colors.terracotta');
   }
 
-  .editor-styles-wrapper a {
-    color: theme('colors.forest');
-    text-decoration-color: rgba(43, 83, 41, 0.3);
-    text-underline-offset: 4px;
+  /* Quote: terracotta left border, italic Newsreader. */
+  blockquote {
+    font-family: theme('fontFamily.heading');
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-left: 3px solid theme('colors.terracotta');
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 1.5rem 0;
+    color: theme('colors.ink');
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: theme('fontFamily.body');
+    color: theme('colors.terracotta');
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 
-  .editor-styles-wrapper code {
+  /* Links: forest with subtle underline. */
+  a {
+    color: theme('colors.forest');
+    text-decoration: underline;
+    text-decoration-color: rgba(43, 83, 41, 0.3);
+    text-underline-offset: 4px;
+    font-weight: 500;
+  }
+
+  /* Inline code: sage-light pill. */
+  code {
     background: rgba(209, 229, 208, 0.4);
     padding: 0.15rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.9em;
+    font-weight: 500;
   }
-
-  .editor-styles-wrapper pre {
+  /* Code block: dark forest with cream text. */
+  pre {
     background: theme('colors.forest');
     color: theme('colors.cream');
     border-radius: 1rem;
     padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
   }
 
-  .editor-styles-wrapper hr,
-  .editor-styles-wrapper .wp-block-separator {
+  /* HR / separator. */
+  hr,
+  .wp-block-separator {
+    border: 0;
     border-top: 1px solid theme('colors.sage-light');
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
     background: none;
   }
 
-  /* Details block: same accordion-ish style so it doesn't look out of place. */
-  .editor-styles-wrapper details {
+  /* Strong / emphasis. */
+  strong, b {
+    font-weight: 600;
+    color: theme('colors.ink');
+  }
+  em, i {
+    font-style: italic;
+  }
+
+  /* Details / summary: branded accordion preview. */
+  details {
     background: theme('colors.cream');
     border: 1px solid rgba(43, 83, 41, 0.15);
     border-radius: 1rem;
     margin: 0.75rem 0;
     overflow: hidden;
+    padding: 0;
   }
-  .editor-styles-wrapper details summary {
+  details summary {
     padding: 1rem 1.25rem;
     font-family: theme('fontFamily.heading');
     color: theme('colors.forest');
     font-weight: 500;
+    font-size: 1.0625rem;
     cursor: pointer;
+    list-style: none;
   }
-  .editor-styles-wrapper details > *:not(summary) {
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before {
+    content: '▸ ';
+    color: theme('colors.terracotta');
+    margin-right: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  details[open] summary::before {
+    content: '▾ ';
+  }
+  details > *:not(summary) {
     padding: 0 1.25rem 1rem;
   }
 
-  /* Pullquote */
-  .editor-styles-wrapper .wp-block-pullquote {
+  /* Pullquote: branded panel with sage tint. */
+  .wp-block-pullquote {
     border-top: 1px solid rgba(43, 83, 41, 0.1);
     border-bottom: 1px solid rgba(43, 83, 41, 0.1);
     background: rgba(209, 229, 208, 0.3);
     padding: 2rem 1.5rem;
     margin: 2rem 0;
     text-align: center;
+    border-left: 0;
   }
-  .editor-styles-wrapper .wp-block-pullquote p {
+  .wp-block-pullquote p {
     font-family: theme('fontFamily.heading');
     font-style: italic;
     color: theme('colors.forest');
     font-size: 1.5rem;
     line-height: 1.4;
+    margin: 0;
+  }
+  .wp-block-pullquote cite {
+    display: block;
+    margin-top: 0.75rem;
+    color: theme('colors.terracotta');
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
-  /* Image rounded preview */
-  .editor-styles-wrapper .wp-block-image img {
+  /* Image: rounded with caption. */
+  .wp-block-image img {
     border-radius: 1rem;
+  }
+  .wp-block-image figcaption {
+    color: theme('colors.muted');
+    font-style: italic;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  /* Quote block (different from blockquote in some markup paths). */
+  .wp-block-quote {
+    font-style: normal;
+  }
+  .wp-block-quote p {
+    font-family: theme('fontFamily.heading');
+    font-style: italic;
+  }
+  .wp-block-quote cite {
+    color: theme('colors.terracotta');
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: block;
   }
 }
