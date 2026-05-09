@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog post card. Caller has already called the_post() — this part reads
+ * Blog post card. Caller has already called the_post(); this part reads
  * from the loop context.
  *
  * @package youumatter2
