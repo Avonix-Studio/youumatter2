@@ -54,20 +54,38 @@
   }
 
   /**
-   * Scroll progress: writes 0..1 to --yum2-scroll on <html> and toggles
-   * .yum2-scrolled past 8px so the sticky header can darken its background.
+   * Scroll progress: drives the header underline via transform: scaleX,
+   * and toggles .yum2-scrolled on <html> past 8px so the sticky header
+   * can darken its background.
+   *
+   * Uses requestAnimationFrame to coalesce scroll events and write to the
+   * DOM only once per frame.
    */
   function initScrollProgress() {
     var html = document.documentElement;
-    var update = function () {
+    var bars = document.querySelectorAll('[data-yum2-progress]');
+    var ticking = false;
+
+    var paint = function () {
       var max = html.scrollHeight - window.innerHeight;
-      var ratio = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-      html.style.setProperty('--yum2-scroll', String(ratio));
+      var ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
       html.classList.toggle('yum2-scrolled', window.scrollY > 8);
+      for (var i = 0; i < bars.length; i++) {
+        bars[i].style.transform = 'scaleX(' + ratio + ')';
+      }
+      ticking = false;
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+
+    var schedule = function () {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(paint);
+      }
+    };
+
+    paint();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
   }
 
   /**

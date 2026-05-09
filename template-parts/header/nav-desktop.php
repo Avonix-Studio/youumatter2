@@ -13,8 +13,12 @@ $show_book      = (bool) get_theme_mod( 'yum2_header_show_book_cta', true );
 $show_pill_mod  = (bool) get_theme_mod( 'yum2_header_show_status_pill', true );
 $show_pill      = $show_pill_mod && yum2_get_contact( 'accepting_clients' ) && ! is_404() && ! is_search();
 ?>
-<header class="sticky top-0 z-30 transition-all duration-300 border-b border-transparent bg-cream/60 backdrop-blur-sm [.yum2-scrolled_&]:bg-cream/90 [.yum2-scrolled_&]:backdrop-blur-md [.yum2-scrolled_&]:border-forest/10">
-	<div aria-hidden class="absolute left-0 bottom-0 h-[2px] bg-forest pointer-events-none transition-[width] duration-150 ease-out" style="width: calc(var(--yum2-scroll, 0) * 100%);"></div>
+<header class="sticky top-0 z-30 transition-all duration-300 border-b border-transparent bg-cream/60 backdrop-blur-sm [.yum2-scrolled_&]:bg-cream/80 [.yum2-scrolled_&]:backdrop-blur-md [.yum2-scrolled_&]:border-forest/15 [.yum2-scrolled_&]:shadow-[0_4px_20px_-12px_rgba(26,58,25,0.18)]">
+	<div
+		data-yum2-progress
+		aria-hidden
+		class="absolute left-0 bottom-0 h-[2px] w-full bg-forest pointer-events-none origin-left scale-x-0 transition-transform duration-150 ease-out"
+	></div>
 
 	<div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-[74px]">
 		<?php if ( has_custom_logo() ) : ?>
