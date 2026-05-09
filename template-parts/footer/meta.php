@@ -9,8 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$tagline = (string) get_theme_mod( 'yum2_footer_tagline', __( 'A quiet space for therapy, reflection, and steady growth.', 'youumatter2' ) );
-$year    = gmdate( 'Y' );
+$tagline   = (string) get_theme_mod( 'yum2_footer_tagline', __( 'A quiet space for therapy, reflection, and steady growth.', 'youumatter2' ) );
+$year      = gmdate( 'Y' );
+$copyright = (string) get_theme_mod(
+	'yum2_footer_copyright',
+	__( '© %year% youumatter2. Sanya Oberoi. All rights reserved.', 'youumatter2' )
+);
+$copyright = str_replace( '%year%', $year, $copyright );
 ?>
 <footer class="bg-sage-light px-6 pt-10 pb-6">
 	<div class="max-w-6xl mx-auto">
@@ -51,17 +56,7 @@ $year    = gmdate( 'Y' );
 
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4">
 			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-forest/55" style="font-size:12px;">
-				<span>
-					<?php
-					echo esc_html(
-						sprintf(
-							/* translators: %s: year */
-							__( '© %s youumatter2. Sanya Oberoi. All rights reserved.', 'youumatter2' ),
-							$year
-						)
-					);
-					?>
-				</span>
+				<span><?php echo esc_html( $copyright ); ?></span>
 				<?php if ( has_nav_menu( 'legal' ) ) : ?>
 					<span aria-hidden class="text-forest/30">·</span>
 					<?php

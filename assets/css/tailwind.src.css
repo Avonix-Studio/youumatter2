@@ -70,6 +70,22 @@
   /* Cloak Alpine elements until x-show evaluates so the drawer doesn't
      flash visible during page load. */
   [x-cloak] { display: none !important; }
+
+  /* Constrain WP's custom-logo output. WordPress emits the image at its
+     natural width/height; without these, large source files blow out the
+     header bar and footer. Site Identity in Customizer uploads here. */
+  .custom-logo-link { display: inline-flex; align-items: center; }
+  .custom-logo {
+    height: auto;
+    width: auto;
+    max-height: 36px;
+    max-width: 200px;
+    object-fit: contain;
+  }
+  footer .custom-logo { max-height: 44px; }
+  @media (min-width: 768px) {
+    header .custom-logo { max-height: 40px; }
+  }
 }
 
 @layer components {

@@ -158,6 +158,7 @@ function yum2_customize_register( $wp_customize ) {
 		'header_show_book_cta'        => true,
 		'header_show_status_pill'     => true,
 		'footer_tagline'              => __( 'A quiet space for therapy, reflection, and steady growth.', 'youumatter2' ),
+		'footer_copyright'            => __( '© %year% youumatter2. Sanya Oberoi. All rights reserved.', 'youumatter2' ),
 		'footer_show_newsletter'      => true,
 		'home_show_gentle_invitation' => true,
 	);
@@ -177,6 +178,12 @@ function yum2_customize_register( $wp_customize ) {
 		'footer_tagline' => array(
 			'label'    => __( 'Footer tagline', 'youumatter2' ),
 			'desc'     => __( 'Small line under the wordmark in the footer.', 'youumatter2' ),
+			'type'     => 'text',
+			'sanitize' => 'sanitize_text_field',
+		),
+		'footer_copyright' => array(
+			'label'    => __( 'Footer copyright line', 'youumatter2' ),
+			'desc'     => __( 'Use %year% to insert the current year automatically. HTML is stripped.', 'youumatter2' ),
 			'type'     => 'text',
 			'sanitize' => 'sanitize_text_field',
 		),
