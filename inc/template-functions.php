@@ -20,9 +20,69 @@ function yum2_body_classes( $classes ) {
 	if ( ! is_admin() ) {
 		$classes[] = 'has-bottom-nav';
 	}
+	if ( is_home() || ( is_archive() && in_array( get_post_type(), array( '', 'post' ), true ) ) || is_search() ) {
+		$classes[] = 'blog-index';
+	}
+	if ( is_singular( 'post' ) ) {
+		$classes[] = 'single-post-yum2';
+	}
 	return $classes;
 }
 add_filter( 'body_class', 'yum2_body_classes' );
+
+/**
+ * Reading time, in minutes, for the given post.
+ *
+ * Word count / 200 (the lazy adult-reading-rate average) rounded up,
+ * floor of 1. Returns a translated "X min read" string.
+ *
+ * @param int|WP_Post|null $post
+ * @return string
+ */
+function yum2_reading_time( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return '';
+	}
+	$words   = str_word_count( wp_strip_all_tags( (string) $post->post_content ) );
+	$minutes = max( 1, (int) ceil( $words / 200 ) );
+	return sprintf(
+		/* translators: %d: minutes */
+		_n( '%d min read', '%d min read', $minutes, 'youumatter2' ),
+		$minutes
+	);
+}
+
+/**
+ * Fallback excerpt: when the post has no manual excerpt, return the
+ * first sentence of the content (capped at ~30 words) instead of WP's
+ * default 55-word truncation that often cuts mid-thought.
+ *
+ * @param string  $excerpt
+ * @param WP_Post $post
+ * @return string
+ */
+function yum2_excerpt_fallback( $excerpt, $post = null ) {
+	if ( '' !== trim( (string) $excerpt ) ) {
+		return $excerpt;
+	}
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return $excerpt;
+	}
+	$plain = wp_strip_all_tags( strip_shortcodes( (string) $post->post_content ) );
+	$plain = trim( preg_replace( '/\s+/', ' ', $plain ) );
+	if ( '' === $plain ) {
+		return $excerpt;
+	}
+	if ( preg_match( '/^(.{20,}?[.!?])(\s|$)/u', $plain, $m ) ) {
+		$first = trim( $m[1] );
+	} else {
+		$first = $plain;
+	}
+	return wp_trim_words( $first, 30, '…' );
+}
+add_filter( 'get_the_excerpt', 'yum2_excerpt_fallback', 10, 2 );
 
 /**
  * Newsletter form handler. POST target for template-parts/footer/newsletter.php.

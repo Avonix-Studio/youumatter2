@@ -143,4 +143,141 @@
     cursor: pointer;
   }
   .yum2-bullet-active { @apply bg-forest w-7; }
+
+  /* ------------------------------------------------------------------
+   * Post body typography: layered on top of @tailwindcss/typography's
+   * prose-yum2 variant. These are the things prose plugin can't do
+   * cleanly (drop cap, Gutenberg block markup outside the default
+   * elements, custom <details> accordion).
+   * ----------------------------------------------------------------*/
+
+  /* Drop cap on the first paragraph of a post body. Suppressed when the
+     post starts with a heading (no ::first-letter on h2 + p adjacent). */
+  .prose-yum2 > p:first-of-type::first-letter {
+    float: left;
+    font-family: theme('fontFamily.heading');
+    font-size: 4.5rem;
+    line-height: 0.85;
+    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    color: theme('colors.forest');
+    font-weight: 600;
+  }
+
+  /* Gutenberg Details block as a styled accordion. Sanya types FAQs as
+     <details><summary>Q</summary>A</details> and they render branded. */
+  .prose-yum2 details {
+    @apply bg-cream border border-forest/15 rounded-2xl my-3 overflow-hidden;
+  }
+  .prose-yum2 details summary {
+    @apply relative cursor-pointer text-forest py-4 pl-5 pr-14 list-none;
+    font-family: theme('fontFamily.heading');
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .prose-yum2 details summary::-webkit-details-marker { display: none; }
+  .prose-yum2 details summary::after {
+    content: '+';
+    @apply absolute right-4 top-1/2 -translate-y-1/2 size-7 rounded-full border border-forest/20 flex items-center justify-center text-forest text-base leading-none transition-transform;
+    font-weight: 400;
+  }
+  .prose-yum2 details[open] summary::after {
+    content: '×';
+    @apply bg-forest border-forest text-cream;
+  }
+  .prose-yum2 details[open] summary {
+    @apply border-b border-forest/10;
+  }
+  .prose-yum2 details > *:not(summary) {
+    @apply px-5 py-4 text-ink;
+  }
+  .prose-yum2 details > p { margin: 0; }
+
+  /* Gutenberg block-specific overrides. Most block markup is covered by
+     the prose plugin via element selectors (h2, p, ul, etc.) but some
+     wrappers (.wp-block-pullquote, .wp-block-separator, gallery) need
+     their own rules. */
+  .prose-yum2 .wp-block-pullquote {
+    @apply my-10 px-6 py-8 bg-sage-light/30 border-y border-forest/10 not-italic text-center;
+    border-left: 0;
+  }
+  .prose-yum2 .wp-block-pullquote p {
+    font-family: theme('fontFamily.heading');
+    @apply italic text-forest;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .prose-yum2 .wp-block-pullquote cite {
+    @apply block mt-3 not-italic text-terracotta uppercase tracking-widest;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .prose-yum2 .wp-block-separator {
+    @apply border-0 border-t border-sage-light my-12;
+    background: none;
+  }
+  .prose-yum2 .wp-block-separator.is-style-dots {
+    @apply border-0;
+    text-align: center;
+  }
+  .prose-yum2 .wp-block-separator.is-style-dots::before {
+    content: '· · ·';
+    color: theme('colors.terracotta');
+    letter-spacing: 0.5em;
+    font-size: 1.5rem;
+  }
+
+  .prose-yum2 .wp-block-image figure { margin: 0; }
+  .prose-yum2 .wp-block-image img {
+    @apply rounded-2xl shadow-sm;
+  }
+
+  .prose-yum2 .wp-block-quote {
+    @apply not-italic;
+  }
+  .prose-yum2 .wp-block-quote p {
+    font-family: theme('fontFamily.heading');
+    @apply italic;
+  }
+  .prose-yum2 .wp-block-quote cite {
+    @apply block mt-3 not-italic text-terracotta;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* Inline category pill on cards. */
+  .yum2-card-pill {
+    @apply inline-flex items-center bg-white/90 backdrop-blur-sm border border-forest/15 text-forest rounded-full px-3.5 py-1.5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Filter pill chip. */
+  .yum2-filter-pill {
+    @apply inline-flex items-center shrink-0 rounded-full px-4 h-10 border transition-colors whitespace-nowrap;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .yum2-filter-pill.is-active {
+    @apply bg-forest border-forest text-cream;
+  }
+  .yum2-filter-pill:not(.is-active) {
+    @apply bg-transparent border-forest/20 text-forest hover:border-forest;
+  }
+
+  /* paginate_links output. Wraps page numbers in anchors / spans we style. */
+  .yum2-pagination .page-numbers {
+    @apply inline-flex items-center justify-center min-w-[44px] h-11 px-3 rounded-full border border-forest/20 text-forest hover:border-forest transition-colors;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .yum2-pagination .page-numbers.current {
+    @apply bg-forest border-forest text-cream;
+  }
+  .yum2-pagination .page-numbers.dots {
+    @apply border-transparent;
+  }
 }

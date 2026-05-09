@@ -1,0 +1,179 @@
+/**
+ * Block-editor stylesheet. Compiled to assets/css/editor.css and loaded
+ * via add_editor_style() so Sanya sees actual rendering inside Gutenberg.
+ *
+ * Imports the same Tailwind layers as the front-end build, but wraps the
+ * prose rules so they target the editor canvas (.editor-styles-wrapper).
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Self-hosted fonts: same @font-face declarations as the front-end. */
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/newsreader/Newsreader-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/newsreader/Newsreader-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/newsreader/Newsreader-400-Italic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/plus-jakarta-sans/PlusJakartaSans-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/plus-jakarta-sans/PlusJakartaSans-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/plus-jakarta-sans/PlusJakartaSans-600.woff2') format('woff2');
+  }
+
+  .editor-styles-wrapper {
+    background: theme('colors.cream');
+    color: theme('colors.ink');
+    font-family: theme('fontFamily.body');
+  }
+
+  .editor-styles-wrapper h1,
+  .editor-styles-wrapper h2,
+  .editor-styles-wrapper h3,
+  .editor-styles-wrapper h4 {
+    font-family: theme('fontFamily.heading');
+    color: theme('colors.forest');
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .editor-styles-wrapper h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .editor-styles-wrapper h3 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .editor-styles-wrapper p,
+  .editor-styles-wrapper li {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .editor-styles-wrapper blockquote {
+    font-family: theme('fontFamily.heading');
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-left: 3px solid theme('colors.terracotta');
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: theme('colors.ink');
+  }
+
+  .editor-styles-wrapper ul > li::marker,
+  .editor-styles-wrapper ol > li::marker {
+    color: theme('colors.terracotta');
+  }
+
+  .editor-styles-wrapper a {
+    color: theme('colors.forest');
+    text-decoration-color: rgba(43, 83, 41, 0.3);
+    text-underline-offset: 4px;
+  }
+
+  .editor-styles-wrapper code {
+    background: rgba(209, 229, 208, 0.4);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  .editor-styles-wrapper pre {
+    background: theme('colors.forest');
+    color: theme('colors.cream');
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .editor-styles-wrapper hr,
+  .editor-styles-wrapper .wp-block-separator {
+    border-top: 1px solid theme('colors.sage-light');
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: none;
+  }
+
+  /* Details block: same accordion-ish style so it doesn't look out of place. */
+  .editor-styles-wrapper details {
+    background: theme('colors.cream');
+    border: 1px solid rgba(43, 83, 41, 0.15);
+    border-radius: 1rem;
+    margin: 0.75rem 0;
+    overflow: hidden;
+  }
+  .editor-styles-wrapper details summary {
+    padding: 1rem 1.25rem;
+    font-family: theme('fontFamily.heading');
+    color: theme('colors.forest');
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .editor-styles-wrapper details > *:not(summary) {
+    padding: 0 1.25rem 1rem;
+  }
+
+  /* Pullquote */
+  .editor-styles-wrapper .wp-block-pullquote {
+    border-top: 1px solid rgba(43, 83, 41, 0.1);
+    border-bottom: 1px solid rgba(43, 83, 41, 0.1);
+    background: rgba(209, 229, 208, 0.3);
+    padding: 2rem 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .editor-styles-wrapper .wp-block-pullquote p {
+    font-family: theme('fontFamily.heading');
+    font-style: italic;
+    color: theme('colors.forest');
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  /* Image rounded preview */
+  .editor-styles-wrapper .wp-block-image img {
+    border-radius: 1rem;
+  }
+}

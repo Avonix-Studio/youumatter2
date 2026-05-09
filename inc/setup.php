@@ -54,5 +54,10 @@ function yum2_setup() {
 	add_image_size( 'yum2-blog-featured', 1200, 700, true );
 	add_image_size( 'yum2-portrait', 800, 1000, true );
 	add_image_size( 'yum2-og-image', 1200, 630, true );
+
+	add_post_type_support( 'post', 'excerpt' );
+
+	// Block editor sees front-end rendering via the compiled editor stylesheet.
+	add_editor_style( 'assets/css/editor.css' );
 }
 add_action( 'after_setup_theme', 'yum2_setup' );
