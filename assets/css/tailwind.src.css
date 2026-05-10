@@ -280,4 +280,18 @@
   .yum2-pagination .page-numbers.dots {
     @apply border-transparent;
   }
+
+  /* About-page marquee strip. Items are duplicated server-side, this
+     animation translates by -50% over 60s for a seamless loop. */
+  .yum2-marquee {
+    animation: yum2-marquee-scroll 60s linear infinite;
+    will-change: transform;
+  }
+  @keyframes yum2-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-marquee { animation: none; }
+  }
 }

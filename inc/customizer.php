@@ -271,5 +271,84 @@ function yum2_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	/* ------------------------------------------------------------------
+	 * About page numbers
+	 * Three stats Sanya can update as the practice grows. Defaults match
+	 * the React export but every value is overridable. Set value to 0 to
+	 * hide a stat row.
+	 * ----------------------------------------------------------------*/
+	$wp_customize->add_section(
+		'yum2_about',
+		array(
+			'title'       => __( 'About page', 'youumatter2' ),
+			'priority'    => 37,
+			'description' => __( 'Editable numbers shown in the About page "track record" section. Set a value to 0 to hide that stat.', 'youumatter2' ),
+		)
+	);
+
+	$about_stats = array(
+		'1' => array( 'value' => 3,   'suffix' => '+', 'label' => __( 'years walking alongside clients', 'youumatter2' ) ),
+		'2' => array( 'value' => 180, 'suffix' => '+', 'label' => __( 'hours of supervised clinical practice', 'youumatter2' ) ),
+		'3' => array( 'value' => 50,  'suffix' => '+', 'label' => __( 'individuals and couples supported', 'youumatter2' ) ),
+	);
+
+	foreach ( $about_stats as $n => $stat ) {
+		$wp_customize->add_setting(
+			'yum2_about_stat_' . $n . '_value',
+			array(
+				'default'           => $stat['value'],
+				'sanitize_callback' => 'absint',
+				'capability'        => 'edit_theme_options',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'yum2_about_stat_' . $n . '_value',
+			array(
+				/* translators: %d: stat number */
+				'label'   => sprintf( __( 'Stat %d value', 'youumatter2' ), (int) $n ),
+				'section' => 'yum2_about',
+				'type'    => 'number',
+			)
+		);
+		$wp_customize->add_setting(
+			'yum2_about_stat_' . $n . '_suffix',
+			array(
+				'default'           => $stat['suffix'],
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'yum2_about_stat_' . $n . '_suffix',
+			array(
+				/* translators: %d: stat number */
+				'label'       => sprintf( __( 'Stat %d suffix', 'youumatter2' ), (int) $n ),
+				'description' => __( 'Shown after the number (e.g. "+", "k").', 'youumatter2' ),
+				'section'     => 'yum2_about',
+				'type'        => 'text',
+			)
+		);
+		$wp_customize->add_setting(
+			'yum2_about_stat_' . $n . '_label',
+			array(
+				'default'           => $stat['label'],
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'yum2_about_stat_' . $n . '_label',
+			array(
+				/* translators: %d: stat number */
+				'label'   => sprintf( __( 'Stat %d label', 'youumatter2' ), (int) $n ),
+				'section' => 'yum2_about',
+				'type'    => 'text',
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'yum2_customize_register' );

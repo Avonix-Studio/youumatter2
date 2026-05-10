@@ -145,6 +145,74 @@
   }
 
   /**
+   * Alpine factory for an animated count-up. Holds at 0 until the element
+   * scrolls into view, then eases up to the target over ~1.8s. Respects
+   * prefers-reduced-motion (snaps straight to target).
+   *
+   * @param {number} target Final integer to count to.
+   */
+  window.yum2CountUp = function (target) {
+    return {
+      display: 0,
+      _done: false,
+      init: function () {
+        var self = this;
+        var t = Number(target) || 0;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) {
+          self.display = t;
+          self._done = true;
+          return;
+        }
+        if (!('IntersectionObserver' in window)) {
+          self.display = t;
+          self._done = true;
+          return;
+        }
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting || self._done) return;
+            self._done = true;
+            var start = performance.now();
+            var dur = 1800;
+            var tick = function (now) {
+              var p = Math.min(1, (now - start) / dur);
+              var eased = 1 - Math.pow(1 - p, 3);
+              self.display = Math.round(eased * t);
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            obs.disconnect();
+          });
+        }, { rootMargin: '-15% 0px' });
+        obs.observe(self.$el);
+      },
+    };
+  };
+
+  /**
+   * Alpine factory for the About-page sticky belief blocks. Adds an
+   * IntersectionObserver to track when each block is centred in the
+   * viewport, exposing `active` for opacity / scale animation.
+   */
+  window.yum2BeliefBlock = function () {
+    return {
+      active: false,
+      init: function () {
+        var self = this;
+        if (!('IntersectionObserver' in window)) {
+          self.active = true;
+          return;
+        }
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { self.active = e.isIntersecting; });
+        }, { rootMargin: '-40% 0px -40% 0px' });
+        obs.observe(self.$refs.root);
+      },
+    };
+  };
+
+  /**
    * Alpine factory for the homepage testimonials carousel. Native CSS
    * scroll-snap drives the layout; this just tracks page state for the
    * dot/arrow controls and exposes goTo() for programmatic scrolling.
