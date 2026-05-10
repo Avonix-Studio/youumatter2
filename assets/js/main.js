@@ -145,6 +145,52 @@
   }
 
   /**
+   * Alpine factory for the homepage testimonials carousel. Native CSS
+   * scroll-snap drives the layout; this just tracks page state for the
+   * dot/arrow controls and exposes goTo() for programmatic scrolling.
+   *
+   * @param {number} count Number of testimonial cards.
+   */
+  window.yum2TestimonialsCarousel = function (count) {
+    return {
+      total: Number(count) || 0,
+      page: 0,
+      pages: 1,
+      _resize: null,
+      _scroll: null,
+      init: function () {
+        var self = this;
+        var compute = function () {
+          var pv = window.matchMedia('(min-width: 768px)').matches ? 2 : 1;
+          self.pages = Math.max(1, Math.ceil(self.total / pv));
+          if (self.page >= self.pages) self.page = self.pages - 1;
+        };
+        compute();
+        this._resize = compute;
+        window.addEventListener('resize', this._resize);
+
+        var el = this.$refs.scroller;
+        if (el) {
+          this._scroll = function () {
+            var w = el.clientWidth;
+            if (!w) return;
+            self.page = Math.max(0, Math.min(self.pages - 1, Math.round(el.scrollLeft / w)));
+          };
+          el.addEventListener('scroll', this._scroll, { passive: true });
+        }
+      },
+      goTo: function (p) {
+        var el = this.$refs.scroller;
+        if (!el) return;
+        var w = el.clientWidth;
+        var target = Math.max(0, Math.min(this.pages - 1, p));
+        el.scrollTo({ left: target * w, behavior: 'smooth' });
+        this.page = target;
+      },
+    };
+  };
+
+  /**
    * Alpine component for the desktop floating TOC pill (single-post only).
    * Tracks the current visible h2 via IntersectionObserver and the page's
    * scroll progress (0..1) for the circular ring.

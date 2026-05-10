@@ -18,6 +18,11 @@ get_header();
 	get_template_part( 'template-parts/home/you-might-be-feeling' );
 	get_template_part( 'template-parts/home/about' );
 	get_template_part( 'template-parts/home/how-it-works' );
+	get_template_part( 'template-parts/home/inside-a-session' );
+	get_template_part( 'template-parts/home/testimonials' );
+	get_template_part( 'template-parts/home/from-the-blog' );
+	get_template_part( 'template-parts/home/faq' );
+	get_template_part( 'template-parts/home/instagram-feed' );
 	get_template_part( 'template-parts/home/gentle-invitation' );
 	?>
 </main>

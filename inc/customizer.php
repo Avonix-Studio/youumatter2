@@ -221,5 +221,55 @@ function yum2_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	/* ------------------------------------------------------------------
+	 * Homepage Sections
+	 * Toggles for the lower homepage sections (everything below
+	 * how-it-works). Defaults all visible.
+	 * ----------------------------------------------------------------*/
+	$wp_customize->add_section(
+		'yum2_home_sections',
+		array(
+			'title'       => __( 'Homepage Sections', 'youumatter2' ),
+			'priority'    => 36,
+			'description' => __( 'Show or hide each section on the home page below "How it works". Default: all visible.', 'youumatter2' ),
+		)
+	);
+
+	$home_defaults = array(
+		'home_show_inside_session' => true,
+		'home_show_testimonials'   => true,
+		'home_show_from_blog'      => true,
+		'home_show_faq'            => true,
+		'home_show_instagram'      => true,
+	);
+
+	$home_fields = array(
+		'home_show_inside_session' => __( 'Show "Inside a session" section', 'youumatter2' ),
+		'home_show_testimonials'   => __( 'Show testimonials carousel', 'youumatter2' ),
+		'home_show_from_blog'      => __( 'Show "From the blog" section', 'youumatter2' ),
+		'home_show_faq'            => __( 'Show FAQ section', 'youumatter2' ),
+		'home_show_instagram'      => __( 'Show Instagram feed section', 'youumatter2' ),
+	);
+
+	foreach ( $home_fields as $key => $label ) {
+		$wp_customize->add_setting(
+			'yum2_' . $key,
+			array(
+				'default'           => $home_defaults[ $key ],
+				'sanitize_callback' => 'rest_sanitize_boolean',
+				'capability'        => 'edit_theme_options',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'yum2_' . $key,
+			array(
+				'label'   => $label,
+				'section' => 'yum2_home_sections',
+				'type'    => 'checkbox',
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'yum2_customize_register' );
