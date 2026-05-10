@@ -14,7 +14,10 @@
       "Bash(grep -o \"[^,{}]*bg-cream[^,{}]*{[^}]*}\" assets/css/main.css)",
       "Bash(php -l header.php)",
       "Bash(php -l footer.php)",
-      "Bash(php -l template-parts/header/nav-mobile-drawer.php)"
+      "Bash(php -l template-parts/header/nav-mobile-drawer.php)",
+      "Bash(cp screenshot.png screenshot-original-backup.png)",
+      "Bash(sips -Z 1200 screenshot.png --out screenshot.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight screenshot.png)"
     ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
