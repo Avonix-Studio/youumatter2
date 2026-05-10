@@ -145,6 +145,31 @@
   }
 
   /**
+   * Alpine factory for the FAQ page. Holds activeGroup, query, openKey,
+   * and helper methods used by template-parts/faq/* partials.
+   *
+   * @param {string} firstGroupId Default active group id.
+   */
+  window.yum2FAQ = function (firstGroupId) {
+    return {
+      activeGroup: firstGroupId || '',
+      query: '',
+      openKey: null,
+      matches: function (text) {
+        var s = (this.query || '').trim().toLowerCase();
+        if (!s) return true;
+        return ('' + text).toLowerCase().indexOf(s) !== -1;
+      },
+      selectGroup: function (groupId) {
+        this.activeGroup = groupId;
+        this.query = '';
+      },
+      isOpen: function (key) { return this.openKey === key; },
+      toggle: function (key) { this.openKey = this.openKey === key ? null : key; },
+    };
+  };
+
+  /**
    * Alpine factory for an animated count-up. Holds at 0 until the element
    * scrolls into view, then eases up to the target over ~1.8s. Respects
    * prefers-reduced-motion (snaps straight to target).

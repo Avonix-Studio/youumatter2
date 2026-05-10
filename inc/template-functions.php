@@ -164,6 +164,133 @@ function yum2_fix_svg_custom_logo( $html ) {
 }
 add_filter( 'get_custom_logo', 'yum2_fix_svg_custom_logo' );
 
+/**
+ * FAQ groups for the FAQ page (and any future schema/markup that needs
+ * the same data, e.g. JSON-LD FAQPage in inc/seo.php).
+ *
+ * Centralised so updates only happen in one place.
+ *
+ * @return array<int, array{id:string, label:string, blurb:string, items:array<int, array{q:string, a:string}>}>
+ */
+function yum2_faq_groups() {
+	return array(
+		array(
+			'id'    => 'getting-started',
+			'label' => __( 'Getting started', 'youumatter2' ),
+			'blurb' => __( 'What the first few steps look like.', 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( 'How do I book my first session?', 'youumatter2' ),
+					'a' => __( "The simplest way is to send a short note via the contact form or WhatsApp. I'll reply with a few time options and a soft first step. We don't commit to long-term work on day one.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'What happens in the first session?', 'youumatter2' ),
+					'a' => __( "It's a 50-minute conversation. I'll ask what brought you, what you've tried, and what you'd like to feel different. You're not expected to have tidy answers. Unclear is a valid starting point.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'Will you diagnose me on the first day?', 'youumatter2' ),
+					'a' => __( "No. Diagnosis, if it's relevant at all, comes much later and only with your involvement. The early sessions are about understanding, not labels.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'How long does therapy usually take?', 'youumatter2' ),
+					'a' => __( "It depends on what you're working on. Some clients feel steadier in 6 to 8 sessions; others stay for longer work. We review together every few weeks so you're always in the driver's seat.", 'youumatter2' ),
+				),
+			),
+		),
+		array(
+			'id'    => 'sessions-fees',
+			'label' => __( 'Sessions & fees', 'youumatter2' ),
+			'blurb' => __( 'Format, frequency, cost.', 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( 'How long is a session and how often do we meet?', 'youumatter2' ),
+					'a' => __( 'Sessions are 50 minutes. Most clients start weekly or fortnightly, and we adjust as things settle.', 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'What do you charge?', 'youumatter2' ),
+					'a' => __( 'Fees are shared on enquiry so I can factor in your situation and format (online vs in-person). I keep a small number of concessional slots each month.', 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'Do you offer sliding scale or concessional spots?', 'youumatter2' ),
+					'a' => __( 'Yes, a few each month. If cost is a barrier, please mention it in your message. No awkwardness either way.', 'youumatter2' ),
+				),
+				array(
+					'q' => __( "What's your cancellation policy?", 'youumatter2' ),
+					'a' => __( "I ask for 24 hours' notice for cancellations. Late cancellations and no-shows are charged at the full fee, with reasonable exceptions for emergencies.", 'youumatter2' ),
+				),
+			),
+		),
+		array(
+			'id'    => 'online-in-person',
+			'label' => __( 'Online vs In-person', 'youumatter2' ),
+			'blurb' => __( 'Choosing what works for you.', 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( 'Is online therapy as effective as in-person?', 'youumatter2' ),
+					'a' => __( "For most concerns, yes. Research consistently finds comparable outcomes. The best format is the one you'll actually show up to, week after week.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'What platform do you use for online sessions?', 'youumatter2' ),
+					'a' => __( "Google Meet. You'll get a link before the session. No downloads beyond a browser, and end-to-end encryption by default.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'Where is the in-person clinic?', 'youumatter2' ),
+					'a' => __( "Pitampura, New Delhi. The exact address is shared once we've confirmed a first session.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'Can I switch between online and in-person?', 'youumatter2' ),
+					'a' => __( 'Absolutely. Some clients start online and shift as they get more comfortable, or vice versa when travel gets tricky.', 'youumatter2' ),
+				),
+			),
+		),
+		array(
+			'id'    => 'confidentiality',
+			'label' => __( 'Confidentiality', 'youumatter2' ),
+			'blurb' => __( 'What stays private, and the few exceptions.', 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( 'Is what I share confidential?', 'youumatter2' ),
+					'a' => __( "Yes. Everything in session stays between us, with three narrow exceptions required by professional ethics: imminent risk to life, harm to a child or vulnerable adult, or a court order. I'll walk you through these in session one.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'Do you share notes with anyone?', 'youumatter2' ),
+					'a' => __( "No. I keep minimal, secured notes for my own continuity and they're not shared with third parties, family members, or employers.", 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'What about insurance or HR claims?', 'youumatter2' ),
+					'a' => __( "I can provide a simple invoice on request. I don't fill out detailed insurance forms or speak to employers without your explicit, written consent.", 'youumatter2' ),
+				),
+			),
+		),
+		array(
+			'id'    => 'couples',
+			'label' => __( 'For couples', 'youumatter2' ),
+			'blurb' => __( "When you're coming in together.", 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( 'Do you see couples?', 'youumatter2' ),
+					'a' => __( 'Yes. Couple sessions are 60 minutes and usually fortnightly. We work on communication patterns, ruptures, and the quiet things that build up.', 'youumatter2' ),
+				),
+				array(
+					'q' => __( 'What if only one of us wants therapy?', 'youumatter2' ),
+					'a' => __( "That's common. Start with an individual session. The work often softens the dynamic at home even when only one partner is in the room.", 'youumatter2' ),
+				),
+			),
+		),
+		array(
+			'id'    => 'emergency',
+			'label' => __( 'In an emergency', 'youumatter2' ),
+			'blurb' => __( 'When you need support right now.', 'youumatter2' ),
+			'items' => array(
+				array(
+					'q' => __( "What do I do if I'm in crisis?", 'youumatter2' ),
+					'a' => __( "Please reach out to iCall India (9152987821) or Vandrevala Foundation (1860 266 2345). Both are free and staffed by trained counsellors. If you're in immediate danger, call emergency services. I'll follow up as soon as I see your message, but these services respond faster in acute moments.", 'youumatter2' ),
+				),
+			),
+		),
+	);
+}
+
 /* ------------------------------------------------------------------
  * Single-post helpers (Phase 4b)
  * ----------------------------------------------------------------*/
