@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.png';
+$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 ?>
 <section class="relative bg-sage-light overflow-hidden">
 	<div aria-hidden class="absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(228,239,227,0.95) 0%, rgba(200,220,199,0) 65%);"></div>

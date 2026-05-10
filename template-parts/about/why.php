@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$portrait  = get_template_directory_uri() . '/assets/images/sanya-portrait.png';
+$portrait  = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $paragraphs = array(
 	__( 'I came to therapy first as a client. What I found there, being heard without being fixed, changed how I moved through the world. I trained in psychology because I wanted to offer that same quiet to other people.', 'youumatter2' ),
 	__( "Years later, after seeing clients across hospital wards, schools, and private practice, I'm still convinced of the simplest thing: most of us aren't broken. We're just carrying patterns we didn't choose, in a body that learned to brace too early.", 'youumatter2' ),

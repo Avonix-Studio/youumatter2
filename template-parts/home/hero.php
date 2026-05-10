@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.png';
+$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 ?>
 <section class="relative overflow-hidden bg-[#f2ede3]">
