@@ -18,7 +18,7 @@ get_header();
 <main id="primary" class="site-main">
 	<?php
 	get_template_part( 'template-parts/contact/hero' );
-	get_template_part( 'template-parts/contact/methods' );
+	get_template_part( 'template-parts/contact/form-and-methods' );
 	get_template_part( 'template-parts/contact/map' );
 	get_template_part( 'template-parts/contact/closing-cta' );
 	?>

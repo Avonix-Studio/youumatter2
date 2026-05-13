@@ -36,7 +36,7 @@ $show_pill      = $show_pill_mod && yum2_get_contact( 'accepting_clients' ) && !
 				array(
 					'theme_location' => 'primary',
 					'container'      => false,
-					'menu_class'     => 'flex items-center gap-8 m-0 p-0 list-none text-sm text-forest/70',
+					'menu_class'     => 'flex items-center gap-8 m-0 p-0 list-none text-sm text-forest/85',
 					'depth'          => 1,
 					'fallback_cb'    => '__return_empty_string',
 				)
@@ -64,7 +64,7 @@ $show_pill      = $show_pill_mod && yum2_get_contact( 'accepting_clients' ) && !
 						array(
 							'label'   => __( 'Book a Session', 'youumatter2' ),
 							'variant' => 'primary',
-							'class'   => 'h-11 px-5',
+							'class'   => 'h-10 px-5',
 						)
 					);
 					?>

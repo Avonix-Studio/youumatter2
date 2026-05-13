@@ -57,6 +57,11 @@ $copyright = str_replace( '%year%', $year, $copyright );
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4">
 			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-forest/55" style="font-size:12px;">
 				<span><?php echo esc_html( $copyright ); ?></span>
+				<span aria-hidden class="text-forest/30">·</span>
+				<a href="https://avonixstudio.com" target="_blank" rel="noopener noreferrer"
+				   class="hover:text-forest transition-colors">
+					<?php esc_html_e( 'Made by Avonix Studio', 'youumatter2' ); ?>
+				</a>
 				<?php if ( has_nav_menu( 'legal' ) ) : ?>
 					<span aria-hidden class="text-forest/30">·</span>
 					<?php

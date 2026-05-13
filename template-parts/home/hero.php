@@ -28,7 +28,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 			esc_html_e( 'Youu matter.', 'youumatter2' );
 			?>
 			<br>
-			<span class="italic" style="color:#c07a5a;"><?php esc_html_e( 'And youu can do this.', 'youumatter2' ); ?></span>
+			<span class="italic" style="color:#c07a5a;"><?php esc_html_e( 'And you can do this.', 'youumatter2' ); ?></span>
 		</h1>
 
 		<div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
@@ -83,7 +83,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 					>
 				</div>
 
-				<svg viewBox="0 0 64 64" class="absolute -top-6 -right-4 md:-top-8 md:-right-6 w-14 h-14 md:w-20 md:h-20 text-[#c07a5a]" fill="currentColor" aria-hidden>
+				<svg viewBox="0 0 64 64" class="absolute -top-6 -right-4 md:-top-8 md:-right-6 w-14 h-14 md:w-20 md:h-20 text-[#c07a5a] yum2-leaf-float" fill="currentColor" aria-hidden>
 					<path d="M46 8C24 8 12 24 12 42c0 6 3 12 9 12 14 0 26-12 30-34 .6-2.4 1.8-6.9 3-12-3.6 0-6 0-8 0z" opacity="0.95"/>
 					<path d="M22 46c4-10 12-18 22-22" stroke="#f2ede3" stroke-width="1.6" fill="none" opacity="0.7"/>
 				</svg>

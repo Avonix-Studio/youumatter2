@@ -107,7 +107,7 @@
   }
 
   /* Default nav link colour and hover for non-active items. */
-  .yum2-nav a { @apply text-forest/70 hover:text-forest transition-colors; }
+  .yum2-nav a { @apply text-forest/85 hover:text-forest transition-colors; }
 
   /* Mobile drawer nav: large stacked items, no underline pseudo, more padding. */
   .yum2-nav-mobile ul a {
@@ -293,5 +293,119 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .yum2-marquee { animation: none; }
+  }
+
+  /* Hero leaf: gentle rock + float. Subtle enough to feel organic. */
+  .yum2-leaf-float {
+    animation: yum2-leaf-rock 4s ease-in-out infinite;
+    transform-origin: 60% 80%;
+  }
+  @keyframes yum2-leaf-rock {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25%      { transform: rotate(3deg) translateY(-3px); }
+    50%      { transform: rotate(-2deg) translateY(-1px); }
+    75%      { transform: rotate(1.5deg) translateY(-4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-leaf-float { animation: none; }
+  }
+
+  /* ----------------------------------------------------------------
+   * WPForms overrides. Strip default styling and apply brand tokens
+   * so the contact form matches the youumatter2 design system.
+   * ----------------------------------------------------------------*/
+  .wpforms-container .wpforms-form {
+    font-family: theme('fontFamily.body');
+  }
+  .wpforms-container .wpforms-form .wpforms-field-label {
+    font-family: theme('fontFamily.body');
+    font-weight: 600;
+    font-size: 13px;
+    color: theme('colors.forest');
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .wpforms-container .wpforms-form .wpforms-field-sublabel {
+    font-size: 12px;
+    color: theme('colors.forest / 55%');
+  }
+  .wpforms-container .wpforms-form input[type="text"],
+  .wpforms-container .wpforms-form input[type="email"],
+  .wpforms-container .wpforms-form input[type="tel"],
+  .wpforms-container .wpforms-form input[type="number"],
+  .wpforms-container .wpforms-form input[type="url"],
+  .wpforms-container .wpforms-form select,
+  .wpforms-container .wpforms-form textarea {
+    background: theme('colors.cream');
+    border: 1px solid theme('colors.forest / 18%');
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: theme('fontFamily.body');
+    color: theme('colors.forest');
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .wpforms-container .wpforms-form input:focus,
+  .wpforms-container .wpforms-form select:focus,
+  .wpforms-container .wpforms-form textarea:focus {
+    border-color: theme('colors.forest');
+    box-shadow: 0 0 0 3px theme('colors.forest / 8%');
+    outline: none;
+  }
+  .wpforms-container .wpforms-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  .wpforms-container .wpforms-form .wpforms-submit-container {
+    padding-top: 8px;
+  }
+  .wpforms-container .wpforms-form button[type="submit"],
+  .wpforms-container .wpforms-form .wpforms-submit {
+    background: theme('colors.forest') !important;
+    color: theme('colors.cream') !important;
+    border: none;
+    border-radius: 9999px;
+    height: 52px;
+    padding: 0 28px;
+    font-family: theme('fontFamily.body');
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 24px rgba(26,58,25,0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .wpforms-container .wpforms-form button[type="submit"]:hover,
+  .wpforms-container .wpforms-form .wpforms-submit:hover {
+    background: theme('colors.forest / 90%') !important;
+    box-shadow: 0 14px 32px rgba(26,58,25,0.24);
+  }
+  /* Radio/checkbox brand styling */
+  .wpforms-container .wpforms-form .wpforms-field-radio ul li,
+  .wpforms-container .wpforms-form .wpforms-field-checkbox ul li {
+    margin-bottom: 6px;
+  }
+  .wpforms-container .wpforms-form .wpforms-field-radio ul li label,
+  .wpforms-container .wpforms-form .wpforms-field-checkbox ul li label {
+    font-size: 14px;
+    color: theme('colors.forest');
+  }
+  /* Consent/GDPR checkbox */
+  .wpforms-container .wpforms-form .wpforms-field-gdpr-checkbox label {
+    font-size: 13px;
+    color: theme('colors.forest / 65%');
+    line-height: 1.5;
+  }
+  /* Confirmation message */
+  .wpforms-container .wpforms-confirmation-container-full {
+    background: theme('colors.sage-light');
+    border: 1px solid theme('colors.forest / 15%');
+    border-radius: 16px;
+    padding: 24px;
+    color: theme('colors.forest');
+    font-family: theme('fontFamily.body');
   }
 }
