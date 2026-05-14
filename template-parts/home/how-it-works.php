@@ -52,13 +52,13 @@ $steps = array(
 
 		<div class="flex flex-col md:flex-row items-stretch gap-4 md:gap-0">
 			<?php foreach ( $steps as $i => $step ) : ?>
-				<div class="flex md:flex-1 items-stretch">
+				<div class="flex md:flex-1 items-stretch yum2-reveal">
 					<div class="relative flex-1 min-w-0">
-						<div class="group relative bg-[#f8f3e9] border border-[#e0d9ce] rounded-[22px] p-6 md:p-7 h-full hover:border-[rgba(43,83,41,0.35)] hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] transition-[border-color,box-shadow] duration-500">
+						<div class="group relative bg-[#f8f3e9] border border-[#e0d9ce] rounded-[22px] p-6 md:p-7 h-full hover:border-[rgba(43,83,41,0.35)] hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] hover:-translate-y-1.5 transition-[border-color,box-shadow,transform] duration-500">
 							<div class="flex items-center gap-3 mb-5">
 								<div class="relative shrink-0">
 									<span aria-hidden class="absolute inset-0 rounded-full bg-[#d1e5d0] animate-ping opacity-50"></span>
-									<div class="relative size-11 rounded-full bg-[#2b5329] text-white flex items-center justify-center shadow-[0_8px_18px_rgba(26,58,25,0.22)]">
+									<div class="relative size-11 rounded-full bg-[#2b5329] text-white flex items-center justify-center shadow-[0_8px_18px_rgba(26,58,25,0.22)] yum2-icon-bob<?php echo $i > 0 ? ' yum2-icon-bob--d' . $i : ''; ?>">
 										<?php echo yum2_icon( $step['icon'], array( 'size' => 18 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								</div>

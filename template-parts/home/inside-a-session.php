@@ -51,7 +51,7 @@ $items = array(
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
 			<?php foreach ( $items as $item ) : ?>
-				<div class="group flex flex-col gap-3 bg-[#f8f3e9] border border-forest/15 rounded-[16px] p-5 md:p-5 hover:border-forest/35 transition-colors duration-300">
+				<div class="group flex flex-col gap-3 bg-[#f8f3e9] border border-forest/15 rounded-[16px] p-5 md:p-5 hover:border-forest/35 transition-colors duration-300 yum2-reveal">
 					<span class="shrink-0 size-10 rounded-full bg-sage-light flex items-center justify-center text-forest group-hover:bg-forest group-hover:text-cream transition-colors duration-300">
 						<?php echo yum2_icon( $item['icon'], array( 'size' => 17, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</span>

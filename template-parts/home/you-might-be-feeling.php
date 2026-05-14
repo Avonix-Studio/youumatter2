@@ -136,7 +136,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 			<?php esc_html_e( 'What are you carrying today?', 'youumatter2' ); ?>
 		</p>
 
-		<div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-5 md:gap-14 items-end mb-8 md:mb-10">
+		<div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-5 md:gap-14 items-end mb-8 md:mb-10 yum2-reveal">
 			<h2 class="text-[#1a3a19]" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.8vw,52px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
 				<?php esc_html_e( 'If any of these sound like you,', 'youumatter2' ); ?>
 				<em class="italic" style="font-weight:400;color:#c07a5a;"><?php esc_html_e( 'this might help.', 'youumatter2' ); ?></em>

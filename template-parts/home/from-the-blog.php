@@ -54,7 +54,7 @@ if ( ! $blog_url ) {
 
 		<div class="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pr-8 md:pr-0" style="scrollbar-width:none;">
 			<?php while ( $q->have_posts() ) : $q->the_post(); ?>
-				<div class="shrink-0 snap-start w-[85%] md:w-auto">
+				<div class="shrink-0 snap-start w-[85%] md:w-auto yum2-reveal">
 					<?php get_template_part( 'template-parts/blog/card' ); ?>
 				</div>
 			<?php endwhile; ?>

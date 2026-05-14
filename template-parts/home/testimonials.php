@@ -47,7 +47,7 @@ $testimonials = array(
 <section class="relative bg-sage-light px-5 md:px-8 pt-10 md:pt-14 pb-12 md:pb-16 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto" x-data="yum2TestimonialsCarousel(<?php echo esc_attr( count( $testimonials ) ); ?>)" x-init="init()">
 
-		<div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-6 mb-6 md:mb-8">
+		<div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-6 mb-6 md:mb-8 yum2-reveal">
 			<div class="flex items-baseline gap-3 md:gap-4 flex-wrap">
 				<span class="text-terracotta tracking-[2px] uppercase" style="font-size:11px;font-weight:600;">
 					<?php esc_html_e( 'Client reviews', 'youumatter2' ); ?>

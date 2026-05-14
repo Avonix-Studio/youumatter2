@@ -361,6 +361,24 @@
   };
 
   /**
+   * Scroll-reveal: toggle .is-visible when .yum2-reveal elements enter viewport.
+   * Fires once per element, respects prefers-reduced-motion via CSS.
+   */
+  (function () {
+    var revealEls = document.querySelectorAll('.yum2-reveal');
+    if (!revealEls.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '-40px 0px' });
+    revealEls.forEach(function (el) { obs.observe(el); });
+  })();
+
+  /**
    * Open the Calendly popup for a given event URL.
    *
    * @param {string} url Calendly event URL.

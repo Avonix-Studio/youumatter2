@@ -107,7 +107,12 @@
   }
 
   /* Default nav link colour and hover for non-active items. */
-  .yum2-nav a { @apply text-forest/85 hover:text-forest transition-colors; }
+  .yum2-nav a {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    @apply text-forest/85 hover:text-forest transition-colors;
+  }
 
   /* Mobile drawer nav: large stacked items, no underline pseudo, more padding. */
   .yum2-nav-mobile ul a {
@@ -399,6 +404,60 @@
     color: theme('colors.forest / 65%');
     line-height: 1.5;
   }
+  /* ------------------------------------------------------------------
+   * Scroll-reveal entrance. Add .yum2-reveal to any element that should
+   * fade + slide up when it enters the viewport. JS observer in main.js
+   * toggles .is-visible to trigger the transition.
+   * ----------------------------------------------------------------*/
+  .yum2-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .yum2-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .yum2-reveal:nth-child(2) { transition-delay: 0.08s; }
+  .yum2-reveal:nth-child(3) { transition-delay: 0.16s; }
+  .yum2-reveal:nth-child(4) { transition-delay: 0.24s; }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Hero quote card: gentle float anchored at its rotation. */
+  .yum2-float {
+    animation: yum2-float 4s ease-in-out infinite;
+  }
+  @keyframes yum2-float {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50%       { transform: rotate(-3deg) translateY(-4px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .yum2-float { animation: none; } }
+
+  /* Hero portrait background circle: soft scale breathe. */
+  .yum2-circle-breathe {
+    animation: yum2-circle-breathe 6s ease-in-out infinite;
+  }
+  @keyframes yum2-circle-breathe {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.03); }
+  }
+  @media (prefers-reduced-motion: reduce) { .yum2-circle-breathe { animation: none; } }
+
+  /* How-it-works step icons: subtle upward bob, staggered per sibling. */
+  .yum2-icon-bob {
+    animation: yum2-icon-bob 5s ease-in-out infinite;
+  }
+  @keyframes yum2-icon-bob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-3px); }
+  }
+  .yum2-icon-bob.yum2-icon-bob--d1 { animation-delay: 0.4s; }
+  .yum2-icon-bob.yum2-icon-bob--d2 { animation-delay: 0.8s; }
+  @media (prefers-reduced-motion: reduce) { .yum2-icon-bob { animation: none; } }
+
   /* Confirmation message */
   .wpforms-container .wpforms-confirmation-container-full {
     background: theme('colors.sage-light');

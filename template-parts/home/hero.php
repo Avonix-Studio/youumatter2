@@ -72,7 +72,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 			</div>
 
 			<div class="order-1 md:order-2 relative w-full max-w-[420px] md:max-w-[460px] mx-auto aspect-square">
-				<div aria-hidden class="absolute -inset-[6%] rounded-full bg-[#d1e5d0]"></div>
+				<div aria-hidden class="absolute -inset-[6%] rounded-full bg-[#d1e5d0] yum2-circle-breathe"></div>
 				<div class="relative rounded-full overflow-hidden shadow-[0_24px_48px_-12px_rgba(19,60,20,0.22)] size-full">
 					<img
 						src="<?php echo esc_url( $portrait ); ?>"
@@ -88,7 +88,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 					<path d="M22 46c4-10 12-18 22-22" stroke="#f2ede3" stroke-width="1.6" fill="none" opacity="0.7"/>
 				</svg>
 
-				<div class="hidden md:flex absolute -top-5 -left-6 bg-white rounded-2xl px-4 py-3 items-center gap-2 shadow-[0_14px_32px_rgba(19,60,20,0.12)] border border-[#e0d9ce]" style="transform:rotate(-3deg);">
+				<div class="hidden md:flex absolute -top-5 -left-6 bg-white rounded-2xl px-4 py-3 items-center gap-2 shadow-[0_14px_32px_rgba(19,60,20,0.12)] border border-[#e0d9ce] yum2-float">
 					<span class="italic text-[#1a3a19]" style="font-family:'Newsreader',serif;font-size:14px;">
 						<?php esc_html_e( '"A steady Tuesday."', 'youumatter2' ); ?>
 					</span>
