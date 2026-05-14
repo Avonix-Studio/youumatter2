@@ -20,6 +20,9 @@
       "Bash(sips -g pixelWidth -g pixelHeight screenshot.png)",
       "Bash(sips -s format jpeg -s formatOptions 82 assets/images/sanya-portrait.png --out assets/images/sanya-portrait.jpg)"
     ],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
     ]

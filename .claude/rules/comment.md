@@ -1,0 +1,3 @@
+Every section of the codebase should have a comment at the top describing its purpose and any important details. This helps other developers understand the code quickly and reduces confusion.
+
+if the section is something I might to edit to change heading and text mention a comment about that as well. For example, if there is a section for the header of the website, I might want to change the heading and text in that section, so I would add a comment like "This section contains the header of the website. You can change the heading and text here."

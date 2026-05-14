@@ -22,3 +22,4 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/post-types.php';
 require get_template_directory() . '/inc/security.php';
 require get_template_directory() . '/inc/seo.php';
+require get_template_directory() . '/inc/blocks.php';
