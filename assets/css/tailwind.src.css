@@ -81,12 +81,6 @@
     display: none !important;
   }
 
-  /* Body scroll-lock while the IG lightbox (or any future modal) is open. */
-  html.yum2-modal-open,
-  html.yum2-modal-open body {
-    overflow: hidden;
-  }
-
   /* Constrain WP's custom-logo output. WordPress emits the image at its
      natural width/height; without these, large source files blow out the
      header bar and footer. Site Identity in Customizer uploads here. */
