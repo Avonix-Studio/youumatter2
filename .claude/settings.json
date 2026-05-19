@@ -18,9 +18,18 @@
       "Bash(cp screenshot.png screenshot-original-backup.png)",
       "Bash(sips -Z 1200 screenshot.png --out screenshot.png)",
       "Bash(sips -g pixelWidth -g pixelHeight screenshot.png)",
-      "Bash(sips -s format jpeg -s formatOptions 82 assets/images/sanya-portrait.png --out assets/images/sanya-portrait.jpg)"
+      "Bash(sips -s format jpeg -s formatOptions 82 assets/images/sanya-portrait.png --out assets/images/sanya-portrait.jpg)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | %{size_download} bytes\\\\n\" --max-time 10 \"https://feeds.behold.so/GN2nUABNN8oVhsf6RPwl\")",
+      "Skill(ui-ux-pro-max)",
+      "Skill(ui-ux-pro-max:*)",
+      "Bash(python3 /Users/krishnaaggarwal/.claude/skills/ui-ux-pro-max/scripts/search.py \"video lightbox modal accessibility focus trap\" --domain ux -n 8)",
+      "Bash(python3 /Users/krishnaaggarwal/.claude/skills/ui-ux-pro-max/scripts/search.py \"tailwind modal dialog video aria\" --stack html-tailwind -n 6)",
+      "Bash(php -l template-parts/home/instagram-feed.php)",
+      "Bash(php -l inc/content.php)"
     ],
-    "deny": ["Bash(rm -rf *)"],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
     ]

@@ -422,6 +422,49 @@
   };
 
   /**
+   * Alpine factory for the Instagram lightbox. Holds the post list, the
+   * currently-open index, and open/close/keyboard handlers. Pauses the
+   * <video> element on close and locks page scroll while open.
+   *
+   * @param {Array} posts Live Behold posts to render.
+   */
+  window.yum2IgFeed = function (posts) {
+    return {
+      posts: Array.isArray(posts) ? posts : [],
+      activeIndex: null,
+      get current() {
+        if (this.activeIndex === null) return {};
+        return this.posts[this.activeIndex] || {};
+      },
+      init: function () {
+        var self = this;
+        // Body scroll-lock toggled via class on <html>; CSS in tailwind.src.css.
+        this.$watch &&
+          this.$watch("activeIndex", function (v) {
+            document.documentElement.classList.toggle(
+              "yum2-modal-open",
+              v !== null,
+            );
+          });
+      },
+      open: function (i) {
+        this.activeIndex = i;
+      },
+      close: function () {
+        // Pause + reset any playing reel so it doesn't keep buffering.
+        var v = this.$root && this.$root.querySelector("video");
+        if (v) {
+          try {
+            v.pause();
+            v.currentTime = 0;
+          } catch (e) {}
+        }
+        this.activeIndex = null;
+      },
+    };
+  };
+
+  /**
    * Scroll-reveal: toggle .is-visible when .yum2-reveal elements enter viewport.
    * Fires once per element, respects prefers-reduced-motion via CSS.
    */

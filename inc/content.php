@@ -97,10 +97,12 @@ function yum2_get_instagram_posts( $limit = 6 ) {
 		}
 
 		$posts[] = array(
-			'caption'   => $caption,
-			'thumb'     => isset( $p['thumbnailUrl'] ) ? esc_url_raw( $p['thumbnailUrl'] ) : '',
-			'permalink' => isset( $p['permalink'] ) ? esc_url_raw( $p['permalink'] ) : '',
-			'is_reel'   => ! empty( $p['isReel'] ),
+			'caption'    => $caption,
+			'thumb'      => isset( $p['thumbnailUrl'] ) ? esc_url_raw( $p['thumbnailUrl'] ) : '',
+			'permalink'  => isset( $p['permalink'] ) ? esc_url_raw( $p['permalink'] ) : '',
+			'is_reel'    => ! empty( $p['isReel'] ),
+			'media_url'  => isset( $p['mediaUrl'] ) ? esc_url_raw( $p['mediaUrl'] ) : '',
+			'media_type' => isset( $p['mediaType'] ) ? (string) $p['mediaType'] : '',
 		);
 	}
 
