@@ -2,6 +2,8 @@
 /**
  * Home hero. Eyebrow chip + giant H1 + 2-button CTA + portrait disc.
  *
+ * Copy lives in inc/content.php under 'hero'.
+ *
  * @package youumatter2
  */
 
@@ -9,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$c        = yum2_content( 'hero' );
 $portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 ?>
@@ -19,22 +22,19 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 	<div class="relative max-w-6xl mx-auto px-5 md:px-8 pt-10 md:pt-14 pb-20 md:pb-24">
 		<span class="inline-flex items-center gap-2 bg-[#d1e5d0] text-[#2b5329] rounded-full pl-3 pr-4 py-1.5 mb-8 md:mb-10" style="font-size:12px;font-weight:600;letter-spacing:1.5px;">
 			<span class="size-1.5 rounded-full bg-[#2b5329]"></span>
-			<span class="uppercase"><?php esc_html_e( 'Counselling Psychologist', 'youumatter2' ); ?></span>
+			<span class="uppercase"><?php echo esc_html( $c['eyebrow'] ); ?></span>
 		</span>
 
 		<h1 class="text-[#1a3a19] mb-10 md:mb-14" style="font-family:'Newsreader',serif;font-size:clamp(44px,9vw,120px);line-height:0.98;letter-spacing:-0.03em;font-weight:500;text-wrap:balance;">
-			<?php
-			/* translators: brand wordmark uses doubled "youu" */
-			esc_html_e( 'Youu matter.', 'youumatter2' );
-			?>
+			<?php echo esc_html( $c['heading'] ); ?>
 			<br>
-			<span class="italic" style="color:#c07a5a;"><?php esc_html_e( 'And you can do this.', 'youumatter2' ); ?></span>
+			<span class="italic" style="color:#c07a5a;"><?php echo esc_html( $c['heading_em'] ); ?></span>
 		</h1>
 
 		<div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
 			<div class="order-2 md:order-1">
 				<p class="text-[#516352] max-w-lg mb-8" style="font-size:clamp(17px,1.6vw,20px);line-height:1.55;">
-					<?php esc_html_e( "A quiet space to untangle what's weighing on you. Thoughtful, evidence-based therapy, online or in person at my clinic.", 'youumatter2' ); ?>
+					<?php echo esc_html( $c['body'] ); ?>
 				</p>
 
 				<div class="flex flex-wrap gap-3 mb-4">
@@ -43,17 +43,17 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 						'template-parts/shared/book-button',
 						null,
 						array(
-							'label'   => __( 'Book a Session', 'youumatter2' ),
+							'label'   => $c['btn_book'],
 							'variant' => 'primary',
 							'class'   => 'h-[56px] px-7',
 						)
 					);
 					?>
-					<a href="<?php echo esc_url( yum2_whatsapp_url( __( 'Hi Sanya, I would like to learn more about working together.', 'youumatter2' ) ) ); ?>"
+					<a href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
 						target="_blank" rel="noopener"
 						class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-[rgba(43,83,41,0.25)] hover:border-[#2b5329] text-[#2b5329] rounded-full h-[56px] px-7 transition-colors"
 						style="font-size:16px;font-weight:600;">
-						<?php esc_html_e( 'Message on WhatsApp', 'youumatter2' ); ?>
+						<?php echo esc_html( $c['btn_whatsapp'] ); ?>
 						<span aria-hidden>&rarr;</span>
 					</a>
 				</div>
@@ -90,7 +90,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 
 				<div class="hidden md:flex absolute -top-5 -left-6 bg-white rounded-2xl px-4 py-3 items-center gap-2 shadow-[0_14px_32px_rgba(19,60,20,0.12)] border border-[#e0d9ce] yum2-float">
 					<span class="italic text-[#1a3a19]" style="font-family:'Newsreader',serif;font-size:14px;">
-						<?php esc_html_e( '"A steady Tuesday."', 'youumatter2' ); ?>
+						<?php echo esc_html( $c['quote_card'] ); ?>
 					</span>
 				</div>
 
@@ -101,7 +101,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 							<span class="relative rounded-full size-2 bg-[#2b5329]"></span>
 						</span>
 						<span class="text-[#1a3a19]" style="font-size:12px;font-weight:600;">
-							<?php esc_html_e( 'Accepting new clients', 'youumatter2' ); ?>
+							<?php echo esc_html( $c['badge_accepting'] ); ?>
 						</span>
 					</div>
 				<?php endif; ?>

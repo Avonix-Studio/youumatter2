@@ -30,6 +30,9 @@ if ( ! $q->have_posts() ) {
 	return;
 }
 
+/* Copy lives in inc/content.php under 'from_blog'. */
+$c = yum2_content( 'from_blog' );
+
 $blog_url = get_permalink( (int) get_option( 'page_for_posts' ) );
 if ( ! $blog_url ) {
 	$blog_url = home_url( '/' );
@@ -40,15 +43,15 @@ if ( ! $blog_url ) {
 		<div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 md:gap-14 items-end mb-10 md:mb-12">
 			<div>
 				<p class="text-terracotta tracking-[2px] uppercase mb-4" style="font-size:12px;font-weight:600;">
-					<?php esc_html_e( 'From the blog', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['label'] ); ?>
 				</p>
 				<h2 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.8vw,52px);line-height:1.08;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
-					<?php esc_html_e( 'Thoughts to help you', 'youumatter2' ); ?>
-					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'along the way.', 'youumatter2' ); ?></em>
+					<?php echo esc_html( $c['heading'] ); ?>
+					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
 			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
-				<?php esc_html_e( 'Honest writing on anxiety, relationships, and what it means to feel okay again.', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
 
@@ -62,7 +65,7 @@ if ( ! $blog_url ) {
 
 		<div class="flex items-center justify-center mt-10 md:mt-12">
 			<a href="<?php echo esc_url( $blog_url ); ?>" class="group inline-flex items-center gap-2 text-forest hover:text-forest/80 transition-colors" style="font-size:15px;font-weight:600;">
-				<?php esc_html_e( 'View all posts', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['view_all'] ); ?>
 				<span class="transition-transform group-hover:translate-x-1" aria-hidden>&rarr;</span>
 			</a>
 		</div>

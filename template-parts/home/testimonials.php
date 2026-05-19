@@ -16,33 +16,9 @@ if ( ! get_theme_mod( 'yum2_home_show_testimonials', true ) ) {
 	return;
 }
 
-$testimonials = array(
-	array(
-		'quote'       => __( 'I came in thinking something was wrong with me. I left understanding that I had been coping, not broken. Sanya made the difference feel huge.', 'youumatter2' ),
-		'attribution' => __( 'A., 29', 'youumatter2' ),
-		'context'     => __( 'Anxiety · 6 months in', 'youumatter2' ),
-	),
-	array(
-		'quote'       => __( 'She never rushed me. The first real moment came in session five, and she was there, ready, like she had been expecting it.', 'youumatter2' ),
-		'attribution' => __( 'R., 34', 'youumatter2' ),
-		'context'     => __( 'Relationships', 'youumatter2' ),
-	),
-	array(
-		'quote'       => __( "I had tried therapy before and walked away. This time felt different. Warm, specific, and honest in a way I didn't know therapy could be.", 'youumatter2' ),
-		'attribution' => __( 'M., 41', 'youumatter2' ),
-		'context'     => __( 'Self-esteem', 'youumatter2' ),
-	),
-	array(
-		'quote'       => __( 'The space she holds is the actual work. I started saying things I did not know I thought, and she helped me stay with them.', 'youumatter2' ),
-		'attribution' => __( 'K., 26', 'youumatter2' ),
-		'context'     => __( 'Purpose & direction', 'youumatter2' ),
-	),
-	array(
-		'quote'       => __( "Even our hardest sessions ended with me feeling more like myself, not less. That's rare.", 'youumatter2' ),
-		'attribution' => __( 'S., 38', 'youumatter2' ),
-		'context'     => __( 'Depression', 'youumatter2' ),
-	),
-);
+/* Copy lives in inc/content.php under 'testimonials'. */
+$c            = yum2_content( 'testimonials' );
+$testimonials = $c['items'];
 ?>
 <section class="relative bg-sage-light px-5 md:px-8 pt-10 md:pt-14 pb-12 md:pb-16 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto" x-data="yum2TestimonialsCarousel(<?php echo esc_attr( count( $testimonials ) ); ?>)" x-init="init()">
@@ -50,16 +26,16 @@ $testimonials = array(
 		<div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-6 mb-6 md:mb-8 yum2-reveal">
 			<div class="flex items-baseline gap-3 md:gap-4 flex-wrap">
 				<span class="text-terracotta tracking-[2px] uppercase" style="font-size:11px;font-weight:600;">
-					<?php esc_html_e( 'Client reviews', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['label'] ); ?>
 				</span>
 				<span aria-hidden class="hidden md:inline-block h-px w-8 bg-forest/20"></span>
 				<h2 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.15;letter-spacing:-0.01em;font-weight:400;">
-					<?php esc_html_e( 'What clients say,', 'youumatter2' ); ?>
-					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'in their own words.', 'youumatter2' ); ?></em>
+					<?php echo esc_html( $c['heading'] ); ?>
+					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
 			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:14.5px;">
-				<?php esc_html_e( 'Shared with consent · details changed for privacy.', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['privacy_note'] ); ?>
 			</p>
 		</div>
 

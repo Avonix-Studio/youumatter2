@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Copy lives in inc/content.php under 'newsletter'. */
+$c          = yum2_content( 'newsletter' );
 $subscribed = isset( $_GET['subscribed'] ) ? sanitize_text_field( wp_unslash( $_GET['subscribed'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $redirect   = remove_query_arg( 'subscribed' );
 ?>
@@ -16,16 +18,16 @@ $redirect   = remove_query_arg( 'subscribed' );
 	<div class="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-5">
 		<div class="md:max-w-sm">
 			<p class="italic text-forest mb-1.5" style="font-family:'Newsreader',serif;font-size:22px;">
-				<?php esc_html_e( 'Stay close to what helps.', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['heading'] ); ?>
 			</p>
 			<p class="text-forest/60" style="font-size:13px;line-height:1.55;">
-				<?php esc_html_e( 'Monthly notes on therapy, mindful habits, and quiet reflections. No spam, unsubscribe anytime.', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
 
 		<?php if ( '1' === $subscribed ) : ?>
 			<p class="italic text-forest" style="font-family:'Newsreader',serif;font-size:16px;">
-				<?php esc_html_e( "Thank you. I'll be in touch.", 'youumatter2' ); ?>
+				<?php echo esc_html( $c['success'] ); ?>
 			</p>
 		<?php else : ?>
 			<form
@@ -43,7 +45,7 @@ $redirect   = remove_query_arg( 'subscribed' );
 					type="email"
 					name="email"
 					required
-					placeholder="<?php esc_attr_e( 'Your email', 'youumatter2' ); ?>"
+					placeholder="<?php echo esc_attr( $c['placeholder'] ); ?>"
 					class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-forest/60"
 					style="font-size:14px;"
 				>
@@ -52,14 +54,14 @@ $redirect   = remove_query_arg( 'subscribed' );
 					class="bg-forest hover:bg-forest/90 text-cream rounded-full px-6 h-[40px] transition-colors whitespace-nowrap"
 					style="font-size:14px;font-weight:600;"
 				>
-					<?php esc_html_e( 'Subscribe', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['btn_submit'] ); ?>
 				</button>
 			</form>
 		<?php endif; ?>
 	</div>
 	<?php if ( '0' === $subscribed ) : ?>
 		<p class="text-terracotta text-center mt-3" style="font-size:13px;">
-			<?php esc_html_e( 'That email address looked off. Please try again.', 'youumatter2' ); ?>
+			<?php echo esc_html( $c['error'] ); ?>
 		</p>
 	<?php endif; ?>
 </section>

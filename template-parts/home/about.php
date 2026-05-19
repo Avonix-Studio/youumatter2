@@ -9,20 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Copy lives in inc/content.php under 'about'. */
+$c        = yum2_content( 'about' );
 $portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 
-$beliefs = array(
-	array( 'k' => '01', 't' => __( "Therapy isn't fixing.", 'youumatter2' ),    's' => __( "It's meeting yourself with less armour.", 'youumatter2' ) ),
-	array( 'k' => '02', 't' => __( 'Your pace, always.', 'youumatter2' ),         's' => __( "We don't rush the tender parts.", 'youumatter2' ) ),
-	array( 'k' => '03', 't' => __( 'Small shifts, real change.', 'youumatter2' ), 's' => __( 'Tiny honest things, practised often.', 'youumatter2' ) ),
-);
-
-$approaches = array(
-	array( 'name' => __( 'CBT', 'youumatter2' ),               'gist' => __( 'Naming the thought loops that keep us stuck.', 'youumatter2' ) ),
-	array( 'name' => __( 'Narrative Therapy', 'youumatter2' ), 'gist' => __( "Rewriting the story you've been told about yourself.", 'youumatter2' ) ),
-	array( 'name' => __( 'Mindfulness', 'youumatter2' ),       'gist' => __( 'Staying with what is, without flinching.', 'youumatter2' ) ),
-	array( 'name' => __( 'Emotion-Focused', 'youumatter2' ),   'gist' => __( 'Feelings as information, not obstacles.', 'youumatter2' ) ),
-);
+$beliefs   = $c['beliefs'];
+$approaches = $c['approaches'];
 ?>
 <section class="relative bg-[#f8f3e9] px-5 md:px-8 pt-16 md:pt-24 pb-16 md:pb-24 overflow-hidden">
 	<div aria-hidden class="absolute top-10 right-0 w-[420px] h-[420px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(209,229,208,0.45) 0%, rgba(248,243,233,0) 70%);"></div>
@@ -43,22 +35,17 @@ $approaches = array(
 				<span class="size-2 rounded-full bg-[#c07a5a]" aria-hidden></span>
 				<div class="flex flex-col leading-tight">
 					<span class="text-[#c07a5a] uppercase tracking-[0.14em]" style="font-size:9.5px;font-weight:700;">
-						<?php esc_html_e( 'Credential', 'youumatter2' ); ?>
+						<?php echo esc_html( $c['credential_label'] ); ?>
 					</span>
 					<span class="text-[#1a3a19]" style="font-size:12.5px;font-weight:600;">
-						<?php esc_html_e( 'M.A. Clinical Psychology', 'youumatter2' ); ?>
+						<?php echo esc_html( $c['credential_value'] ); ?>
 					</span>
 				</div>
 			</div>
 
 			<div class="absolute -bottom-6 -left-3 md:-bottom-8 md:-left-8 bg-[#f2ede3] rounded-2xl px-4 py-3 md:px-5 md:py-4 border border-[#e0d9ce] shadow-[0_14px_28px_rgba(19,60,20,0.1)] w-[230px] md:w-[270px]">
 				<?php
-				$rows = array(
-					array( 'label' => __( 'Based in', 'youumatter2' ),  'value' => __( 'Pitampura, Delhi', 'youumatter2' ) ),
-					array( 'label' => __( 'Sessions', 'youumatter2' ),  'value' => __( 'Online · In-person', 'youumatter2' ) ),
-					array( 'label' => __( 'Languages', 'youumatter2' ), 'value' => __( 'English · Hindi', 'youumatter2' ) ),
-				);
-				foreach ( $rows as $row ) :
+				foreach ( $c['stat_rows'] as $row ) :
 					?>
 					<div class="flex items-center justify-between gap-3 py-2.5 md:py-3 border-b border-[rgba(26,58,25,0.1)] last:border-b-0">
 						<span class="text-[#c07a5a] uppercase tracking-[0.14em] shrink-0" style="font-size:10.5px;font-weight:700;">
@@ -74,21 +61,21 @@ $approaches = array(
 
 		<div class="md:pl-2 mt-6 md:mt-0">
 			<p class="text-[#c07a5a] tracking-[2px] uppercase mb-4" style="font-size:12px;font-weight:600;">
-				<?php esc_html_e( 'About Sanya', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['label'] ); ?>
 			</p>
 
 			<h2 class="text-[#1a3a19] mb-7" style="font-family:'Newsreader',serif;font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
-				<?php esc_html_e( "Hi, I'm", 'youumatter2' ); ?>
-				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'Sanya.', 'youumatter2' ); ?></em>
+				<?php echo esc_html( $c['heading'] ); ?>
+				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 
 			<p class="text-[#516352] mb-6" style="font-size:17px;line-height:1.65;">
-				<?php esc_html_e( "I'm a Counselling Psychologist (M.A. Clinical Psychology) working with individuals and couples through relationships, anxiety, and emotional well-being. My style is warm, collaborative, and client-centered. A safe, non-judgmental space.", 'youumatter2' ); ?>
+				<?php echo esc_html( $c['bio'] ); ?>
 			</p>
 
 			<div class="bg-[#f2ede3] border border-[#e0d9ce] rounded-[20px] p-5 md:p-6 mb-7">
 				<p class="text-[#c07a5a] uppercase tracking-[0.14em] mb-4" style="font-size:11px;font-weight:700;">
-					<?php esc_html_e( 'What I believe', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['beliefs_label'] ); ?>
 				</p>
 				<ul class="flex flex-col gap-3.5">
 					<?php foreach ( $beliefs as $b ) : ?>
@@ -132,7 +119,7 @@ $approaches = array(
 					</span>
 				</div>
 				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="group inline-flex items-center gap-1.5 text-[#2b5329] hover:text-[#1f3d1e] transition-colors" style="font-size:14px;font-weight:600;">
-					<?php esc_html_e( 'Read my full story', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['read_more'] ); ?>
 					<span aria-hidden class="transition-transform group-hover:translate-x-1">&rarr;</span>
 				</a>
 			</div>

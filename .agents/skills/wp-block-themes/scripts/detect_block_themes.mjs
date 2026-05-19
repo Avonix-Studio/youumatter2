@@ -33,7 +33,11 @@ function readJsonSafe(p) {
   }
 }
 
-function findFilesRecursive(repoRoot, predicate, { maxFiles = 6000, maxDepth = 10 } = {}) {
+function findFilesRecursive(
+  repoRoot,
+  predicate,
+  { maxFiles = 6000, maxDepth = 10 } = {},
+) {
   const results = [];
   const queue = [{ dir: repoRoot, depth: 0 }];
   let visited = 0;
@@ -95,10 +99,14 @@ function summarizeTheme(repoRoot, themeJsonPath) {
 function main() {
   const repoRoot = process.cwd();
 
-  const { results: themeJsonFiles, truncated } = findFilesRecursive(repoRoot, (p) => path.basename(p) === "theme.json", {
-    maxFiles: 8000,
-    maxDepth: 12,
-  });
+  const { results: themeJsonFiles, truncated } = findFilesRecursive(
+    repoRoot,
+    (p) => path.basename(p) === "theme.json",
+    {
+      maxFiles: 8000,
+      maxDepth: 12,
+    },
+  );
 
   const themes = themeJsonFiles.map((p) => summarizeTheme(repoRoot, p));
 
@@ -114,4 +122,3 @@ function main() {
 }
 
 main();
-

@@ -18,6 +18,8 @@ if ( ! get_theme_mod( 'yum2_home_show_gentle_invitation', true ) ) {
 	return;
 }
 
+/* Copy lives in inc/content.php under 'gentle_invitation'. */
+$c             = yum2_content( 'gentle_invitation' );
 $accepting     = (bool) yum2_get_contact( 'accepting_clients' );
 $clinic        = (string) yum2_get_contact( 'clinic_address' );
 $hours         = (string) yum2_get_contact( 'clinic_hours' );
@@ -31,16 +33,16 @@ $email         = (string) yum2_get_contact( 'email' );
 	<div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-start">
 		<div>
 			<p class="text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
-				<?php esc_html_e( 'A gentle invitation', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['label'] ); ?>
 			</p>
 
 			<h2 class="text-forest mb-5" style="font-family:'Newsreader',serif;font-size:clamp(34px,5.2vw,60px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
-				<?php esc_html_e( 'Take your time.', 'youumatter2' ); ?>
-				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( "I'll be here when you're ready.", 'youumatter2' ); ?></em>
+				<?php echo esc_html( $c['heading'] ); ?>
+				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 
 			<p class="italic text-forest/60 max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
-				<?php esc_html_e( 'Reaching out is often the hardest part. No pressure, no rush. Just a conversation when it feels right for you.', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['body'] ); ?>
 			</p>
 
 			<div class="flex flex-wrap items-center gap-3 mb-8">
@@ -49,20 +51,20 @@ $email         = (string) yum2_get_contact( 'email' );
 					'template-parts/shared/book-button',
 					null,
 					array(
-						'label'   => __( 'Book a session', 'youumatter2' ),
+						'label'   => $c['btn_book'],
 						'variant' => 'primary',
 						'icon'    => true,
 					)
 				);
 				?>
 				<a
-					href="<?php echo esc_url( yum2_whatsapp_url( __( 'Hi Sanya, I would like to start a conversation.', 'youumatter2' ) ) ); ?>"
+					href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
 					target="_blank" rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 bg-transparent border-2 border-forest/25 hover:border-forest text-forest rounded-full h-[52px] px-6 transition-colors"
 					style="font-size:15px;font-weight:600;"
 				>
 					<?php echo yum2_icon( 'message-circle', array( 'size' => 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					<?php esc_html_e( 'Message on WhatsApp', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['btn_whatsapp'] ); ?>
 				</a>
 			</div>
 

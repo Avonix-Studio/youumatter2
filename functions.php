@@ -14,6 +14,7 @@ if ( ! defined( 'YUM2_VERSION' ) ) {
 }
 
 require get_template_directory() . '/inc/config.php';
+require get_template_directory() . '/inc/content.php';
 require get_template_directory() . '/inc/setup.php';
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/template-tags.php';

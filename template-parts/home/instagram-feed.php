@@ -24,50 +24,13 @@ if ( '' === $ig_url ) {
 	return;
 }
 
-$tiles = array(
-	array(
-		'caption'  => __( "On the days the 'what-ifs' win, try this one grounding practice.", 'youumatter2' ),
-		'likes'    => '124k',
-		'comments' => '842',
-		'is_reel'  => true,
-		'bg'       => '#c8dcc7',
-	),
-	array(
-		'caption'  => __( 'What to say when your inner critic gets loud.', 'youumatter2' ),
-		'likes'    => '96k',
-		'comments' => '1.2k',
-		'is_reel'  => true,
-		'bg'       => '#ede0d0',
-	),
-	array(
-		'caption'  => __( "Boundaries aren't walls. They're doors with handles on the inside.", 'youumatter2' ),
-		'likes'    => '58k',
-		'comments' => '412',
-		'is_reel'  => true,
-		'bg'       => '#d1e5d0',
-	),
-	array(
-		'caption'  => __( 'A reminder for anyone rebuilding their self-worth this week.', 'youumatter2' ),
-		'likes'    => '214k',
-		'comments' => '3.1k',
-		'is_reel'  => true,
-		'bg'       => '#e4efe3',
-	),
-	array(
-		'caption'  => __( "Rest isn't a reward. It's the ground the rest grows from.", 'youumatter2' ),
-		'likes'    => '42k',
-		'comments' => '268',
-		'is_reel'  => true,
-		'bg'       => '#f8f3e9',
-	),
-	array(
-		'caption'  => __( 'A quiet Sunday practice: ask what felt honest this week.', 'youumatter2' ),
-		'likes'    => '1.2k',
-		'comments' => '46',
-		'is_reel'  => false,
-		'bg'       => '#f2ede3',
-	),
-);
+/* Copy lives in inc/content.php under 'instagram'.
+ * Try the live Behold feed first; fall back to placeholder tiles if Behold
+ * is unreachable or hasn't returned data yet. */
+$c          = yum2_content( 'instagram' );
+$live_posts = yum2_get_instagram_posts( 6 );
+$is_live    = ! empty( $live_posts );
+$tiles      = $is_live ? $live_posts : $c['tiles'];
 ?>
 <section class="relative bg-cream px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto">
@@ -75,16 +38,16 @@ $tiles = array(
 		<div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 md:gap-14 items-end mb-10 md:mb-12">
 			<div>
 				<p class="text-terracotta tracking-[2px] uppercase mb-4" style="font-size:12px;font-weight:600;">
-					<?php esc_html_e( 'On Instagram', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['label'] ); ?>
 				</p>
 				<h2 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.8vw,52px);line-height:1.08;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
-					<?php esc_html_e( 'Small reminders,', 'youumatter2' ); ?>
-					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'in your feed.', 'youumatter2' ); ?></em>
+					<?php echo esc_html( $c['heading'] ); ?>
+					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
 			<div class="flex flex-col gap-4">
 				<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
-					<?php esc_html_e( 'Reflections, reels, and quiet reminders. Shared between sessions.', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['description'] ); ?>
 				</p>
 				<a
 					href="<?php echo esc_url( $ig_url ); ?>"
@@ -115,44 +78,53 @@ $tiles = array(
 			class="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pr-8 md:pr-10"
 			style="scrollbar-width:none;"
 		>
-			<?php foreach ( $tiles as $tile ) : ?>
+			<?php
+			foreach ( $tiles as $tile ) :
+				/* Live tiles link to the real Instagram post; placeholders all
+				 * link to the profile. */
+				$tile_href = $is_live && ! empty( $tile['permalink'] ) ? $tile['permalink'] : $ig_url;
+				$has_thumb = $is_live && ! empty( $tile['thumb'] );
+				?>
 				<div class="shrink-0 snap-start w-[58%] sm:w-[40%] md:w-[25%] lg:w-[22%]">
 					<a
-						href="<?php echo esc_url( $ig_url ); ?>"
+						href="<?php echo esc_url( $tile_href ); ?>"
 						target="_blank" rel="noopener noreferrer"
 						class="group relative block aspect-[9/16] rounded-[18px] overflow-hidden border border-forest/15 hover:border-forest/35 hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1"
-						style="background:<?php echo esc_attr( $tile['bg'] ); ?>;"
+						<?php if ( ! $has_thumb ) : ?>style="background:<?php echo esc_attr( isset( $tile['bg'] ) ? $tile['bg'] : '#e4efe3' ); ?>;"<?php endif; ?>
 					>
-						<div aria-hidden class="absolute inset-0 opacity-40 pointer-events-none" style="background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);"></div>
+						<?php if ( $has_thumb ) : ?>
+							<img
+								src="<?php echo esc_url( $tile['thumb'] ); ?>"
+								alt=""
+								loading="lazy" decoding="async"
+								class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+							>
+							<div aria-hidden class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);"></div>
+						<?php else : ?>
+							<div aria-hidden class="absolute inset-0 opacity-40 pointer-events-none" style="background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);"></div>
+						<?php endif; ?>
 
 						<div class="relative h-full p-5 flex flex-col justify-between">
 							<div class="flex items-start justify-between">
-								<span class="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-forest/8 text-forest rounded-full px-2.5 py-1" style="font-size:10px;font-weight:700;letter-spacing:0.1em;">
+								<span class="inline-flex items-center gap-1.5 bg-white/85 backdrop-blur-sm border border-forest/8 text-forest rounded-full px-2.5 py-1" style="font-size:10px;font-weight:700;letter-spacing:0.1em;">
 									<?php echo yum2_icon( 'instagram', array( 'size' => 10, 'stroke' => 2 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									<?php echo $tile['is_reel'] ? esc_html__( 'POST', 'youumatter2' ) : esc_html__( 'POST', 'youumatter2' ); ?>
+									<?php echo esc_html( $tile['is_reel'] ? __( 'REEL', 'youumatter2' ) : __( 'POST', 'youumatter2' ) ); ?>
 								</span>
 								<?php if ( $tile['is_reel'] ) : ?>
 									<span class="inline-flex items-center gap-1 bg-black/60 backdrop-blur-sm text-white rounded-full px-2 py-1" style="font-size:9.5px;font-weight:700;letter-spacing:0.1em;">
 										<?php echo yum2_icon( 'play', array( 'size' => 9, 'stroke' => 2.5 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-										<?php esc_html_e( 'REEL', 'youumatter2' ); ?>
+										<?php esc_html_e( 'PLAY', 'youumatter2' ); ?>
 									</span>
 								<?php endif; ?>
 							</div>
 
-							<p class="italic text-forest line-clamp-4" style="font-family:'Newsreader',serif;font-size:clamp(14px,1.3vw,16px);line-height:1.35;font-weight:500;">
-								&ldquo;<?php echo esc_html( $tile['caption'] ); ?>&rdquo;
-							</p>
-
-							<div class="flex items-center gap-4 text-forest/65" style="font-size:11.5px;font-weight:600;">
-								<span class="inline-flex items-center gap-1">
-									<?php echo yum2_icon( 'heart', array( 'size' => 12, 'stroke' => 2 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									<?php echo esc_html( $tile['likes'] ); ?>
-								</span>
-								<span class="inline-flex items-center gap-1">
-									<?php echo yum2_icon( 'message-circle', array( 'size' => 12, 'stroke' => 2 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									<?php echo esc_html( $tile['comments'] ); ?>
-								</span>
-							</div>
+							<?php if ( ! empty( $tile['caption'] ) ) : ?>
+								<p class="italic <?php echo $has_thumb ? 'text-white drop-shadow-md' : 'text-forest'; ?> line-clamp-4" style="font-family:'Newsreader',serif;font-size:clamp(14px,1.3vw,16px);line-height:1.35;font-weight:500;">
+									&ldquo;<?php echo esc_html( $tile['caption'] ); ?>&rdquo;
+								</p>
+							<?php else : ?>
+								<span></span>
+							<?php endif; ?>
 						</div>
 					</a>
 				</div>

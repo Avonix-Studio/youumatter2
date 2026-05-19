@@ -2,6 +2,8 @@
 /**
  * Home: how it works. Three-step path from booking to first session.
  *
+ * Copy lives in inc/content.php under 'how_it_works'.
+ *
  * @package youumatter2
  */
 
@@ -9,26 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$steps = array(
-	array(
-		'icon'  => 'calendar',
-		'title' => __( 'Book', 'youumatter2' ),
-		'body'  => __( "Tap Book, pick a time that works, and you're set. No forms, no back-and-forth.", 'youumatter2' ),
-		'note'  => __( 'takes about a minute', 'youumatter2' ),
-	),
-	array(
-		'icon'  => 'message',
-		'title' => __( 'Connect', 'youumatter2' ),
-		'body'  => __( "A fifteen-minute intro on WhatsApp. To see if we're a fit, no pressure either way.", 'youumatter2' ),
-		'note'  => __( 'on WhatsApp, at your comfort', 'youumatter2' ),
-	),
-	array(
-		'icon'  => 'leaf',
-		'title' => __( 'Begin', 'youumatter2' ),
-		'body'  => __( 'Your first therapy session. Sixty minutes, online or in person. We start where you are, gently, at your pace.', 'youumatter2' ),
-		'note'  => __( 'sixty minutes, yours', 'youumatter2' ),
-	),
-);
+$c     = yum2_content( 'how_it_works' );
+$steps = $c['steps'];
 ?>
 <section class="relative bg-[#e4efe3] px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div aria-hidden class="absolute -top-20 right-0 w-[460px] h-[460px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(248,243,233,0.6) 0%, rgba(228,239,227,0) 70%);"></div>
@@ -38,15 +22,15 @@ $steps = array(
 		<div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-5 md:gap-14 items-end mb-10 md:mb-12">
 			<div>
 				<p class="text-[#c07a5a] tracking-[2px] uppercase mb-4" style="font-size:12px;font-weight:600;">
-					<?php esc_html_e( 'From here to a first session', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['label'] ); ?>
 				</p>
 				<h2 class="text-[#1a3a19]" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.8vw,54px);line-height:1.08;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
-					<?php esc_html_e( 'Three small steps.', 'youumatter2' ); ?>
-					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( "No commitment until you're ready.", 'youumatter2' ); ?></em>
+					<?php echo esc_html( $c['heading'] ); ?>
+					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
 			<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
-				<?php esc_html_e( "Reaching out is often the hardest part. After that, it's simple.", 'youumatter2' ); ?>
+				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
 
@@ -103,7 +87,7 @@ $steps = array(
 
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-10 md:mt-12 pt-7 border-t border-[rgba(26,58,25,0.12)]">
 			<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:17px;">
-				<?php esc_html_e( "Not ready to book? That's okay, just say hi.", 'youumatter2' ); ?>
+				<?php echo esc_html( $c['footer_note'] ); ?>
 			</p>
 			<div class="flex flex-wrap gap-3">
 				<?php
@@ -111,16 +95,16 @@ $steps = array(
 					'template-parts/shared/book-button',
 					null,
 					array(
-						'label'   => __( 'Book a Session', 'youumatter2' ),
+						'label'   => $c['btn_book'],
 						'variant' => 'primary',
 					)
 				);
 				?>
-				<a href="<?php echo esc_url( yum2_whatsapp_url( __( 'Hi Sanya, just saying hi for now.', 'youumatter2' ) ) ); ?>"
+				<a href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
 					target="_blank" rel="noopener"
 					class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-[rgba(43,83,41,0.25)] hover:border-[#2b5329] text-[#2b5329] rounded-full h-[52px] px-7 transition-colors"
 					style="font-size:15px;font-weight:600;">
-					<?php esc_html_e( 'Message on WhatsApp', 'youumatter2' ); ?>
+					<?php echo esc_html( $c['btn_whatsapp'] ); ?>
 					<span aria-hidden>&rarr;</span>
 				</a>
 			</div>

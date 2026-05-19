@@ -28,6 +28,7 @@ function yum2_contact_defaults() {
 		'clinic_hours'      => 'Mon to Sat · 10:00 AM to 7:00 PM',
 		'instagram'         => 'https://www.instagram.com/youumatter2withsanya/',
 		'instagram_handle'  => '@youumatter2withsanya',
+		'behold_feed_url'   => 'https://feeds.behold.so/GN2nUABNN8oVhsf6RPwl',
 		'linkedin'          => 'https://www.linkedin.com/in/sanya-oberoi-a5a747175/',
 		'youtube'           => '',
 		'twitter'           => '',

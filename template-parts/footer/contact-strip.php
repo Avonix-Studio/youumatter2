@@ -9,24 +9,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Labels live in inc/content.php under 'contact_strip'.
+ * Email / phone values come from inc/config.php via yum2_get_contact(). */
+$c = yum2_content( 'contact_strip' );
+
 $items = array(
 	array(
-		'label'  => __( 'Email me', 'youumatter2' ),
+		'label'  => $c['label_email'],
 		'meta'   => yum2_get_contact( 'email' ),
 		'href'   => yum2_email_url(),
 		'icon'   => 'mail',
 		'target' => '_self',
 	),
 	array(
-		'label'  => __( 'Call me', 'youumatter2' ),
+		'label'  => $c['label_call'],
 		'meta'   => yum2_get_contact( 'phone_display' ),
 		'href'   => yum2_phone_url(),
 		'icon'   => 'phone',
 		'target' => '_self',
 	),
 	array(
-		'label'  => __( 'WhatsApp me', 'youumatter2' ),
-		'meta'   => __( 'Quick reply, usually same day', 'youumatter2' ),
+		'label'  => $c['label_whatsapp'],
+		'meta'   => $c['meta_whatsapp'],
 		'href'   => yum2_whatsapp_url(),
 		'icon'   => 'message-circle',
 		'target' => '_blank',

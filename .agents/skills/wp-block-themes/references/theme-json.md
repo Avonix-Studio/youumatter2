@@ -27,11 +27,13 @@ Upstream references:
 ## WordPress 6.9 additions
 
 **Form element styling:**
+
 - Style text inputs and selects via `styles.elements` (e.g., `styles.elements.input`, `styles.elements.select`).
 - Supports border, color, outline, shadow, and spacing properties.
 - Note: Focus state styling is not yet available in 6.9.
 
 **Border radius presets:**
+
 - Define presets in `settings.border.radiusSizes` for visual selection in the border radius control.
 - Users can still enter custom values.
 
@@ -50,6 +52,7 @@ Upstream references:
 ```
 
 **Button pseudo-classes:**
+
 - Style Button block hover and focus states directly in theme.json.
 - No longer requires custom CSS for simple button state styling.
 

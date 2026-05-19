@@ -41,6 +41,7 @@ If you are creating a new block theme from scratch (or converting a classic them
 - Be explicit about the minimum supported WordPress version because `theme.json` schema versions differ.
 
 Read:
+
 - `references/creating-new-block-theme.md`
 
 After creating the theme root, re-run `detect_block_themes` and continue below.
@@ -55,6 +56,7 @@ After creating the theme root, re-run `detect_block_themes` and continue below.
   - user customizations can make theme.json edits appear “ignored”
 
 Read:
+
 - `references/debugging.md` (style hierarchy + fastest checks)
 
 ### 3) Make `theme.json` changes safely
@@ -65,6 +67,7 @@ Decide whether you are changing:
 - **styles** (how it looks by default): CSS-like rules for elements/blocks
 
 Read:
+
 - `references/theme-json.md`
 
 ### 4) Templates and template parts
@@ -73,6 +76,7 @@ Read:
 - Template parts live under `parts/` and must not be nested in subdirectories.
 
 Read:
+
 - `references/templates-and-parts.md`
 
 ### 5) Patterns
@@ -80,6 +84,7 @@ Read:
 Prefer filesystem patterns under `patterns/` when you want theme-owned patterns.
 
 Read:
+
 - `references/patterns.md`
 
 ### 6) Style variations
@@ -87,6 +92,7 @@ Read:
 Style variations are JSON files under `styles/`. Note: once a user picks a style variation, that selection is stored in the DB, so changing the file may not “update what the user sees” automatically.
 
 Read:
+
 - `references/style-variations.md`
 
 ## Verification

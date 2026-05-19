@@ -13,39 +13,20 @@ if ( ! get_theme_mod( 'yum2_home_show_inside_session', true ) ) {
 	return;
 }
 
-$items = array(
-	array(
-		'icon'  => 'map-pin',
-		'label' => __( 'Start where you are', 'youumatter2' ),
-		'body'  => __( 'No script. Bring a specific problem, or just "I feel off". Both work.', 'youumatter2' ),
-	),
-	array(
-		'icon'  => 'ear',
-		'label' => __( 'Stay with what surfaces', 'youumatter2' ),
-		'body'  => __( 'I listen closely, ask gently, and give it space. No rushing past the real stuff.', 'youumatter2' ),
-	),
-	array(
-		'icon'  => 'sprout',
-		'label' => __( 'Patterns, not blame', 'youumatter2' ),
-		'body'  => __( "We look at what a feeling is protecting, not whether you're right or wrong.", 'youumatter2' ),
-	),
-	array(
-		'icon'  => 'gem',
-		'label' => __( 'Leave with one thing', 'youumatter2' ),
-		'body'  => __( 'One observation or small practice to sit with. Not ten takeaways to forget.', 'youumatter2' ),
-	),
-);
+/* Copy lives in inc/content.php under 'inside_a_session'. */
+$c     = yum2_content( 'inside_a_session' );
+$items = $c['items'];
 ?>
 <section class="relative bg-cream px-5 md:px-8 py-10 md:py-12 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto">
 		<div class="flex items-baseline gap-3 md:gap-4 flex-wrap mb-6 md:mb-8">
 			<span class="text-terracotta tracking-[2px] uppercase" style="font-size:11px;font-weight:600;">
-				<?php esc_html_e( 'Inside a session', 'youumatter2' ); ?>
+				<?php echo esc_html( $c['label'] ); ?>
 			</span>
 			<span aria-hidden class="hidden md:inline-block h-px w-8 bg-forest/20"></span>
 			<h2 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.15;letter-spacing:-0.01em;font-weight:400;">
-				<?php esc_html_e( 'What actually happens', 'youumatter2' ); ?>
-				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'in a session.', 'youumatter2' ); ?></em>
+				<?php echo esc_html( $c['heading'] ); ?>
+				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 		</div>
 
