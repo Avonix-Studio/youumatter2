@@ -396,33 +396,7 @@ function yum2_build_content() {
 			'btn_all_faqs' => __( 'See all FAQs', 'youumatter2' ),
 			'btn_whatsapp' => __( 'Ask on WhatsApp', 'youumatter2' ),
 			'whatsapp_msg' => __( 'Hi Sanya, I have a quick question.', 'youumatter2' ),
-
-			'items' => array(
-				array(
-					'q' => __( 'How long is each session?', 'youumatter2' ),
-					'a' => __( 'Sessions run 60 minutes. The first one may run a little longer if we need it. We will not rush something important.', 'youumatter2' ),
-				),
-				array(
-					'q' => __( 'Do you offer online sessions?', 'youumatter2' ),
-					'a' => __( 'Yes. I work online on Google Meet, and in person at my clinic in Pitampura, Delhi. We can switch between formats as life requires.', 'youumatter2' ),
-				),
-				array(
-					'q' => __( "How do I know if we'll be a fit?", 'youumatter2' ),
-					'a' => __( "A short intro on WhatsApp is the easiest way. Fifteen minutes, no pressure. You'll know more about my approach, and I'll understand what you're looking for.", 'youumatter2' ),
-				),
-				array(
-					'q' => __( 'How many sessions will I need?', 'youumatter2' ),
-					'a' => __( "There's no set number. Some people come for a specific concern and wrap up in 6 to 8 sessions. Others stay longer for deeper work. We'll revisit the question together.", 'youumatter2' ),
-				),
-				array(
-					'q' => __( 'Is everything we talk about confidential?', 'youumatter2' ),
-					'a' => __( "Yes. Sessions are strictly confidential, with the exceptions required by law and professional ethics (e.g. serious risk of harm). I'll walk you through this in the first session.", 'youumatter2' ),
-				),
-				array(
-					'q' => __( 'What does it cost?', 'youumatter2' ),
-					'a' => __( 'Fees are shared during our intro call so I can recommend a pace and format that fits you. I keep a limited number of reduced-cost slots available.', 'youumatter2' ),
-				),
-			),
+			/* Questions come from the FAQs CPT (flagged "Show on homepage"), not from here. */
 		),
 
 		/* =============================================================

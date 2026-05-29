@@ -13,10 +13,15 @@ if ( ! get_theme_mod( 'yum2_home_show_faq', true ) ) {
 	return;
 }
 
-/* Copy lives in inc/content.php under 'faq'. */
+/* Section chrome (label/heading/buttons) lives in inc/content.php under 'faq'.
+   The questions come from FAQs flagged "Show on homepage" in the admin. */
 $c         = yum2_content( 'faq' );
-$questions = $c['items'];
+$questions = yum2_faq_homepage_items( 6 );
 $faq_url   = home_url( '/faq/' );
+
+if ( empty( $questions ) ) {
+	return;
+}
 ?>
 <section class="relative bg-[#f8f3e9] px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div class="relative max-w-5xl mx-auto" x-data="{ open: null }">
