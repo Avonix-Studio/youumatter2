@@ -60,7 +60,9 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 			<div class="swiper-wrapper">
 				<?php foreach ( $cards as $i => $card ) : ?>
 					<div class="swiper-slide pb-2 pt-1">
-						<article class="group relative bg-[#f8f3e9] border border-[#e0d9ce] rounded-[20px] p-5 md:p-7 overflow-hidden hover:border-[rgba(43,83,41,0.35)] hover:shadow-[0_22px_44px_-16px_rgba(26,58,25,0.16)] transition-[border-color,box-shadow,transform] duration-300 h-full" style="transform:rotate(<?php echo esc_attr( (string) $tilts[ $i ] ); ?>deg);">
+						<article
+							:class="active === <?php echo (int) $i; ?> ? 'ring-2 ring-[#2b5329] border-[#2b5329] shadow-[0_22px_44px_-16px_rgba(26,58,25,0.24)]' : 'ring-0 ring-transparent border-[#e0d9ce] hover:border-[rgba(43,83,41,0.35)] hover:shadow-[0_22px_44px_-16px_rgba(26,58,25,0.16)]'"
+							class="group relative bg-[#f8f3e9] border rounded-[20px] p-5 md:p-7 overflow-hidden transition-[border-color,box-shadow,transform] duration-300 h-full" style="transform:rotate(<?php echo esc_attr( (string) $tilts[ $i ] ); ?>deg);">
 							<span aria-hidden class="pointer-events-none absolute -top-2 right-3 md:-top-4 md:right-4 select-none" style="font-family:'Newsreader',serif;font-size:clamp(86px,11vw,160px);font-weight:600;line-height:1;color:rgba(26,58,25,0.06);letter-spacing:-0.05em;">
 								<?php echo esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ); ?>
 							</span>

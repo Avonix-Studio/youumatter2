@@ -34,7 +34,9 @@
       slidesPerGroup: 1,
       spaceBetween: 16,
       breakpoints: {
-        768: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 24 },
+        // slidesPerGroup 1 (not 2) so a chip's slideTo(i) can land any card,
+        // including the second of a visible pair, at the front of the view.
+        768: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 24 },
       },
       navigation: prev && next ? { prevEl: prev, nextEl: next } : false,
       pagination: pagination
