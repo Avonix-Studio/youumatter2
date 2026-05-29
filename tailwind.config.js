@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./*.php", "./template-parts/**/*.php", "./inc/**/*.php"],
+  // JS is scanned too: classes used only in main.js (e.g. the Swiper bullet
+  // classes in renderBullet) would otherwise be purged from @layer components.
+  content: [
+    "./*.php",
+    "./template-parts/**/*.php",
+    "./inc/**/*.php",
+    "./assets/js/**/*.js",
+  ],
   theme: {
     extend: {
       colors: {

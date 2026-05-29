@@ -58,7 +58,8 @@
       "Bash(curl -sL --max-time 40 -o \"Newsreader-Italic-VF.woff2\" \"https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.2.10/files/newsreader-latin-wght-italic.woff2\")",
       "Bash(grep -oE \"\\\\.border-[^{]*43[, ]*83[, ]*41[^{]*\\\\{[^}]*\\\\}\" assets/css/main.css)",
       "Bash(grep -oE \"border-[^{ ]*\\\\{border-color:rgba\\\\\\(43,83,41,\\\\.\\(22|45\\)\\\\\\)\\\\}\" assets/css/main.css)",
-      "Bash(php -l template-parts/home/you-might-be-feeling.php)"
+      "Bash(php -l template-parts/home/you-might-be-feeling.php)",
+      "Bash(awk '{print $5, $NF}')"
     ],
     "deny": ["Bash(rm -rf *)"],
     "additionalDirectories": [
