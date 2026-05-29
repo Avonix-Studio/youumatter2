@@ -55,9 +55,13 @@
       "Bash(curl -s --max-time 25 \"https://data.jsdelivr.com/v1/packages/npm/@fontsource-variable/newsreader@latest?structure=flat\")",
       "Bash(curl -s --max-time 25 \"https://data.jsdelivr.com/v1/packages/npm/@fontsource-variable/newsreader/resolved\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); fs=[f['name'] for f in d['files']]; print\\('\\\\n'.join\\([f for f in fs if f.endswith\\('.woff2'\\) and 'italic' in f]\\)\\)\")",
-      "Bash(curl -sL --max-time 40 -o \"Newsreader-Italic-VF.woff2\" \"https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.2.10/files/newsreader-latin-wght-italic.woff2\")"
+      "Bash(curl -sL --max-time 40 -o \"Newsreader-Italic-VF.woff2\" \"https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.2.10/files/newsreader-latin-wght-italic.woff2\")",
+      "Bash(grep -oE \"\\\\.border-[^{]*43[, ]*83[, ]*41[^{]*\\\\{[^}]*\\\\}\" assets/css/main.css)",
+      "Bash(grep -oE \"border-[^{ ]*\\\\{border-color:rgba\\\\\\(43,83,41,\\\\.\\(22|45\\)\\\\\\)\\\\}\" assets/css/main.css)"
     ],
-    "deny": ["Bash(rm -rf *)"],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
     ]
