@@ -16,9 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 $c     = yum2_content( 'feeling' );
 $chips = $c['chips'];
 $cards = $c['cards'];
-
-/* Visual rotation values - not content, stays here. */
-$tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 ?>
 <section class="relative bg-[#f2ede3] px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div aria-hidden class="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[440px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(228,239,227,0.55) 0%, rgba(242,237,227,0) 70%);"></div>
@@ -62,7 +59,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 					<div class="swiper-slide pb-2 pt-1">
 						<article
 							:class="active === <?php echo (int) $i; ?> ? 'border-[#2b5329]' : 'border-[rgba(43,83,41,0.22)] hover:border-[rgba(43,83,41,0.45)] hover:shadow-[0_22px_44px_-16px_rgba(26,58,25,0.16)]'"
-							class="group relative bg-[#f8f3e9] border rounded-[20px] p-5 md:p-7 overflow-hidden transition-[border-color,box-shadow,transform] duration-300 h-full" style="transform:rotate(<?php echo esc_attr( (string) $tilts[ $i ] ); ?>deg);">
+							class="group relative bg-[#f8f3e9] border rounded-[20px] p-5 md:p-7 overflow-hidden transition-[border-color,box-shadow] duration-300 h-full">
 							<span aria-hidden class="pointer-events-none absolute -top-2 right-3 md:-top-4 md:right-4 select-none" style="font-family:'Newsreader',serif;font-size:clamp(86px,11vw,160px);font-weight:600;line-height:1;color:rgba(26,58,25,0.06);letter-spacing:-0.05em;">
 								<?php echo esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ); ?>
 							</span>
