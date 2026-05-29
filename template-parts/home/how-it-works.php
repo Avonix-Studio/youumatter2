@@ -29,7 +29,7 @@ $steps = $c['steps'];
 					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
-			<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
 				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
@@ -58,7 +58,7 @@ $steps = $c['steps'];
 										);
 										?>
 									</span>
-									<span class="italic text-[#516352] mt-0.5" style="font-family:'Newsreader',serif;font-size:13px;">
+									<span class="italic text-[#3d4f3e] mt-0.5" style="font-family:'Newsreader',serif;font-size:13px;">
 										<?php echo esc_html( $step['note'] ); ?>
 									</span>
 								</div>
@@ -67,7 +67,7 @@ $steps = $c['steps'];
 							<h3 class="text-[#1a3a19] mb-2" style="font-family:'Newsreader',serif;font-size:clamp(22px,2.2vw,28px);line-height:1.1;letter-spacing:-0.02em;font-weight:500;">
 								<?php echo esc_html( $step['title'] ); ?>
 							</h3>
-							<p class="text-[#516352]" style="font-size:15px;line-height:1.55;">
+							<p class="text-[#3d4f3e]" style="font-size:15px;line-height:1.55;">
 								<?php echo esc_html( $step['body'] ); ?>
 							</p>
 						</div>
@@ -86,7 +86,7 @@ $steps = $c['steps'];
 		</div>
 
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-10 md:mt-12 pt-7 border-t border-[rgba(26,58,25,0.12)]">
-			<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:17px;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:17px;">
 				<?php echo esc_html( $c['footer_note'] ); ?>
 			</p>
 			<div class="flex flex-wrap gap-3">

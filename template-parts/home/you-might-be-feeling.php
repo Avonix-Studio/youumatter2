@@ -33,7 +33,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 				<?php echo esc_html( $c['heading'] ); ?>
 				<em class="italic" style="font-weight:400;color:#c07a5a;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
-			<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
@@ -73,7 +73,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 								<h3 class="text-[#1a3a19] mb-2" style="font-family:'Newsreader',serif;font-size:clamp(22px,2.2vw,28px);line-height:1.15;letter-spacing:-0.02em;font-weight:500;">
 									<?php echo esc_html( $card['title'] ); ?>
 								</h3>
-								<p class="italic text-[#516352] mb-5" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.5;">
+								<p class="italic text-[#3d4f3e] mb-5" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.5;">
 									<?php echo esc_html( $card['tagline'] ); ?>
 								</p>
 
@@ -82,7 +82,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 								</p>
 								<ul class="flex flex-col gap-2 mb-5">
 									<?php foreach ( $card['signs'] as $sign ) : ?>
-										<li class="grid grid-cols-[12px_1fr] gap-3 text-[#516352]" style="font-size:14.5px;line-height:1.5;">
+										<li class="grid grid-cols-[12px_1fr] gap-3 text-[#3d4f3e]" style="font-size:15px;line-height:1.55;">
 											<span class="mt-[8px] size-[6px] rounded-full bg-[#2b5329]" aria-hidden></span>
 											<span><?php echo esc_html( $sign ); ?></span>
 										</li>
@@ -93,7 +93,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 									<p class="text-[#c07a5a] tracking-[0.14em] uppercase mb-1.5" style="font-size:11px;font-weight:700;">
 										<?php esc_html_e( "How we'd work on it", 'youumatter2' ); ?>
 									</p>
-									<p class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:14.5px;line-height:1.55;">
+									<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:15px;line-height:1.6;">
 										<?php echo esc_html( $card['approach'] ); ?>
 									</p>
 								</div>
@@ -144,7 +144,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 		<div class="flex items-center justify-between mt-6 gap-4">
 			<div class="flex items-center gap-2">
 				<div class="yum2-feeling-pagination flex items-center gap-2"></div>
-				<span class="ml-3 text-[#516352]" style="font-size:12px;">
+				<span class="ml-3 text-[#3d4f3e]" style="font-size:12px;">
 					<span class="yum2-feeling-current">1</span>
 					<?php esc_html_e( 'of', 'youumatter2' ); ?>
 					<?php echo esc_html( (string) count( $cards ) ); ?>
@@ -163,7 +163,7 @@ $tilts = array( -0.4, 0.3, -0.25, 0.35, -0.3, 0.25, -0.35, 0.3, -0.2 );
 
 		<div class="mt-8">
 			<div class="h-px bg-[rgba(26,58,25,0.12)]"></div>
-			<p class="italic text-[#516352] text-center mt-6" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.5;">
+			<p class="italic text-[#3d4f3e] text-center mt-6" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.5;">
 				<?php echo esc_html( $c['cta_note'] ); ?>
 			</p>
 			<div class="mt-4 flex flex-col md:flex-row md:justify-center items-stretch md:items-center gap-3">

@@ -25,7 +25,19 @@
       "Bash(python3 /Users/krishnaaggarwal/.claude/skills/ui-ux-pro-max/scripts/search.py \"video lightbox modal accessibility focus trap\" --domain ux -n 8)",
       "Bash(python3 /Users/krishnaaggarwal/.claude/skills/ui-ux-pro-max/scripts/search.py \"tailwind modal dialog video aria\" --stack html-tailwind -n 6)",
       "Bash(php -l template-parts/home/instagram-feed.php)",
-      "Bash(php -l inc/content.php)"
+      "Bash(php -l inc/content.php)",
+      "Bash(find assets/fonts -type f)",
+      "Bash(ls -la assets/fonts/plus-jakarta-sans/)",
+      "Bash(ls -la assets/fonts/newsreader/)",
+      "Bash(md5 plus-jakarta-sans/*.woff2)",
+      "Bash(md5 newsreader/*.woff2)",
+      "Bash(python3 -c ' *)",
+      "Bash(pip3 install *)",
+      "Read(//Users/krishnaaggarwal/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python3 scripts/search.py \"calm counselling psychology wellness therapy service\" --design-system -p \"youumatter2\")",
+      "Bash(python3 scripts/search.py \"color contrast muted text body readability\" --domain ux -n 6)",
+      "Bash(python3 scripts/search.py \"line-height line-length readable body\" --domain ux -n 4)",
+      "Bash(xargs -I{} sh -c 'echo \"$\\(grep -c \"#516352\" \"{}\"\\) {}\"')"
     ],
     "deny": ["Bash(rm -rf *)"],
     "additionalDirectories": [

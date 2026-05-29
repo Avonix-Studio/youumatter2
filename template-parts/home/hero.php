@@ -33,7 +33,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 
 		<div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
 			<div class="order-2 md:order-1">
-				<p class="text-[#516352] max-w-lg mb-8" style="font-size:clamp(17px,1.6vw,20px);line-height:1.55;">
+				<p class="text-[#3d4f3e] max-w-lg mb-8" style="font-size:clamp(17px,1.6vw,20px);line-height:1.55;">
 					<?php echo esc_html( $c['body'] ); ?>
 				</p>
 

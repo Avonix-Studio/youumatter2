@@ -27,7 +27,7 @@ $email         = (string) yum2_get_contact( 'email' );
 				<?php esc_html_e( 'Take your time.', 'youumatter2' ); ?>
 				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( "I'll be here when you're ready.", 'youumatter2' ); ?></em>
 			</h2>
-			<p class="italic text-forest/65 max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e] max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
 				<?php esc_html_e( 'Reaching out is often the hardest part. No pressure, no rush. Just a conversation when it feels right for you.', 'youumatter2' ); ?>
 			</p>
 

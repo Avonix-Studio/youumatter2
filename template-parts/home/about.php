@@ -69,7 +69,7 @@ $approaches = $c['approaches'];
 				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 
-			<p class="text-[#516352] mb-6" style="font-size:17px;line-height:1.65;">
+			<p class="text-[#3d4f3e] mb-6" style="font-size:17px;line-height:1.65;">
 				<?php echo esc_html( $c['bio'] ); ?>
 			</p>
 
@@ -87,7 +87,7 @@ $approaches = $c['approaches'];
 								<span class="text-[#1a3a19] mr-2" style="font-family:'Newsreader',serif;font-size:17px;font-weight:500;letter-spacing:-0.005em;">
 									<?php echo esc_html( $b['t'] ); ?>
 								</span>
-								<span class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:16px;">
+								<span class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:16px;">
 									<?php echo esc_html( $b['s'] ); ?>
 								</span>
 							</div>
@@ -114,7 +114,7 @@ $approaches = $c['approaches'];
 						<path d="M4 22 C10 8, 22 6, 26 18 C28 26, 20 30, 18 24 C16 16, 30 10, 38 16 C44 20, 40 28, 46 24 C52 20, 54 10, 62 14 C70 18, 64 28, 72 26 C82 24, 86 14, 96 18 C104 21, 102 28, 108 24" stroke="#1a3a19" stroke-width="1.6" stroke-linecap="round" fill="none"/>
 						<path d="M18 32 L42 32" stroke="#c07a5a" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
 					</svg>
-					<span class="italic text-[#516352]" style="font-family:'Newsreader',serif;font-size:14px;">
+					<span class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:14px;">
 						<?php esc_html_e( 'Sanya', 'youumatter2' ); ?>
 					</span>
 				</div>

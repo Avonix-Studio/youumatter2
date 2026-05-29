@@ -9,7 +9,7 @@ module.exports = {
         "sage-light": "#D1E5D0",
         terracotta: "#C07A5A",
         ink: "#1a1a1a",
-        muted: "#6b6b6b",
+        muted: "#4f4f4f",
       },
       fontFamily: {
         heading: ["Newsreader", "Georgia", "serif"],

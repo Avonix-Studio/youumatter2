@@ -21,10 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<link rel="preload" as="font" type="font/woff2" href="<?php echo esc_url( get_template_directory_uri() . '/assets/fonts/newsreader/Newsreader-500.woff2' ); ?>" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="<?php echo esc_url( get_template_directory_uri() . '/assets/fonts/plus-jakarta-sans/PlusJakartaSans-400.woff2' ); ?>" crossorigin>
+	<link rel="preload" as="font" type="font/woff2" href="<?php echo esc_url( get_template_directory_uri() . '/assets/fonts/newsreader/Newsreader-400.woff2' ); ?>" crossorigin>
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'bg-cream text-ink font-body antialiased' ); ?>>
+<body <?php body_class( 'bg-cream text-ink font-body' ); ?>>
 <?php wp_body_open(); ?>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DLJRMNF"
