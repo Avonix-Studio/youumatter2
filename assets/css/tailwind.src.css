@@ -130,7 +130,7 @@
 
   /* Default nav link colour and hover for non-active items. */
   .yum2-nav a {
-    font-family: "Newsreader", Georgia, serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
     font-size: 15px;
     font-weight: 500;
     @apply text-forest/85 hover:text-forest transition-colors;
