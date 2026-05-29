@@ -38,7 +38,7 @@ $excerpt = get_the_excerpt();
 			<div aria-hidden class="absolute -top-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(228,239,227,0.7) 0%, rgba(200,220,199,0) 65%);"></div>
 
 			<div class="relative max-w-3xl">
-				<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'youumatter2' ); ?>" class="flex items-center flex-wrap gap-1.5 text-forest/70" style="font-size:12.5px;">
+				<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'youumatter2' ); ?>" class="flex items-center flex-wrap gap-1.5 text-[#3d4f3e]" style="font-size:12.5px;">
 					<?php $count = count( $crumbs ); foreach ( $crumbs as $i => $c ) : ?>
 						<?php if ( '' !== $c['url'] ) : ?>
 							<a href="<?php echo esc_url( $c['url'] ); ?>" class="hover:text-forest transition-colors"><?php echo esc_html( $c['label'] ); ?></a>
@@ -75,7 +75,7 @@ $excerpt = get_the_excerpt();
 				</h1>
 
 				<?php if ( '' !== $excerpt ) : ?>
-					<p class="italic text-forest/75 mt-4 max-w-2xl" style="font-family:'Newsreader',serif;font-size:clamp(16px,1.6vw,19px);line-height:1.55;">
+					<p class="italic text-[#3d4f3e] mt-4 max-w-2xl" style="font-family:'Newsreader',serif;font-size:clamp(16px,1.6vw,19px);line-height:1.55;">
 						<?php echo esc_html( $excerpt ); ?>
 					</p>
 				<?php endif; ?>
@@ -88,7 +88,7 @@ $excerpt = get_the_excerpt();
 						<p class="text-forest" style="font-size:14px;font-weight:600;">
 							<?php echo esc_html( $author_name ); ?>
 						</p>
-						<div class="flex items-center flex-wrap gap-x-3 gap-y-1 text-forest/70 mt-0.5" style="font-size:12.5px;">
+						<div class="flex items-center flex-wrap gap-x-3 gap-y-1 text-[#3d4f3e] mt-0.5" style="font-size:12.5px;">
 							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>" class="inline-flex items-center gap-1.5">
 								<?php echo yum2_icon( 'calendar', array( 'size' => 11, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								<?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>

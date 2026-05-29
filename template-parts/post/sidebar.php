@@ -57,7 +57,7 @@ $tags = get_the_tags();
 					<?php foreach ( $tags as $t ) : $hashtag = '#' . preg_replace( '/\s+/', '', $t->name ); ?>
 						<a
 							href="<?php echo esc_url( get_tag_link( $t ) ); ?>"
-							class="inline-flex items-center bg-cream hover:bg-sage-light/60 text-forest/65 hover:text-forest border border-forest/15 rounded-full px-3 py-1 transition-colors"
+							class="inline-flex items-center bg-cream hover:bg-sage-light/60 text-[#3d4f3e] hover:text-forest border border-forest/15 rounded-full px-3 py-1 transition-colors"
 							style="font-size:12.5px;font-weight:500;"
 						>
 							<?php echo esc_html( $hashtag ); ?>

@@ -20,7 +20,7 @@ $redirect   = remove_query_arg( 'subscribed' );
 			<p class="italic text-forest mb-1.5" style="font-family:'Newsreader',serif;font-size:22px;">
 				<?php echo esc_html( $c['heading'] ); ?>
 			</p>
-			<p class="text-forest/60" style="font-size:13px;line-height:1.55;">
+			<p class="text-[#3d4f3e]" style="font-size:13px;line-height:1.55;">
 				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
@@ -46,7 +46,7 @@ $redirect   = remove_query_arg( 'subscribed' );
 					name="email"
 					required
 					placeholder="<?php echo esc_attr( $c['placeholder'] ); ?>"
-					class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-forest/60"
+					class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-forest/70"
 					style="font-size:14px;"
 				>
 				<button

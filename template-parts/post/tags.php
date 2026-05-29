@@ -39,7 +39,7 @@ if ( empty( $pills ) ) {
 	<?php foreach ( $pills as $p ) : $hashtag = '#' . preg_replace( '/\s+/', '', $p['label'] ); ?>
 		<a
 			href="<?php echo esc_url( $p['url'] ); ?>"
-			class="inline-flex items-center bg-cream hover:bg-sage-light/60 text-forest/70 hover:text-forest border border-forest/15 rounded-full px-3.5 py-1.5 transition-colors"
+			class="inline-flex items-center bg-cream hover:bg-sage-light/60 text-[#3d4f3e] hover:text-forest border border-forest/15 rounded-full px-3.5 py-1.5 transition-colors"
 			style="font-size:13px;font-weight:500;"
 		>
 			<?php echo esc_html( $hashtag ); ?>

@@ -39,7 +39,7 @@ $items = $c['items'];
 					<h3 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(16px,1.35vw,18px);line-height:1.2;letter-spacing:-0.005em;font-weight:500;">
 						<?php echo esc_html( $item['label'] ); ?>
 					</h3>
-					<p class="text-forest/65" style="font-size:13.5px;line-height:1.55;">
+					<p class="text-[#3d4f3e]" style="font-size:13.5px;line-height:1.55;">
 						<?php echo esc_html( $item['body'] ); ?>
 					</p>
 				</div>

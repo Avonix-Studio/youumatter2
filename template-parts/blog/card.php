@@ -46,11 +46,11 @@ $primary_cat = ! empty( $cats ) ? $cats[0] : null;
 			<h3 class="text-forest mb-2" style="font-family:'Newsreader',serif;font-size:clamp(19px,1.6vw,22px);line-height:1.2;letter-spacing:-0.01em;font-weight:500;">
 				<?php the_title(); ?>
 			</h3>
-			<p class="text-forest/65 mb-5 flex-1" style="font-size:14.5px;line-height:1.55;">
+			<p class="text-[#3d4f3e] mb-5 flex-1" style="font-size:14.5px;line-height:1.55;">
 				<?php echo esc_html( get_the_excerpt() ); ?>
 			</p>
 			<div class="flex items-center justify-between pt-4 border-t border-forest/10">
-				<span class="text-forest/65" style="font-size:12px;">
+				<span class="text-[#3d4f3e]" style="font-size:12px;">
 					<?php
 					echo esc_html(
 						sprintf(

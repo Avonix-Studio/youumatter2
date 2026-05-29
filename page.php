@@ -24,7 +24,7 @@ while ( have_posts() ) :
 
 		<section class="bg-cream px-5 md:px-8 pt-12 md:pt-20 pb-8 md:pb-10 border-b border-forest/10">
 			<div class="max-w-3xl mx-auto">
-				<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'youumatter2' ); ?>" class="flex items-center flex-wrap gap-1.5 text-forest/70 mb-5" style="font-size:12.5px;">
+				<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'youumatter2' ); ?>" class="flex items-center flex-wrap gap-1.5 text-[#3d4f3e] mb-5" style="font-size:12.5px;">
 					<?php $count = count( $crumbs ); foreach ( $crumbs as $i => $c ) : ?>
 						<?php if ( '' !== $c['url'] ) : ?>
 							<a href="<?php echo esc_url( $c['url'] ); ?>" class="hover:text-forest transition-colors">

@@ -32,7 +32,7 @@ $portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 					</span>
 				</div>
 
-				<p class="italic text-forest/65 mt-4 max-w-xs" style="font-family:'Newsreader',serif;font-size:16px;line-height:1.5;">
+				<p class="italic text-[#3d4f3e] mt-4 max-w-xs" style="font-family:'Newsreader',serif;font-size:16px;line-height:1.5;">
 					<?php esc_html_e( 'Specialising in relationships, intimacy, and the emotional weight of being a person right now.', 'youumatter2' ); ?>
 				</p>
 			</div>

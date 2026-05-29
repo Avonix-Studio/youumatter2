@@ -43,7 +43,7 @@ $cards = array(
 				<?php esc_html_e( 'Less couch and clipboard,', 'youumatter2' ); ?>
 				<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'more conversation.', 'youumatter2' ); ?></em>
 			</h2>
-			<p class="italic text-forest/65 mb-12" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e] mb-12" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php esc_html_e( "I don't lead with method. I lead with you. These are the four threads I weave together based on what you bring.", 'youumatter2' ); ?>
 			</p>
 		</div>
@@ -60,7 +60,7 @@ $cards = array(
 					<h3 class="text-forest mb-2" style="font-family:'Newsreader',serif;font-size:22px;line-height:1.25;letter-spacing:-0.01em;font-weight:500;">
 						<?php echo esc_html( $card['title'] ); ?>
 					</h3>
-					<p class="text-forest/65" style="font-size:15px;line-height:1.6;">
+					<p class="text-[#3d4f3e]" style="font-size:15px;line-height:1.6;">
 						<?php echo esc_html( $card['body'] ); ?>
 					</p>
 				</div>

@@ -27,7 +27,7 @@ if ( '' === $contact_url ) {
 			<?php esc_html_e( "Didn't find what you were looking for?", 'youumatter2' ); ?>
 			<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'Just ask.', 'youumatter2' ); ?></em>
 		</h2>
-		<p class="italic text-forest/65 max-w-xl mx-auto mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+		<p class="italic text-[#3d4f3e] max-w-xl mx-auto mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 			<?php esc_html_e( "There's no such thing as a silly question. If you've read this far, your curiosity is a good sign.", 'youumatter2' ); ?>
 		</p>
 		<div class="flex flex-wrap items-center justify-center gap-3">

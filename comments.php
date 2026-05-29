@@ -35,7 +35,7 @@ if ( ! empty( $_GET['ca'] ) ) { // phpcs:ignore WordPress.Security.NonceVerifica
 					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'reflections.', 'youumatter2' ); ?></em>
 				</h2>
 			</div>
-			<span class="shrink-0 inline-flex items-center gap-1.5 text-forest/65 bg-white border border-forest/15 rounded-full px-3 py-1.5" style="font-size:12.5px;font-weight:600;">
+			<span class="shrink-0 inline-flex items-center gap-1.5 text-[#3d4f3e] bg-white border border-forest/15 rounded-full px-3 py-1.5" style="font-size:12.5px;font-weight:600;">
 				<?php echo yum2_icon( 'message-circle', array( 'size' => 13, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<?php echo esc_html( (string) $comment_count ); ?>
 			</span>
@@ -54,7 +54,7 @@ if ( ! empty( $_GET['ca'] ) ) { // phpcs:ignore WordPress.Security.NonceVerifica
 				array(
 					'class_form'         => 'bg-white border border-forest/15 rounded-[22px] p-5 md:p-6 mb-8',
 					'title_reply'        => '',
-					'title_reply_before' => '<p class="text-forest mb-3" style="font-family:\'Newsreader\',serif;font-size:18px;font-weight:500;">' . esc_html__( 'Join the conversation', 'youumatter2' ) . '</p><p class="text-forest/65 mb-4" style="font-size:13.5px;line-height:1.55;">' . esc_html__( 'Comments are moderated with care. Be kind, this is a quiet space.', 'youumatter2' ) . '</p>',
+					'title_reply_before' => '<p class="text-forest mb-3" style="font-family:\'Newsreader\',serif;font-size:18px;font-weight:500;">' . esc_html__( 'Join the conversation', 'youumatter2' ) . '</p><p class="text-[#3d4f3e] mb-4" style="font-size:13.5px;line-height:1.55;">' . esc_html__( 'Comments are moderated with care. Be kind, this is a quiet space.', 'youumatter2' ) . '</p>',
 					'title_reply_after'  => '',
 					'comment_notes_before' => '',
 					'comment_notes_after'  => '',
@@ -67,7 +67,7 @@ if ( ! empty( $_GET['ca'] ) ) { // phpcs:ignore WordPress.Security.NonceVerifica
 			);
 		} else {
 			?>
-			<p class="bg-cream border border-forest/15 rounded-[18px] p-5 italic text-forest/65 text-center" style="font-family:'Newsreader',serif;font-size:15px;">
+			<p class="bg-cream border border-forest/15 rounded-[18px] p-5 italic text-[#3d4f3e] text-center" style="font-family:'Newsreader',serif;font-size:15px;">
 				<?php esc_html_e( 'Comments are closed for this essay.', 'youumatter2' ); ?>
 			</p>
 			<?php

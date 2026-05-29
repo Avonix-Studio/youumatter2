@@ -29,7 +29,7 @@ $caption = get_the_post_thumbnail_caption();
 			?>
 		</figure>
 		<?php if ( '' !== $caption ) : ?>
-			<p class="italic text-forest/65 text-center mt-3" style="font-family:'Newsreader',serif;font-size:14px;">
+			<p class="italic text-[#3d4f3e] text-center mt-3" style="font-family:'Newsreader',serif;font-size:14px;">
 				<?php echo esc_html( $caption ); ?>
 			</p>
 		<?php endif; ?>

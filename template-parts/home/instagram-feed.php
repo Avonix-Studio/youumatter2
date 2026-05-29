@@ -46,7 +46,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 				</h2>
 			</div>
 			<div class="flex flex-col gap-4">
-				<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+				<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 					<?php echo esc_html( $c['description'] ); ?>
 				</p>
 				<a

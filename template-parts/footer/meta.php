@@ -31,7 +31,7 @@ $copyright = str_replace( '%year%', $year, $copyright );
 					<?php endif; ?>
 				</div>
 				<?php if ( '' !== $tagline ) : ?>
-					<p class="text-forest/65 max-w-sm" style="font-size:13px;line-height:1.6;">
+					<p class="text-[#3d4f3e] max-w-sm" style="font-size:13px;line-height:1.6;">
 						<?php echo esc_html( $tagline ); ?>
 					</p>
 				<?php endif; ?>
@@ -55,7 +55,7 @@ $copyright = str_replace( '%year%', $year, $copyright );
 		<div class="h-px bg-forest/10"></div>
 
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4">
-			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-forest/55" style="font-size:12px;">
+			<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[#3d4f3e]" style="font-size:12px;">
 				<span><?php echo esc_html( $copyright ); ?></span>
 				<span aria-hidden class="text-forest/30">·</span>
 				<a href="https://avonixstudio.com" target="_blank" rel="noopener noreferrer"

@@ -56,7 +56,7 @@ $onclick  = '' !== $calendly ? sprintf( 'return yum2OpenCalendly(%s)', wp_json_e
 				<a
 					href="<?php echo esc_url( $item['href'] ); ?>"
 					<?php if ( 'whatsapp' === $item['key'] ) : ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>
-					class="flex flex-col items-center gap-1 px-3 py-1.5 transition-colors <?php echo $item['active'] ? 'text-forest' : 'text-forest/65 hover:text-forest'; ?>"
+					class="flex flex-col items-center gap-1 px-3 py-1.5 transition-colors <?php echo $item['active'] ? 'text-forest' : 'text-[#3d4f3e] hover:text-forest'; ?>"
 				>
 					<?php echo yum2_icon( $item['icon'], array( 'size' => 20, 'stroke' => $item['active'] ? 2.2 : 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<span class="uppercase" style="font-size:10px;font-weight:500;letter-spacing:0.5px;">

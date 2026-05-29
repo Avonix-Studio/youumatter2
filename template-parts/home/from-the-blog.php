@@ -50,7 +50,7 @@ if ( ! $blog_url ) {
 					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
-			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>

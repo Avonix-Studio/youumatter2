@@ -53,7 +53,7 @@ $items = array(
 						<span class="text-forest leading-tight" style="font-family:'Newsreader',serif;font-size:clamp(18px,2vw,22px);font-weight:500;">
 							<?php echo esc_html( $item['label'] ); ?>
 						</span>
-						<span class="text-forest/60 truncate mt-1 leading-tight" style="font-size:13px;">
+						<span class="text-[#3d4f3e] truncate mt-1 leading-tight" style="font-size:13px;">
 							<?php echo esc_html( $item['meta'] ); ?>
 						</span>
 					</div>

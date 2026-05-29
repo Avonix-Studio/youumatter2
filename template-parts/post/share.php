@@ -21,7 +21,7 @@ $wa_url   = 'https://wa.me/?text=' . rawurlencode( $wa_text );
 $tw_url   = 'https://twitter.com/intent/tweet?text=' . rawurlencode( $title ) . '&url=' . rawurlencode( $url );
 ?>
 <div class="not-prose mt-10 md:mt-12 py-5 border-y border-forest/12 flex items-center justify-between gap-4 flex-wrap" x-data="{ copied: false }">
-	<span class="inline-flex items-center gap-2 text-forest/65" style="font-size:13px;">
+	<span class="inline-flex items-center gap-2 text-[#3d4f3e]" style="font-size:13px;">
 		<?php echo yum2_icon( 'share-2', array( 'size' => 14, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php esc_html_e( 'Share this essay', 'youumatter2' ); ?>
 	</span>

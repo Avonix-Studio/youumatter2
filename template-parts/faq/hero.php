@@ -21,12 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php esc_html_e( 'Questions,', 'youumatter2' ); ?>
 			<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'answered.', 'youumatter2' ); ?></em>
 		</h1>
-		<p class="italic text-forest/65 mt-5 max-w-2xl" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
+		<p class="italic text-[#3d4f3e] mt-5 max-w-2xl" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
 			<?php esc_html_e( "The things people ask most often before they reach out. If something you're wondering isn't here, just send a note.", 'youumatter2' ); ?>
 		</p>
 
 		<div class="mt-8 max-w-xl relative">
-			<span aria-hidden class="absolute left-5 top-1/2 -translate-y-1/2 text-forest/65">
+			<span aria-hidden class="absolute left-5 top-1/2 -translate-y-1/2 text-[#3d4f3e]">
 				<?php echo yum2_icon( 'search', array( 'size' => 16, 'stroke' => 2 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</span>
 			<label class="sr-only" for="yum2-faq-search"><?php esc_html_e( 'Search the FAQs', 'youumatter2' ); ?></label>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				type="text"
 				x-model.debounce.150ms="query"
 				placeholder="<?php esc_attr_e( 'Search the FAQs…', 'youumatter2' ); ?>"
-				class="w-full bg-[#f8f3e9] border border-forest/15 rounded-full pl-12 pr-5 h-[52px] text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors"
+				class="w-full bg-[#f8f3e9] border border-forest/15 rounded-full pl-12 pr-5 h-[52px] text-ink placeholder:text-forest/70 outline-none focus:border-forest transition-colors"
 				style="font-size:14.5px;"
 			>
 		</div>

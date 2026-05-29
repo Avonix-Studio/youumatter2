@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php esc_html_e( "Let's start with", 'youumatter2' ); ?>
 			<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'a conversation.', 'youumatter2' ); ?></em>
 		</h1>
-		<p class="italic text-forest/65 mt-5 max-w-2xl" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
+		<p class="italic text-[#3d4f3e] mt-5 max-w-2xl" style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;">
 			<?php esc_html_e( "Reach out the way that feels easiest. WhatsApp for something quick, email for something longer, or just book a first session. I reply personally within 24 hours on weekdays.", 'youumatter2' ); ?>
 		</p>
 	</div>

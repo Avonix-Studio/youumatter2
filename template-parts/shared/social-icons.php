@@ -17,7 +17,7 @@ $args = wp_parse_args(
 	$args ?? array(),
 	array(
 		'class'      => 'flex gap-3',
-		'item_class' => 'size-10 rounded-full border border-forest/20 flex items-center justify-center text-forest/70 hover:bg-forest hover:text-cream hover:border-forest transition-colors',
+		'item_class' => 'size-10 rounded-full border border-forest/20 flex items-center justify-center text-[#3d4f3e] hover:bg-forest hover:text-cream hover:border-forest transition-colors',
 	)
 );
 

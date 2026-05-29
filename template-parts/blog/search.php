@@ -19,7 +19,7 @@ $query = is_search() ? get_search_query() : '';
 	class="flex items-center bg-white border border-forest/15 rounded-full h-11 lg:w-[260px] px-4 focus-within:border-forest transition-colors shrink-0"
 >
 	<label class="sr-only" for="yum2-search-field"><?php esc_html_e( 'Search', 'youumatter2' ); ?></label>
-	<span class="text-forest/65 mr-2 shrink-0">
+	<span class="text-[#3d4f3e] mr-2 shrink-0">
 		<?php echo yum2_icon( 'search', array( 'size' => 15, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</span>
 	<input
@@ -28,7 +28,7 @@ $query = is_search() ? get_search_query() : '';
 		name="s"
 		value="<?php echo esc_attr( $query ); ?>"
 		placeholder="<?php esc_attr_e( 'Search posts…', 'youumatter2' ); ?>"
-		class="w-full bg-transparent outline-none text-ink placeholder:text-forest/65"
+		class="w-full bg-transparent outline-none text-ink placeholder:text-forest/70"
 		style="font-size:13.5px;"
 	>
 </form>

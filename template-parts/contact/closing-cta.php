@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(22px,3vw,30px);line-height:1.2;font-weight:400;">
 				<?php esc_html_e( 'Prefer to just book a first session?', 'youumatter2' ); ?>
 			</p>
-			<p class="text-forest/65 mt-2" style="font-size:14.5px;">
+			<p class="text-[#3d4f3e] mt-2" style="font-size:14.5px;">
 				<?php esc_html_e( "It's a 50-minute conversation. No diagnosis, no pressure to continue.", 'youumatter2' ); ?>
 			</p>
 		</div>

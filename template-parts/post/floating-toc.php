@@ -58,7 +58,7 @@ $items_json = wp_json_encode(
 				type="button"
 				@click="open = false"
 				aria-label="<?php esc_attr_e( 'Close', 'youumatter2' ); ?>"
-				class="size-7 rounded-full flex items-center justify-center text-forest/65 hover:bg-forest/5 hover:text-forest transition-colors"
+				class="size-7 rounded-full flex items-center justify-center text-[#3d4f3e] hover:bg-forest/5 hover:text-forest transition-colors"
 			>
 				<?php echo yum2_icon( 'x', array( 'size' => 14, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</button>
@@ -70,12 +70,12 @@ $items_json = wp_json_encode(
 					<a
 						:href="'#' + item.id"
 						@click="open = false"
-						:class="i === current ? 'bg-sage-light text-forest' : 'text-forest/65 hover:bg-forest/5'"
+						:class="i === current ? 'bg-sage-light text-forest' : 'text-[#3d4f3e] hover:bg-forest/5'"
 						class="flex items-start gap-3 px-3 py-2.5 rounded-xl transition-colors"
 						style="font-size:13.5px;line-height:1.45;font-weight:500;"
 					>
 						<span
-							:class="i === current ? 'bg-forest text-cream' : 'bg-cream text-forest/65'"
+							:class="i === current ? 'bg-forest text-cream' : 'bg-cream text-[#3d4f3e]'"
 							class="shrink-0 size-6 rounded-full flex items-center justify-center"
 							style="font-size:11px;font-weight:600;"
 							x-text="i + 1"

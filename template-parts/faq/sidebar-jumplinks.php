@@ -29,13 +29,13 @@ if ( empty( $groups ) ) {
 			<button
 				type="button"
 				@click="selectGroup('<?php echo esc_js( $g['id'] ); ?>')"
-				:class="activeGroup === '<?php echo esc_js( $g['id'] ); ?>' && !query.trim() ? 'bg-sage-light text-forest' : 'text-forest/65 hover:bg-forest/5 hover:text-forest'"
+				:class="activeGroup === '<?php echo esc_js( $g['id'] ); ?>' && !query.trim() ? 'bg-sage-light text-forest' : 'text-[#3d4f3e] hover:bg-forest/5 hover:text-forest'"
 				class="text-left px-4 py-3 rounded-[12px] transition-colors"
 			>
 				<p :style="activeGroup === '<?php echo esc_js( $g['id'] ); ?>' && !query.trim() ? 'font-weight:600' : 'font-weight:500'" style="font-size:14.5px;">
 					<?php echo esc_html( $g['label'] ); ?>
 				</p>
-				<p class="mt-0.5 text-forest/65" style="font-size:12.5px;line-height:1.45;">
+				<p class="mt-0.5 text-[#3d4f3e]" style="font-size:12.5px;line-height:1.45;">
 					<?php echo esc_html( $g['blurb'] ); ?>
 				</p>
 			</button>

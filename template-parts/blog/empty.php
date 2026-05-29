@@ -16,7 +16,7 @@ if ( ! $blog_url ) {
 ?>
 <div class="md:col-span-2 lg:col-span-3">
 	<div class="bg-white border border-forest/15 rounded-[22px] p-10 text-center">
-		<p class="italic text-forest/65 mb-5" style="font-family:'Newsreader',serif;font-size:18px;">
+		<p class="italic text-[#3d4f3e] mb-5" style="font-family:'Newsreader',serif;font-size:18px;">
 			<?php esc_html_e( 'Nothing here yet. Try another category or a different word.', 'youumatter2' ); ?>
 		</p>
 		<a href="<?php echo esc_url( $blog_url ); ?>" class="inline-flex items-center gap-1.5 text-forest hover:text-forest/80" style="font-size:14px;font-weight:600;">

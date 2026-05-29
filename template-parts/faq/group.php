@@ -69,7 +69,7 @@ $gid = (string) $group['id'];
 					x-transition:enter-end="opacity-100 translate-y-0"
 					class="pb-6"
 				>
-					<p class="text-forest/65 pr-12" style="font-size:15px;line-height:1.7;">
+					<p class="text-[#3d4f3e] pr-12" style="font-size:15px;line-height:1.7;">
 						<?php echo esc_html( $item['a'] ); ?>
 					</p>
 				</div>

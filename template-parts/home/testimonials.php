@@ -34,7 +34,7 @@ $testimonials = $c['items'];
 					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
-			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:14.5px;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:14.5px;">
 				<?php echo esc_html( $c['privacy_note'] ); ?>
 			</p>
 		</div>

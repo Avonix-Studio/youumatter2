@@ -549,7 +549,7 @@ function yum2_comment_callback( $comment, $args, $depth ) {
 					<p class="text-forest" style="font-size:14px;font-weight:600;">
 						<?php echo esc_html( $author ); ?>
 					</p>
-					<p class="text-forest/65" style="font-size:12px;">
+					<p class="text-[#3d4f3e]" style="font-size:12px;">
 						<time datetime="<?php echo esc_attr( get_comment_time( 'c', false, false, $comment ) ); ?>">
 							<?php echo esc_html( $ago ); ?>
 						</time>
@@ -566,7 +566,7 @@ function yum2_comment_callback( $comment, $args, $depth ) {
 				comment_text();
 				?>
 			</div>
-			<footer class="mt-4 pt-3 border-t border-forest/10 flex items-center gap-4 text-forest/65" style="font-size:12.5px;font-weight:600;">
+			<footer class="mt-4 pt-3 border-t border-forest/10 flex items-center gap-4 text-[#3d4f3e]" style="font-size:12.5px;font-weight:600;">
 				<button
 					type="button"
 					class="inline-flex items-center gap-1.5 hover:text-forest transition-colors"
@@ -602,14 +602,14 @@ function yum2_comment_form_fields( $fields ) {
 	// textarea above and the row.
 	$fields['author'] = sprintf(
 		'<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">' .
-			'<p class="comment-form-author m-0"><label class="sr-only" for="author">%s</label><input id="author" name="author" type="text" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>',
+			'<p class="comment-form-author m-0"><label class="sr-only" for="author">%s</label><input id="author" name="author" type="text" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/70 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>',
 		esc_html__( 'Your name', 'youumatter2' ),
 		esc_attr( $commenter['comment_author'] ),
 		esc_attr__( 'Your name', 'youumatter2' )
 	);
 
 	$fields['email'] = sprintf(
-			'<p class="comment-form-email m-0"><label class="sr-only" for="email">%s</label><input id="email" name="email" type="email" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>' .
+			'<p class="comment-form-email m-0"><label class="sr-only" for="email">%s</label><input id="email" name="email" type="email" value="%s" placeholder="%s" required class="block w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-3.5 text-ink placeholder:text-forest/70 outline-none focus:border-forest transition-colors" style="font-size:14px;"></p>' .
 		'</div>',
 		esc_html__( 'Email (kept private)', 'youumatter2' ),
 		esc_attr( $commenter['comment_author_email'] ),
@@ -625,7 +625,7 @@ add_filter( 'comment_form_default_fields', 'yum2_comment_form_fields' );
  */
 function yum2_comment_form_textarea( $field ) {
 	return sprintf(
-		'<p class="comment-form-comment m-0"><label class="sr-only" for="comment">%s</label><textarea id="comment" name="comment" rows="3" placeholder="%s" required class="w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-4 text-ink placeholder:text-forest/65 outline-none focus:border-forest transition-colors resize-none" style="font-family:\'Newsreader\',serif;font-size:15px;line-height:1.55;"></textarea></p>',
+		'<p class="comment-form-comment m-0"><label class="sr-only" for="comment">%s</label><textarea id="comment" name="comment" rows="3" placeholder="%s" required class="w-full bg-cream border border-forest/15 rounded-[14px] px-5 py-4 text-ink placeholder:text-forest/70 outline-none focus:border-forest transition-colors resize-none" style="font-family:\'Newsreader\',serif;font-size:15px;line-height:1.55;"></textarea></p>',
 		esc_html__( 'Share a thought', 'youumatter2' ),
 		esc_attr__( 'Share a thought…', 'youumatter2' )
 	);

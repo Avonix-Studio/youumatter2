@@ -26,12 +26,13 @@
     src: url("../fonts/newsreader/Newsreader-400.woff2") format("woff2");
   }
   @font-face {
-    /* Italic master is a static 400 file; the brand only uses italic at 400. */
+    /* Variable italic (wght 200-800) so italic supporting text can render at a
+       medium weight, not just the old static 400. */
     font-family: "Newsreader";
     font-style: italic;
-    font-weight: 400;
+    font-weight: 200 800;
     font-display: swap;
-    src: url("../fonts/newsreader/Newsreader-400-Italic.woff2") format("woff2");
+    src: url("../fonts/newsreader/Newsreader-Italic-VF.woff2") format("woff2");
   }
 
   html {
@@ -90,6 +91,15 @@
 }
 
 @layer components {
+  /* Muted italic-serif supporting copy (section subtitles, descriptions,
+     taglines, notes) renders at a medium italic weight for presence and
+     readability. Targets the supporting-text colour, so heading accent <em>s
+     (terracotta, weight 400) are not affected. Needs the variable Newsreader
+     italic face declared above. */
+  .italic.text-\[\#3d4f3e\] {
+    font-weight: 500;
+  }
+
   /* wp_nav_menu output gets reset list styling so .yum2-nav containers can
      use the menu_class flex/grid utilities directly. */
   .yum2-nav ul,

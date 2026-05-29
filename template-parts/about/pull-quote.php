@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php esc_html_e( "We're just carrying patterns we didn't choose, in a body that learned to brace too early.", 'youumatter2' ); ?>
 			</em>
 		</p>
-		<p class="relative italic text-forest/65 mt-7 flex items-center justify-center gap-2" style="font-family:'Newsreader',serif;font-size:15px;">
+		<p class="relative italic text-[#3d4f3e] mt-7 flex items-center justify-center gap-2" style="font-family:'Newsreader',serif;font-size:15px;">
 			<span aria-hidden class="inline-block w-6 h-px bg-terracotta"></span>
 			<?php esc_html_e( "Sanya, on what she's noticed across a thousand quiet conversations", 'youumatter2' ); ?>
 		</p>

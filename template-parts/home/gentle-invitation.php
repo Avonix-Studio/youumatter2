@@ -41,7 +41,7 @@ $email         = (string) yum2_get_contact( 'email' );
 				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 
-			<p class="italic text-forest/60 max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e] max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php echo esc_html( $c['body'] ); ?>
 			</p>
 
@@ -69,7 +69,7 @@ $email         = (string) yum2_get_contact( 'email' );
 			</div>
 
 			<?php if ( $accepting ) : ?>
-				<p class="inline-flex items-center gap-2 text-forest/70" style="font-size:13px;">
+				<p class="inline-flex items-center gap-2 text-[#3d4f3e]" style="font-size:13px;">
 					<span class="relative flex size-2">
 						<span class="absolute inline-flex h-full w-full rounded-full bg-forest opacity-60 animate-ping"></span>
 						<span class="relative inline-flex size-2 rounded-full bg-forest"></span>
@@ -112,7 +112,7 @@ $email         = (string) yum2_get_contact( 'email' );
 							<p class="text-forest" style="font-family:'Newsreader',serif;font-size:16px;font-weight:500;">
 								<?php echo esc_html( $row['label'] ); ?>
 							</p>
-							<p class="text-forest/60" style="font-size:13.5px;line-height:1.5;">
+							<p class="text-[#3d4f3e]" style="font-size:13.5px;line-height:1.5;">
 								<?php echo esc_html( $row['value'] ); ?>
 							</p>
 						</div>
@@ -128,12 +128,12 @@ $email         = (string) yum2_get_contact( 'email' );
 							<?php esc_html_e( 'Reach me', 'youumatter2' ); ?>
 						</p>
 						<?php if ( '' !== $phone_display ) : ?>
-							<a href="<?php echo esc_url( yum2_phone_url() ); ?>" class="text-forest/60 hover:text-forest transition-colors block" style="font-size:13.5px;line-height:1.5;">
+							<a href="<?php echo esc_url( yum2_phone_url() ); ?>" class="text-[#3d4f3e] hover:text-forest transition-colors block" style="font-size:13.5px;line-height:1.5;">
 								<?php echo esc_html( $phone_display ); ?>
 							</a>
 						<?php endif; ?>
 						<?php if ( '' !== $email ) : ?>
-							<a href="<?php echo esc_url( yum2_email_url() ); ?>" class="text-forest/60 hover:text-forest transition-colors block" style="font-size:13.5px;line-height:1.5;">
+							<a href="<?php echo esc_url( yum2_email_url() ); ?>" class="text-[#3d4f3e] hover:text-forest transition-colors block" style="font-size:13.5px;line-height:1.5;">
 								<?php echo esc_html( $email ); ?>
 							</a>
 						<?php endif; ?>

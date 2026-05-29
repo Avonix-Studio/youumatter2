@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php esc_html_e( 'Pitampura,', 'youumatter2' ); ?>
 					<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'New Delhi.', 'youumatter2' ); ?></em>
 				</h2>
-				<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:16px;line-height:1.55;">
+				<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:16px;line-height:1.55;">
 					<?php esc_html_e( "The exact address is shared once we've confirmed a first session. The neighbourhood is well-connected by Metro (Pitampura station) and easy to reach by car.", 'youumatter2' ); ?>
 				</p>
 			</div>

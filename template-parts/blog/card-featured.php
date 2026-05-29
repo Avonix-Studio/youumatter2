@@ -62,7 +62,7 @@ $thumb_url   = has_post_thumbnail( $post_id ) ? get_the_post_thumbnail_url( $pos
 		<h3 class="text-forest mb-3" style="font-family:'Newsreader',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;letter-spacing:-0.015em;font-weight:500;">
 			<?php echo esc_html( get_the_title( $post_id ) ); ?>
 		</h3>
-		<p class="text-forest/65 mb-6" style="font-size:15.5px;line-height:1.6;">
+		<p class="text-[#3d4f3e] mb-6" style="font-size:15.5px;line-height:1.6;">
 			<?php
 			$excerpt = get_the_excerpt( $post_id );
 			echo esc_html( $excerpt );

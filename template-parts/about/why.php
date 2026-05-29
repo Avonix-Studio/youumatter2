@@ -34,7 +34,7 @@ $paragraphs = array(
 						<?php echo esc_html( $p ); ?>
 					</p>
 				<?php endforeach; ?>
-				<p class="italic text-forest/65 mt-3 flex items-center gap-2" style="font-family:'Newsreader',serif;font-size:18px;">
+				<p class="italic text-[#3d4f3e] mt-3 flex items-center gap-2" style="font-family:'Newsreader',serif;font-size:18px;">
 					<span aria-hidden class="inline-block w-6 h-px bg-terracotta"></span>
 					<?php esc_html_e( 'Sanya', 'youumatter2' ); ?>
 				</p>

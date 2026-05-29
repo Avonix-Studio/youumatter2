@@ -50,7 +50,7 @@ if ( '' === $initials ) {
 			</p>
 		</div>
 	</div>
-	<p class="text-forest/65 mt-3" style="font-size:<?php echo $compact ? '13' : '14'; ?>px;line-height:1.55;">
+	<p class="text-[#3d4f3e] mt-3" style="font-size:<?php echo $compact ? '13' : '14'; ?>px;line-height:1.55;">
 		<?php echo esc_html( $bio ); ?>
 	</p>
 	<?php

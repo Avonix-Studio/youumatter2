@@ -60,7 +60,7 @@ if ( 'mobile' === $args['variant'] ) :
 					</p>
 				</div>
 			</div>
-			<span class="shrink-0 inline-flex items-center gap-1 text-forest/65 ml-3" style="font-size:12px;">
+			<span class="shrink-0 inline-flex items-center gap-1 text-[#3d4f3e] ml-3" style="font-size:12px;">
 				<?php echo esc_html( count( $toc ) ); ?>
 				<span class="text-forest" :style="open ? 'transform:rotate(90deg)' : 'transform:rotate(0deg)'">
 					<?php echo yum2_icon( 'chevron-right', array( 'size' => 14, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -74,10 +74,10 @@ if ( 'mobile' === $args['variant'] ) :
 					<a
 						href="#<?php echo esc_attr( $item['id'] ); ?>"
 						@click="open = false"
-						class="flex items-start gap-3 px-3 py-2.5 rounded-xl text-forest/65 hover:bg-forest/5 transition-colors"
+						class="flex items-start gap-3 px-3 py-2.5 rounded-xl text-[#3d4f3e] hover:bg-forest/5 transition-colors"
 						style="font-size:14px;line-height:1.45;font-weight:500;"
 					>
-						<span aria-hidden class="shrink-0 size-6 rounded-full bg-cream text-forest/65 flex items-center justify-center" style="font-size:11px;font-weight:600;">
+						<span aria-hidden class="shrink-0 size-6 rounded-full bg-cream text-[#3d4f3e] flex items-center justify-center" style="font-size:11px;font-weight:600;">
 							<?php echo (int) ( $i + 1 ); ?>
 						</span>
 						<span class="min-w-0 pt-0.5"><?php echo esc_html( $item['text'] ); ?></span>
@@ -105,7 +105,7 @@ else :
 				<li>
 					<a
 						href="#<?php echo esc_attr( $item['id'] ); ?>"
-						class="group flex items-start gap-2 px-2 py-1.5 -mx-2 rounded-lg text-forest/65 hover:bg-forest/5 hover:text-forest transition-colors"
+						class="group flex items-start gap-2 px-2 py-1.5 -mx-2 rounded-lg text-[#3d4f3e] hover:bg-forest/5 hover:text-forest transition-colors"
 						style="font-size:13.5px;line-height:1.5;font-weight:500;"
 					>
 						<span aria-hidden class="mt-1 shrink-0 text-forest/40 group-hover:translate-x-0.5 transition-transform">

@@ -75,7 +75,7 @@ $frameworks = array(
 							<p class="text-forest" style="font-family:'Newsreader',serif;font-size:18px;font-weight:500;line-height:1.3;">
 								<?php echo esc_html( $row['label'] ); ?>
 							</p>
-							<p class="text-forest/65 mt-0.5" style="font-size:13.5px;">
+							<p class="text-[#3d4f3e] mt-0.5" style="font-size:13.5px;">
 								<?php echo esc_html( $row['place'] ); ?>
 							</p>
 						</li>
@@ -103,7 +103,7 @@ $frameworks = array(
 		</div>
 
 		<div class="mt-14 text-center">
-			<p class="italic text-forest/65 mb-4" style="font-family:'Newsreader',serif;font-size:16px;">
+			<p class="italic text-[#3d4f3e] mb-4" style="font-family:'Newsreader',serif;font-size:16px;">
 				<?php esc_html_e( 'Therapy frameworks I draw from:', 'youumatter2' ); ?>
 			</p>
 			<div class="flex flex-wrap items-center justify-center gap-2">

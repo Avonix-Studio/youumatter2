@@ -31,7 +31,7 @@ if ( ! $blog_url ) {
 					<?php esc_html_e( "Sometimes we lose our way. That's okay.", 'youumatter2' ); ?>
 				</em>
 			</h1>
-			<p class="italic text-forest/65 mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e] mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php esc_html_e( 'Try a search, or pick one of these.', 'youumatter2' ); ?>
 			</p>
 

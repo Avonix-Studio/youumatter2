@@ -44,7 +44,7 @@ $beliefs = array(
 				<?php esc_html_e( 'Three things I keep', 'youumatter2' ); ?>
 				<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'coming back to.', 'youumatter2' ); ?></em>
 			</h2>
-			<p class="hidden md:block italic text-forest/65 mt-5 max-w-sm" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;">
+			<p class="hidden md:block italic text-[#3d4f3e] mt-5 max-w-sm" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;">
 				<?php esc_html_e( 'Not a manifesto, just the quiet anchors I notice myself returning to, session after session.', 'youumatter2' ); ?>
 			</p>
 			<div class="hidden md:block mt-8 h-px w-16 bg-terracotta"></div>
@@ -73,7 +73,7 @@ $beliefs = array(
 						<?php echo esc_html( $b['t'] ); ?>
 					</h3>
 					<p
-						class="italic text-forest/65 max-w-md transition-opacity duration-500"
+						class="italic text-[#3d4f3e] max-w-md transition-opacity duration-500"
 						:class="active ? 'opacity-100' : 'opacity-55'"
 						style="font-family:'Newsreader',serif;font-size:19px;line-height:1.55;"
 					>

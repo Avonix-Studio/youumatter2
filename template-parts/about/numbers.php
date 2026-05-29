@@ -55,7 +55,7 @@ if ( empty( $stats ) ) {
 					<p class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(96px,11vw,140px);line-height:0.95;letter-spacing:-0.04em;font-weight:500;">
 						<span x-text="display"></span><span style="color:#c07a5a;"><?php echo esc_html( $stat['suffix'] ); ?></span>
 					</p>
-					<p class="text-forest/65 mt-3 max-w-[220px] mx-auto" style="font-size:14.5px;line-height:1.5;">
+					<p class="text-[#3d4f3e] mt-3 max-w-[220px] mx-auto" style="font-size:14.5px;line-height:1.5;">
 						<?php echo esc_html( $stat['label'] ); ?>
 					</p>
 				</div>
@@ -63,7 +63,7 @@ if ( empty( $stats ) ) {
 		</div>
 
 		<div class="h-px bg-forest/18 max-w-md mx-auto mt-14"></div>
-		<p class="italic text-forest/65 mt-5" style="font-family:'Newsreader',serif;font-size:15px;">
+		<p class="italic text-[#3d4f3e] mt-5" style="font-family:'Newsreader',serif;font-size:15px;">
 			<?php esc_html_e( 'Updated honestly as the practice grows. Numbers will change. The care will not.', 'youumatter2' ); ?>
 		</p>
 	</div>

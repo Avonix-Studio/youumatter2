@@ -21,7 +21,7 @@ $redirect   = remove_query_arg( 'subscribed' );
 		<?php esc_html_e( 'New essays,', 'youumatter2' ); ?>
 		<em class="italic" style="color:#c07a5a;font-weight:400;"><?php esc_html_e( 'in your inbox.', 'youumatter2' ); ?></em>
 	</h3>
-	<p class="italic text-forest/65 mb-4" style="font-family:'Newsreader',serif;font-size:15px;">
+	<p class="italic text-[#3d4f3e] mb-4" style="font-family:'Newsreader',serif;font-size:15px;">
 		<?php esc_html_e( 'One thoughtful note a month. Unsubscribe any time.', 'youumatter2' ); ?>
 	</p>
 
@@ -46,7 +46,7 @@ $redirect   = remove_query_arg( 'subscribed' );
 				name="email"
 				required
 				placeholder="<?php esc_attr_e( 'Your email', 'youumatter2' ); ?>"
-				class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-forest/65"
+				class="flex-1 min-w-0 bg-transparent outline-none text-ink placeholder:text-forest/70"
 				style="font-size:14px;"
 			>
 			<button

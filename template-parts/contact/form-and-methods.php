@@ -25,7 +25,7 @@ $has_wpforms = function_exists( 'wpforms' ) && $form_id > 0;
 				<p class="text-terracotta tracking-[2px] uppercase mb-3" style="font-size:11px;font-weight:600;">
 					<?php esc_html_e( 'Send a note', 'youumatter2' ); ?>
 				</p>
-				<p class="text-forest/65 mb-6" style="font-size:14px;line-height:1.6;">
+				<p class="text-[#3d4f3e] mb-6" style="font-size:14px;line-height:1.6;">
 					<?php esc_html_e( 'The more context you share, the easier it is for me to suggest a good next step. Nothing is mandatory; just share your name and how to reach you.', 'youumatter2' ); ?>
 				</p>
 
@@ -45,7 +45,7 @@ $has_wpforms = function_exists( 'wpforms' ) && $form_id > 0;
 					<?php esc_html_e( 'A short WhatsApp', 'youumatter2' ); ?>
 					<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'is plenty.', 'youumatter2' ); ?></em>
 				</h2>
-				<p class="italic text-forest/65 mb-6" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;">
+				<p class="italic text-[#3d4f3e] mb-6" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;">
 					<?php esc_html_e( "Tell me what's bringing you here, what you've tried, or just say hi. A few sentences is plenty. I'll reply with a few time options and a soft first step.", 'youumatter2' ); ?>
 				</p>
 				<a
@@ -164,7 +164,7 @@ $has_wpforms = function_exists( 'wpforms' ) && $form_id > 0;
 						<p class="text-forest break-words" style="font-family:'Newsreader',serif;font-size:18px;font-weight:500;">
 							<?php echo esc_html( $card['value'] ); ?>
 						</p>
-						<p class="text-forest/65 mt-0.5" style="font-size:13px;">
+						<p class="text-[#3d4f3e] mt-0.5" style="font-size:13px;">
 							<?php echo esc_html( $card['sub'] ); ?>
 						</p>
 					</div>
@@ -178,7 +178,7 @@ $has_wpforms = function_exists( 'wpforms' ) && $form_id > 0;
 				<p class="text-forest mb-3" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.4;">
 					<?php esc_html_e( "If you're in immediate distress, please reach out now.", 'youumatter2' ); ?>
 				</p>
-				<p class="text-forest/65" style="font-size:13.5px;line-height:1.7;">
+				<p class="text-[#3d4f3e]" style="font-size:13.5px;line-height:1.7;">
 					<?php esc_html_e( 'iCall India:', 'youumatter2' ); ?>
 					<a href="tel:9152987821" class="text-forest hover:underline">9152987821</a><br>
 					<?php esc_html_e( 'Vandrevala Foundation:', 'youumatter2' ); ?>

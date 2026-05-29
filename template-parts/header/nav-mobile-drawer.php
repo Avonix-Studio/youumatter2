@@ -79,7 +79,7 @@ $location      = (string) yum2_get_contact( 'clinic_address' );
 
 	<div class="px-5 py-5 space-y-1.5">
 		<?php if ( '' !== $location ) : ?>
-			<p class="text-forest/70" style="font-size:13px;font-weight:500;">
+			<p class="text-[#3d4f3e]" style="font-size:13px;font-weight:500;">
 				<?php
 				echo esc_html(
 					sprintf(
@@ -118,7 +118,7 @@ $location      = (string) yum2_get_contact( 'clinic_address' );
 	</div>
 
 	<div class="px-5 pb-8">
-		<p class="text-forest/70 tracking-[2px] uppercase mb-3" style="font-size:11px;font-weight:600;">
+		<p class="text-[#3d4f3e] tracking-[2px] uppercase mb-3" style="font-size:11px;font-weight:600;">
 			<?php esc_html_e( 'Follow', 'youumatter2' ); ?>
 		</p>
 		<?php get_template_part( 'template-parts/shared/social-icons' ); ?>

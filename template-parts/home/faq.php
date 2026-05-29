@@ -31,7 +31,7 @@ $faq_url   = home_url( '/faq/' );
 					<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 				</h2>
 			</div>
-			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
 				<?php echo esc_html( $c['description'] ); ?>
 			</p>
 		</div>
@@ -63,7 +63,7 @@ $faq_url   = home_url( '/faq/' );
 						x-transition:enter-end="opacity-100 translate-y-0"
 						class="overflow-hidden"
 					>
-						<p class="text-forest/65 pb-6 pr-12" style="font-size:16px;line-height:1.65;">
+						<p class="text-[#3d4f3e] pb-6 pr-12" style="font-size:16px;line-height:1.65;">
 							<?php echo esc_html( $item['a'] ); ?>
 						</p>
 					</div>
@@ -72,7 +72,7 @@ $faq_url   = home_url( '/faq/' );
 		</div>
 
 		<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-10 md:mt-12">
-			<p class="italic text-forest/65" style="font-family:'Newsreader',serif;font-size:17px;">
+			<p class="italic text-[#3d4f3e]" style="font-family:'Newsreader',serif;font-size:17px;">
 				<?php echo esc_html( $c['footer_note'] ); ?>
 			</p>
 			<div class="flex flex-wrap gap-3">
