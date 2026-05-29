@@ -60,9 +60,7 @@
       "Bash(grep -oE \"border-[^{ ]*\\\\{border-color:rgba\\\\\\(43,83,41,\\\\.\\(22|45\\)\\\\\\)\\\\}\" assets/css/main.css)",
       "Bash(php -l template-parts/home/you-might-be-feeling.php)"
     ],
-    "deny": [
-      "Bash(rm -rf *)"
-    ],
+    "deny": ["Bash(rm -rf *)"],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
     ]

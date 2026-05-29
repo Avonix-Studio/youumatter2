@@ -143,7 +143,7 @@ $cards = $c['cards'];
 		<div class="flex items-center justify-between mt-6 gap-4">
 			<div class="flex items-center gap-2">
 				<div class="yum2-feeling-pagination flex items-center gap-2"></div>
-				<span class="ml-3 text-[#3d4f3e]" style="font-size:12px;">
+				<span class="ml-3 text-[#3d4f3e] whitespace-nowrap" style="font-size:12px;">
 					<span class="yum2-feeling-current">1</span>
 					<?php esc_html_e( 'of', 'youumatter2' ); ?>
 					<?php echo esc_html( (string) count( $cards ) ); ?>

@@ -155,6 +155,18 @@
     font-weight: 500;
   }
 
+  /* The pagination sits inline in the controls bar below the carousel. Swiper
+     adds .swiper-pagination(-horizontal), which would absolutely position it at
+     width:100% overlaying the section (dots vanish from the bar, and the
+     100%-wide box squeezes the "x of 9" counter into a vertical sliver). Keep
+     it in normal flow as a flex row instead. */
+  .yum2-feeling-pagination {
+    position: static !important;
+    width: auto !important;
+    inset: auto !important;
+    margin: 0 !important;
+  }
+
   /* Swiper feeling-carousel pagination bullets. */
   .yum2-bullet {
     @apply h-1.5 w-2.5 rounded-full bg-forest/20 transition-all;
