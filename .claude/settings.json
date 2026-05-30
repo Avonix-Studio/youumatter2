@@ -74,9 +74,7 @@
       "Bash(php -r \"define\\('ABSPATH','/'\\); function get_template_directory\\(\\){return '/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme';} require 'inc/env.php'; echo 'KEY len: '.strlen\\(defined\\('YUM2_MAILERLITE_API_KEY'\\)?YUM2_MAILERLITE_API_KEY:''\\).PHP_EOL; echo 'GROUP: '.\\(defined\\('YUM2_MAILERLITE_GROUP_ID'\\)?YUM2_MAILERLITE_GROUP_ID:'\\(missing\\)'\\).PHP_EOL; echo 'getenv key starts with: '.substr\\(getenv\\('YUM2_MAILERLITE_API_KEY'\\)?:'',0,8\\).PHP_EOL;\")",
       "Bash(php -l inc/admin-newsletter.php)"
     ],
-    "deny": [
-      "Bash(rm -rf *)"
-    ],
+    "deny": ["Bash(rm -rf *)"],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts",
       "/tmp",

@@ -17,15 +17,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function yum2_load_env() {
+/**
+ * Try to load a .env file at the theme root. Returns true if the file was
+ * found and read (regardless of whether it contained any usable lines).
+ */
+function yum2_load_env_file() {
 	$path = get_template_directory() . '/.env';
 	if ( ! is_readable( $path ) ) {
-		return;
+		return false;
 	}
 
 	$lines = file( $path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
 	if ( ! is_array( $lines ) ) {
-		return;
+		return false;
 	}
 
 	foreach ( $lines as $raw ) {
@@ -44,7 +48,6 @@ function yum2_load_env() {
 			continue;
 		}
 
-		// Strip optional surrounding single or double quotes.
 		$len = strlen( $value );
 		if ( $len >= 2 ) {
 			$first = $value[0];
@@ -60,6 +63,23 @@ function yum2_load_env() {
 		if ( false === getenv( $key ) ) {
 			putenv( $key . '=' . $value );
 		}
+	}
+
+	return true;
+}
+
+/**
+ * Load secrets. Tries .env first; falls back to inc/env.local.php for
+ * environments (e.g. WordPress Studio) whose sync excludes dotfiles. Either
+ * file is gitignored. On production, constants in wp-config.php already
+ * win because the !defined() guards in both files leave them untouched.
+ */
+function yum2_load_env() {
+	yum2_load_env_file();
+
+	$php_fallback = get_template_directory() . '/inc/env.local.php';
+	if ( is_readable( $php_fallback ) ) {
+		require_once $php_fallback;
 	}
 }
 yum2_load_env();

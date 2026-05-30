@@ -11,5 +11,6 @@ npm-debug.log
 
 # Secrets - NEVER commit these
 inc/secrets.php
+inc/env.local.php
 .env
 *.env

@@ -65,13 +65,31 @@ function yum2_newsletter_admin_page() {
 			<tr>
 				<th scope="row"><?php esc_html_e( 'API key', 'youumatter2' ); ?></th>
 				<td>
+					<?php
+					$theme_dir    = get_template_directory();
+					$env_path     = $theme_dir . '/.env';
+					$php_path     = $theme_dir . '/inc/env.local.php';
+					$env_exists   = file_exists( $env_path );
+					$env_readable = $env_exists && is_readable( $env_path );
+					$php_exists   = file_exists( $php_path );
+					$php_readable = $php_exists && is_readable( $php_path );
+					?>
 					<?php if ( '' !== $key ) : ?>
 						<span style="color:#1f7a36;font-weight:600;"><?php esc_html_e( 'Loaded', 'youumatter2' ); ?></span>
 						<code><?php echo esc_html( strlen( $key ) ); ?> chars, starts <?php echo esc_html( substr( $key, 0, 6 ) ); ?>...</code>
 					<?php else : ?>
 						<span style="color:#b00;font-weight:600;"><?php esc_html_e( 'NOT loaded', 'youumatter2' ); ?></span>
-						<?php esc_html_e( 'Add YUM2_MAILERLITE_API_KEY to the .env file at the theme root.', 'youumatter2' ); ?>
 					<?php endif; ?>
+
+					<details style="margin-top:.75em;" <?php echo '' === $key ? 'open' : ''; ?>>
+						<summary><?php esc_html_e( 'Where the theme looked for it', 'youumatter2' ); ?></summary>
+						<ul style="margin:.5em 0 0;list-style:disc;padding-left:1.5em;">
+							<li><?php esc_html_e( 'Theme dir:', 'youumatter2' ); ?> <code><?php echo esc_html( $theme_dir ); ?></code></li>
+							<li><code>.env</code> &nbsp; <?php esc_html_e( 'exists:', 'youumatter2' ); ?> <strong><?php echo $env_exists ? 'yes' : 'no'; ?></strong>, <?php esc_html_e( 'readable:', 'youumatter2' ); ?> <strong><?php echo $env_readable ? 'yes' : 'no'; ?></strong></li>
+							<li><code>inc/env.local.php</code> &nbsp; <?php esc_html_e( 'exists:', 'youumatter2' ); ?> <strong><?php echo $php_exists ? 'yes' : 'no'; ?></strong>, <?php esc_html_e( 'readable:', 'youumatter2' ); ?> <strong><?php echo $php_readable ? 'yes' : 'no'; ?></strong></li>
+							<li><code>YUM2_MAILERLITE_API_KEY</code> <?php esc_html_e( 'constant defined:', 'youumatter2' ); ?> <strong><?php echo defined( 'YUM2_MAILERLITE_API_KEY' ) ? 'yes' : 'no'; ?></strong></li>
+						</ul>
+					</details>
 				</td>
 			</tr>
 			<tr>
