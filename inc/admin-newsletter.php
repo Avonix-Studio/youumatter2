@@ -60,7 +60,94 @@ function yum2_newsletter_admin_page() {
 			<div class="notice notice-info is-dismissible"><p><?php echo esc_html( $notice ); ?></p></div>
 		<?php endif; ?>
 
-		<h2><?php esc_html_e( 'MailerLite status', 'youumatter2' ); ?></h2>
+		<h2><?php esc_html_e( 'Configuration', 'youumatter2' ); ?></h2>
+		<p class="description" style="max-width:680px;">
+			<?php esc_html_e( 'Save your MailerLite API key and Group ID here. They live in the WordPress database (wp_options), so they survive every deploy, never touch git, and need no .env file.', 'youumatter2' ); ?>
+		</p>
+
+		<form method="post" action="<?php echo esc_url( $post_url ); ?>">
+			<?php wp_nonce_field( 'yum2_nl_settings', '_yum2_nl_nonce' ); ?>
+			<input type="hidden" name="action" value="yum2_nl_settings">
+
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><label for="yum2-api-key"><?php esc_html_e( 'MailerLite API key', 'youumatter2' ); ?></label></th>
+					<td>
+						<?php
+						$key_source = yum2_mailerlite_source( 'api_key' );
+						$key_saved  = get_option( 'yum2_mailerlite_api_key', '' );
+						if ( '' !== $key_saved ) {
+							$placeholder = sprintf(
+								/* translators: %s is a short prefix of the saved key. */
+								esc_attr__( 'Saved: %s... (paste a new key to replace, leave blank to keep)', 'youumatter2' ),
+								substr( $key_saved, 0, 10 )
+							);
+						} else {
+							$placeholder = esc_attr__( 'Paste your MailerLite API token', 'youumatter2' );
+						}
+						?>
+						<input type="password" id="yum2-api-key" name="api_key" class="large-text" value="" placeholder="<?php echo $placeholder; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already esc_attr__'d above ?>" autocomplete="off">
+						<p class="description">
+							<?php
+							switch ( $key_source ) {
+								case 'option':
+									esc_html_e( 'Source: saved in the database via this screen.', 'youumatter2' );
+									break;
+								case 'env':
+									esc_html_e( 'Source: environment variable (YUM2_MAILERLITE_API_KEY).', 'youumatter2' );
+									break;
+								case 'constant':
+									esc_html_e( 'Source: PHP constant (wp-config.php or theme .env file).', 'youumatter2' );
+									break;
+								default:
+									esc_html_e( 'Not set anywhere yet. Paste the key above and click Save.', 'youumatter2' );
+							}
+							?>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="yum2-group-id"><?php esc_html_e( 'MailerLite Group ID', 'youumatter2' ); ?></label></th>
+					<td>
+						<?php
+						$group_source = yum2_mailerlite_source( 'group_id' );
+						$group_saved  = get_option( 'yum2_mailerlite_group_id', '' );
+						?>
+						<input type="text" id="yum2-group-id" name="group_id" class="regular-text" value="<?php echo esc_attr( $group_saved ); ?>" placeholder="e.g. 188833744132507220">
+						<p class="description">
+							<?php esc_html_e( 'The group new signups are added to in MailerLite.', 'youumatter2' ); ?>
+							<?php
+							switch ( $group_source ) {
+								case 'option':
+									esc_html_e( 'Source: saved here.', 'youumatter2' );
+									break;
+								case 'env':
+									esc_html_e( 'Source: environment variable.', 'youumatter2' );
+									break;
+								case 'constant':
+									esc_html_e( 'Source: PHP constant.', 'youumatter2' );
+									break;
+								default:
+									esc_html_e( 'Not set.', 'youumatter2' );
+							}
+							?>
+						</p>
+					</td>
+				</tr>
+			</table>
+
+			<?php submit_button( __( 'Save settings', 'youumatter2' ) ); ?>
+		</form>
+
+		<?php if ( '' !== $key_saved ) : ?>
+			<form method="post" action="<?php echo esc_url( $post_url ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Remove the saved API key? The theme will fall back to env / constant if any.', 'youumatter2' ) ); ?>');">
+				<?php wp_nonce_field( 'yum2_nl_clear_key', '_yum2_nl_nonce' ); ?>
+				<input type="hidden" name="action" value="yum2_nl_clear_key">
+				<?php submit_button( __( 'Clear saved API key', 'youumatter2' ), 'delete small', 'submit', false ); ?>
+			</form>
+		<?php endif; ?>
+
+		<h2 style="margin-top:2em;"><?php esc_html_e( 'MailerLite status', 'youumatter2' ); ?></h2>
 		<table class="form-table" role="presentation">
 			<tr>
 				<th scope="row"><?php esc_html_e( 'API key', 'youumatter2' ); ?></th>
@@ -232,3 +319,52 @@ function yum2_nl_handle_clear() {
 	yum2_nl_redirect( __( 'Backup queue cleared.', 'youumatter2' ) );
 }
 add_action( 'admin_post_yum2_nl_clear', 'yum2_nl_handle_clear' );
+
+/**
+ * Save the API key and/or Group ID from the Configuration form.
+ * Empty API key field = keep the saved key (so users can re-save Group ID
+ * without re-pasting the secret). Empty Group ID = clear it.
+ */
+function yum2_nl_handle_save_settings() {
+	yum2_nl_guard( 'yum2_nl_settings' );
+
+	$messages = array();
+
+	if ( isset( $_POST['api_key'] ) ) {
+		$key = trim( wp_unslash( $_POST['api_key'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- API token stored as-is, validated by MailerLite on use.
+		if ( '' !== $key ) {
+			update_option( 'yum2_mailerlite_api_key', $key, false );
+			$messages[] = __( 'API key saved.', 'youumatter2' );
+		}
+	}
+
+	if ( isset( $_POST['group_id'] ) ) {
+		$group = trim( sanitize_text_field( wp_unslash( $_POST['group_id'] ) ) );
+		if ( '' === $group ) {
+			if ( get_option( 'yum2_mailerlite_group_id' ) ) {
+				delete_option( 'yum2_mailerlite_group_id' );
+				$messages[] = __( 'Group ID cleared.', 'youumatter2' );
+			}
+		} else {
+			update_option( 'yum2_mailerlite_group_id', $group, false );
+			$messages[] = __( 'Group ID saved.', 'youumatter2' );
+		}
+	}
+
+	if ( empty( $messages ) ) {
+		$messages[] = __( 'No changes saved.', 'youumatter2' );
+	}
+
+	yum2_nl_redirect( implode( ' ', $messages ) );
+}
+add_action( 'admin_post_yum2_nl_settings', 'yum2_nl_handle_save_settings' );
+
+/**
+ * Remove the API key saved in the DB. Falls back to env / constant if any.
+ */
+function yum2_nl_handle_clear_key() {
+	yum2_nl_guard( 'yum2_nl_clear_key' );
+	delete_option( 'yum2_mailerlite_api_key' );
+	yum2_nl_redirect( __( 'Saved API key removed.', 'youumatter2' ) );
+}
+add_action( 'admin_post_yum2_nl_clear_key', 'yum2_nl_handle_clear_key' );

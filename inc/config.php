@@ -111,13 +111,18 @@ function yum2_email_url() {
 /**
  * MailerLite API key. Read in priority order so it is never hardcoded in
  * committed code:
- *   1. a real environment variable (YUM2_MAILERLITE_API_KEY)
- *   2. a constant from wp-config.php or the gitignored inc/secrets.php
+ *   1. WordPress option `yum2_mailerlite_api_key` (saved from Tools -> Newsletter)
+ *   2. a real environment variable (YUM2_MAILERLITE_API_KEY)
+ *   3. a constant from wp-config.php / .env / inc/env.local.php
  * Returns '' when not configured, so callers can degrade gracefully.
  *
  * @return string
  */
 function yum2_mailerlite_api_key() {
+	$opt = get_option( 'yum2_mailerlite_api_key', '' );
+	if ( is_string( $opt ) && '' !== $opt ) {
+		return $opt;
+	}
 	$env = getenv( 'YUM2_MAILERLITE_API_KEY' );
 	if ( is_string( $env ) && '' !== $env ) {
 		return $env;
@@ -136,6 +141,10 @@ function yum2_mailerlite_api_key() {
  * @return string
  */
 function yum2_mailerlite_group_id() {
+	$opt = get_option( 'yum2_mailerlite_group_id', '' );
+	if ( is_string( $opt ) && '' !== $opt ) {
+		return $opt;
+	}
 	$env = getenv( 'YUM2_MAILERLITE_GROUP_ID' );
 	if ( is_string( $env ) && '' !== $env ) {
 		return $env;
@@ -144,4 +153,30 @@ function yum2_mailerlite_group_id() {
 		return (string) YUM2_MAILERLITE_GROUP_ID;
 	}
 	return '';
+}
+
+/**
+ * Where the currently-active MailerLite value is coming from. Returns one of:
+ * 'option' (saved in DB), 'env' (real env var), 'constant' (wp-config / .env /
+ * env.local.php), or 'none'. Used by Tools -> Newsletter for display.
+ *
+ * @param string $which 'api_key' or 'group_id'
+ * @return string
+ */
+function yum2_mailerlite_source( $which ) {
+	$option_key   = 'api_key' === $which ? 'yum2_mailerlite_api_key' : 'yum2_mailerlite_group_id';
+	$constant_key = 'api_key' === $which ? 'YUM2_MAILERLITE_API_KEY' : 'YUM2_MAILERLITE_GROUP_ID';
+
+	$opt = get_option( $option_key, '' );
+	if ( is_string( $opt ) && '' !== $opt ) {
+		return 'option';
+	}
+	$env = getenv( $constant_key );
+	if ( is_string( $env ) && '' !== $env ) {
+		return 'env';
+	}
+	if ( defined( $constant_key ) ) {
+		return 'constant';
+	}
+	return 'none';
 }
