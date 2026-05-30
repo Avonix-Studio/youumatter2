@@ -107,3 +107,41 @@ function yum2_email_url() {
 	$email = (string) yum2_get_contact( 'email' );
 	return '' === $email ? '' : 'mailto:' . sanitize_email( $email );
 }
+
+/**
+ * MailerLite API key. Read in priority order so it is never hardcoded in
+ * committed code:
+ *   1. a real environment variable (YUM2_MAILERLITE_API_KEY)
+ *   2. a constant from wp-config.php or the gitignored inc/secrets.php
+ * Returns '' when not configured, so callers can degrade gracefully.
+ *
+ * @return string
+ */
+function yum2_mailerlite_api_key() {
+	$env = getenv( 'YUM2_MAILERLITE_API_KEY' );
+	if ( is_string( $env ) && '' !== $env ) {
+		return $env;
+	}
+	if ( defined( 'YUM2_MAILERLITE_API_KEY' ) ) {
+		return (string) YUM2_MAILERLITE_API_KEY;
+	}
+	return '';
+}
+
+/**
+ * MailerLite group ID that new website subscribers are added to. Same lookup
+ * order as the API key. Returns '' when unset (subscriber still gets added to
+ * the account, just without a group).
+ *
+ * @return string
+ */
+function yum2_mailerlite_group_id() {
+	$env = getenv( 'YUM2_MAILERLITE_GROUP_ID' );
+	if ( is_string( $env ) && '' !== $env ) {
+		return $env;
+	}
+	if ( defined( 'YUM2_MAILERLITE_GROUP_ID' ) ) {
+		return (string) YUM2_MAILERLITE_GROUP_ID;
+	}
+	return '';
+}

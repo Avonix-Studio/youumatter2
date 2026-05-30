@@ -59,11 +59,24 @@
       "Bash(grep -oE \"\\\\.border-[^{]*43[, ]*83[, ]*41[^{]*\\\\{[^}]*\\\\}\" assets/css/main.css)",
       "Bash(grep -oE \"border-[^{ ]*\\\\{border-color:rgba\\\\\\(43,83,41,\\\\.\\(22|45\\)\\\\\\)\\\\}\" assets/css/main.css)",
       "Bash(php -l template-parts/home/you-might-be-feeling.php)",
-      "Bash(awk '{print $5, $NF}')"
+      "Bash(awk '{print $5, $NF}')",
+      "Bash(cat .gitignore)",
+      "Bash(ls ../wp-config.php ../../wp-config.php)",
+      "Bash(sed -n '1,40p' inc/config.php)",
+      "Bash(git check-ignore *)",
+      "Bash(php -l inc/secrets.php)",
+      "Bash(php -l inc/config.php)",
+      "Bash(php -l functions.php)",
+      "Bash(php /tmp/yum2_ml_groups.php)",
+      "Bash(php /tmp/yum2_ml_test.php)"
     ],
-    "deny": ["Bash(rm -rf *)"],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "additionalDirectories": [
-      "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts"
+      "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts",
+      "/tmp",
+      "/private/tmp"
     ]
   }
 }

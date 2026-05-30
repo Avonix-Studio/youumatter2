@@ -8,3 +8,8 @@ figma_Youumatter_code
 node_modules/
 npm-debug.log
 .cache/
+
+# Secrets - NEVER commit these
+inc/secrets.php
+.env
+*.env

@@ -85,11 +85,12 @@ function yum2_excerpt_fallback( $excerpt, $post = null ) {
 add_filter( 'get_the_excerpt', 'yum2_excerpt_fallback', 10, 2 );
 
 /**
- * Newsletter form handler. POST target for template-parts/footer/newsletter.php.
+ * Newsletter form handler. POST target for every newsletter form (footer,
+ * blog inline, post card). Email-only.
  *
- * Phase 3 stores the email in a capped option array and redirects back
- * with ?subscribed=1. MailerLite wiring lands in a later phase; the
- * markup contract (action name + nonce field name) stays the same.
+ * Adds the address to MailerLite (in the configured group). If MailerLite is
+ * unconfigured or unreachable, the email is kept in a capped backup option so
+ * no signup is lost. The visitor sees the success state either way.
  */
 function yum2_handle_subscribe() {
 	$nonce = isset( $_POST['_yum2_subscribe_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_yum2_subscribe_nonce'] ) ) : '';
@@ -105,6 +106,79 @@ function yum2_handle_subscribe() {
 		exit;
 	}
 
+	if ( ! yum2_mailerlite_subscribe( $email ) ) {
+		yum2_store_pending_subscriber( $email );
+	}
+
+	wp_safe_redirect( add_query_arg( 'subscribed', '1', $redirect ) . '#newsletter' );
+	exit;
+}
+add_action( 'admin_post_yum2_subscribe', 'yum2_handle_subscribe' );
+add_action( 'admin_post_nopriv_yum2_subscribe', 'yum2_handle_subscribe' );
+
+/**
+ * Add (or update) a subscriber in MailerLite, assigned to the configured group.
+ *
+ * Uses MailerLite's create-or-update endpoint, so re-subscribing the same
+ * email is safe. status=active = single opt-in (no confirmation email);
+ * enable double opt-in in MailerLite settings if that is ever wanted.
+ *
+ * @param string $email Validated email.
+ * @return bool True on a 2xx response; false if unconfigured or failed.
+ */
+function yum2_mailerlite_subscribe( $email ) {
+	$key = yum2_mailerlite_api_key();
+	if ( '' === $key ) {
+		return false;
+	}
+
+	$body  = array(
+		'email'  => $email,
+		'status' => 'active',
+	);
+	$group = yum2_mailerlite_group_id();
+	if ( '' !== $group ) {
+		$body['groups'] = array( $group );
+	}
+
+	$response = wp_remote_post(
+		'https://connect.mailerlite.com/api/subscribers',
+		array(
+			'timeout' => 15,
+			'headers' => array(
+				'Authorization' => 'Bearer ' . $key,
+				'Content-Type'  => 'application/json',
+				'Accept'        => 'application/json',
+			),
+			'body'    => wp_json_encode( $body ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( '[youumatter2] MailerLite request error: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
+		return false;
+	}
+
+	$code = (int) wp_remote_retrieve_response_code( $response );
+	if ( $code < 200 || $code >= 300 ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( '[youumatter2] MailerLite HTTP ' . $code . ': ' . wp_remote_retrieve_body( $response ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Keep a subscriber email in a capped backup option when MailerLite could not
+ * accept it, so it can be recovered or re-synced later.
+ *
+ * @param string $email Validated email.
+ */
+function yum2_store_pending_subscriber( $email ) {
 	$list = get_option( 'yum2_pending_subscribers', array() );
 	if ( ! is_array( $list ) ) {
 		$list = array();
@@ -116,12 +190,7 @@ function yum2_handle_subscribe() {
 		}
 		update_option( 'yum2_pending_subscribers', $list, false );
 	}
-
-	wp_safe_redirect( add_query_arg( 'subscribed', '1', $redirect ) . '#newsletter' );
-	exit;
 }
-add_action( 'admin_post_yum2_subscribe', 'yum2_handle_subscribe' );
-add_action( 'admin_post_nopriv_yum2_subscribe', 'yum2_handle_subscribe' );
 
 /**
  * Repair the_custom_logo() output for SVG attachments.
