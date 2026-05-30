@@ -26,5 +26,8 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/post-types.php';
 require get_template_directory() . '/inc/faq.php';
+if ( is_admin() ) {
+	require get_template_directory() . '/inc/admin-newsletter.php';
+}
 require get_template_directory() . '/inc/security.php';
 require get_template_directory() . '/inc/seo.php';
