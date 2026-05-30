@@ -351,34 +351,7 @@ function yum2_build_content() {
 			'heading'      => __( 'What clients say,', 'youumatter2' ),
 			'heading_em'   => __( 'in their own words.', 'youumatter2' ),
 			'privacy_note' => __( 'Shared with consent · details changed for privacy.', 'youumatter2' ),
-
-			'items' => array(
-				array(
-					'quote'       => __( 'I came in thinking something was wrong with me. I left understanding that I had been coping, not broken. Sanya made the difference feel huge.', 'youumatter2' ),
-					'attribution' => __( 'A., 29', 'youumatter2' ),
-					'context'     => __( 'Anxiety · 6 months in', 'youumatter2' ),
-				),
-				array(
-					'quote'       => __( 'She never rushed me. The first real moment came in session five, and she was there, ready, like she had been expecting it.', 'youumatter2' ),
-					'attribution' => __( 'R., 34', 'youumatter2' ),
-					'context'     => __( 'Relationships', 'youumatter2' ),
-				),
-				array(
-					'quote'       => __( "I had tried therapy before and walked away. This time felt different. Warm, specific, and honest in a way I didn't know therapy could be.", 'youumatter2' ),
-					'attribution' => __( 'M., 41', 'youumatter2' ),
-					'context'     => __( 'Self-esteem', 'youumatter2' ),
-				),
-				array(
-					'quote'       => __( 'The space she holds is the actual work. I started saying things I did not know I thought, and she helped me stay with them.', 'youumatter2' ),
-					'attribution' => __( 'K., 26', 'youumatter2' ),
-					'context'     => __( 'Purpose & direction', 'youumatter2' ),
-				),
-				array(
-					'quote'       => __( "Even our hardest sessions ended with me feeling more like myself, not less. That's rare.", 'youumatter2' ),
-					'attribution' => __( 'S., 38', 'youumatter2' ),
-					'context'     => __( 'Depression', 'youumatter2' ),
-				),
-			),
+			/* Items come from the Testimonials CPT, not from here. */
 		),
 
 		/* =============================================================

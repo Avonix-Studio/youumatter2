@@ -33,9 +33,11 @@ function yum2_contact_defaults() {
 		'youtube'           => '',
 		'twitter'           => '',
 		'facebook'          => '',
-		'calendly_url'      => '',
-		'calendly_color'    => '1a4d2e',
-		'accepting_clients' => true,
+		'calendly_url'        => '',
+		'calendly_color'      => '1a4d2e',
+		'accepting_clients'   => true,
+		'google_business_url' => 'https://share.google/4ecvdeKonstjs1YRz',
+		'google_rating'       => '5.0',
 	);
 }
 

@@ -99,17 +99,68 @@ function yum2_register_faq_taxonomy() {
 add_action( 'init', 'yum2_register_faq_taxonomy' );
 
 /**
- * Use "Question" as the title-field placeholder on the FAQ editor so it's
- * obvious the title is the question.
+ * Use "Question" as the title-field placeholder on the FAQ editor, and a
+ * helpful label for the testimonial editor.
  *
  * @param string  $text Placeholder text.
  * @param WP_Post $post Current post.
  * @return string
  */
 function yum2_faq_title_placeholder( $text, $post ) {
-	if ( $post instanceof WP_Post && 'faq' === $post->post_type ) {
-		return __( 'Question (e.g. How long is each session?)', 'youumatter2' );
+	if ( $post instanceof WP_Post ) {
+		if ( 'faq' === $post->post_type ) {
+			return __( 'Question (e.g. How long is each session?)', 'youumatter2' );
+		}
+		if ( 'testimonial' === $post->post_type ) {
+			return __( 'Internal label (e.g. A. - Anxiety)', 'youumatter2' );
+		}
 	}
 	return $text;
 }
 add_filter( 'enter_title_here', 'yum2_faq_title_placeholder', 10, 2 );
+
+/**
+ * Register the `testimonial` post type.
+ *
+ * Title = internal admin label, editor = the actual quote shown on the home
+ * carousel. Optional ACF meta fields (initial, age, condition, duration,
+ * rating, from_google) live in inc/testimonials.php.
+ */
+function yum2_register_testimonial_cpt() {
+	$labels = array(
+		'name'                  => _x( 'Testimonials', 'post type general name', 'youumatter2' ),
+		'singular_name'         => _x( 'Testimonial', 'post type singular name', 'youumatter2' ),
+		'menu_name'             => __( 'Testimonials', 'youumatter2' ),
+		'add_new'               => __( 'Add New', 'youumatter2' ),
+		'add_new_item'          => __( 'Add New Testimonial', 'youumatter2' ),
+		'edit_item'             => __( 'Edit Testimonial', 'youumatter2' ),
+		'new_item'              => __( 'New Testimonial', 'youumatter2' ),
+		'view_item'             => __( 'View Testimonial', 'youumatter2' ),
+		'search_items'          => __( 'Search Testimonials', 'youumatter2' ),
+		'not_found'             => __( 'No testimonials yet', 'youumatter2' ),
+		'not_found_in_trash'    => __( 'No testimonials in Trash', 'youumatter2' ),
+		'all_items'             => __( 'All Testimonials', 'youumatter2' ),
+		'item_published'        => __( 'Testimonial published.', 'youumatter2' ),
+		'item_updated'          => __( 'Testimonial updated.', 'youumatter2' ),
+	);
+
+	register_post_type(
+		'testimonial',
+		array(
+			'labels'             => $labels,
+			'public'             => false,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'show_in_rest'       => true,
+			'menu_icon'          => 'dashicons-format-quote',
+			'menu_position'      => 27,
+			'supports'           => array( 'title', 'editor', 'page-attributes' ),
+			'has_archive'        => false,
+			'rewrite'            => false,
+			'query_var'          => false,
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+		)
+	);
+}
+add_action( 'init', 'yum2_register_testimonial_cpt' );

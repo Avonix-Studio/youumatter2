@@ -86,6 +86,18 @@ function yum2_customize_register( $wp_customize ) {
 			'type'     => 'url',
 			'sanitize' => 'esc_url_raw',
 		),
+		'google_business_url' => array(
+			'label'    => __( 'Google Business reviews URL', 'youumatter2' ),
+			'desc'     => __( 'Used by the testimonials section pill. Leave blank to hide the pill.', 'youumatter2' ),
+			'type'     => 'url',
+			'sanitize' => 'esc_url_raw',
+		),
+		'google_rating' => array(
+			'label'    => __( 'Google rating', 'youumatter2' ),
+			'desc'     => __( 'Shown on the testimonials section pill (e.g. 5.0).', 'youumatter2' ),
+			'type'     => 'text',
+			'sanitize' => 'sanitize_text_field',
+		),
 		'clinic_address' => array(
 			'label'    => __( 'Clinic address', 'youumatter2' ),
 			'type'     => 'text',
