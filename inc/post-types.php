@@ -112,7 +112,7 @@ function yum2_faq_title_placeholder( $text, $post ) {
 			return __( 'Question (e.g. How long is each session?)', 'youumatter2' );
 		}
 		if ( 'testimonial' === $post->post_type ) {
-			return __( 'Internal label (e.g. A. - Anxiety)', 'youumatter2' );
+			return __( 'Auto-generated from the fields below', 'youumatter2' );
 		}
 	}
 	return $text;
@@ -154,7 +154,9 @@ function yum2_register_testimonial_cpt() {
 			'show_in_rest'       => true,
 			'menu_icon'          => 'dashicons-format-quote',
 			'menu_position'      => 27,
-			'supports'           => array( 'title', 'editor', 'page-attributes' ),
+			/* Quote lives in an ACF field, not the post body. Title is
+			   auto-generated from the meta fields (see inc/testimonials.php). */
+			'supports'           => array( 'title', 'page-attributes' ),
 			'has_archive'        => false,
 			'rewrite'            => false,
 			'query_var'          => false,

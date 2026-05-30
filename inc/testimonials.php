@@ -34,6 +34,15 @@ function yum2_register_testimonial_fields() {
 			'title'    => __( 'Testimonial details', 'youumatter2' ),
 			'fields'   => array(
 				array(
+					'key'          => 'field_yum2_testimonial_quote',
+					'label'        => __( 'Testimonial text', 'youumatter2' ),
+					'name'         => 'quote',
+					'type'         => 'textarea',
+					'instructions' => __( 'The review itself. Quote marks are added automatically when shown on the site.', 'youumatter2' ),
+					'rows'         => 5,
+					'required'     => 1,
+				),
+				array(
 					'key'          => 'field_yum2_testimonial_initial',
 					'label'        => __( 'Initial', 'youumatter2' ),
 					'name'         => 'initial',
@@ -104,7 +113,9 @@ add_action( 'acf/init', 'yum2_register_testimonial_fields' );
  * ====================================================================== */
 
 /**
- * Plain-text quote for a testimonial post.
+ * Plain-text quote for a testimonial post. Prefers the ACF "quote" field;
+ * falls back to the post body for legacy entries created before the field
+ * was added.
  *
  * @param int|WP_Post $post Testimonial post or ID.
  * @return string
@@ -114,6 +125,15 @@ function yum2_testimonial_quote( $post ) {
 	if ( ! $post ) {
 		return '';
 	}
+
+	$acf_quote = function_exists( 'get_field' )
+		? (string) get_field( 'quote', $post->ID )
+		: (string) get_post_meta( $post->ID, 'quote', true );
+	$acf_quote = trim( $acf_quote );
+	if ( '' !== $acf_quote ) {
+		return $acf_quote;
+	}
+
 	return trim( wp_strip_all_tags( do_blocks( $post->post_content ), true ) );
 }
 
@@ -209,7 +229,88 @@ function yum2_testimonial_items() {
 }
 
 /* =========================================================================
- * 3. ADMIN: default the testimonial list to drag/menu order
+ * 3. AUTO-TITLE - generated from the meta fields after ACF saves so the user
+ *    never types it. Format: "Initial, Age - Condition", falling back to a
+ *    short quote excerpt if none of those are set.
+ * ====================================================================== */
+
+/**
+ * Build the title from the saved meta fields.
+ *
+ * @param int $post_id Testimonial post ID.
+ * @return string
+ */
+function yum2_testimonial_build_title( $post_id ) {
+	$initial   = trim( (string) yum2_testimonial_field( $post_id, 'initial' ) );
+	$age       = trim( (string) yum2_testimonial_field( $post_id, 'age' ) );
+	$condition = trim( (string) yum2_testimonial_field( $post_id, 'condition' ) );
+
+	$attribution = yum2_testimonial_attribution( $initial, $age );
+
+	$parts = array();
+	if ( '' !== $attribution ) {
+		$parts[] = $attribution;
+	}
+	if ( '' !== $condition ) {
+		$parts[] = $condition;
+	}
+	if ( ! empty( $parts ) ) {
+		return implode( ' - ', $parts );
+	}
+
+	$quote = yum2_testimonial_quote( $post_id );
+	if ( '' !== $quote ) {
+		return wp_trim_words( $quote, 8, '...' );
+	}
+
+	return __( 'Testimonial', 'youumatter2' );
+}
+
+/**
+ * Auto-update the post_title from the meta fields after each ACF save.
+ *
+ * Writes directly via $wpdb (instead of wp_update_post) to avoid retriggering
+ * save_post and looping. clean_post_cache() refreshes the object cache.
+ *
+ * @param int|string $post_id Post ID being saved.
+ */
+function yum2_testimonial_auto_title( $post_id ) {
+	if ( ! is_numeric( $post_id ) || 'testimonial' !== get_post_type( $post_id ) ) {
+		return;
+	}
+
+	$new_title = yum2_testimonial_build_title( (int) $post_id );
+
+	global $wpdb;
+	$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->posts,
+		array(
+			'post_title' => $new_title,
+			'post_name'  => sanitize_title( $new_title ),
+		),
+		array( 'ID' => (int) $post_id ),
+		array( '%s', '%s' ),
+		array( '%d' )
+	);
+	clean_post_cache( (int) $post_id );
+}
+add_action( 'acf/save_post', 'yum2_testimonial_auto_title', 20 );
+
+/**
+ * Hide the now-redundant Title input on the testimonial edit screen, since
+ * we auto-generate it. The page header still says "Edit Testimonial".
+ */
+function yum2_testimonial_admin_css() {
+	$screen = get_current_screen();
+	if ( ! $screen || 'testimonial' !== $screen->post_type ) {
+		return;
+	}
+	echo '<style>#titlediv,#titlewrap,.editor-post-title{display:none !important;}</style>';
+}
+add_action( 'admin_head', 'yum2_testimonial_admin_css' );
+
+/* =========================================================================
+ * 4. ADMIN: default the testimonial list to drag/menu order
  * ====================================================================== */
 function yum2_testimonial_admin_order( $query ) {
 	if ( ! is_admin() || ! $query->is_main_query() ) {
@@ -347,7 +448,6 @@ function yum2_seed_testimonials() {
 				'post_type'    => 'testimonial',
 				'post_status'  => 'publish',
 				'post_title'   => $row['title'],
-				'post_content' => $row['quote'],
 				'menu_order'   => $menu,
 			),
 			true
@@ -358,6 +458,7 @@ function yum2_seed_testimonials() {
 		}
 
 		$meta = array(
+			'quote'       => $row['quote'],
 			'initial'     => $row['initial'],
 			'age'         => $row['age'],
 			'condition'   => $row['condition'],
