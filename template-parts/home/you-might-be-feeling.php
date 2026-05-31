@@ -56,7 +56,7 @@ $cards = $c['cards'];
 		<div class="swiper yum2-feeling-swiper">
 			<div class="swiper-wrapper">
 				<?php foreach ( $cards as $i => $card ) : ?>
-					<div class="swiper-slide pb-2 pt-1">
+					<div class="swiper-slide yum2-reveal pb-2 pt-1" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.06, 2 ) ); ?>s;">
 						<article
 							:class="active === <?php echo (int) $i; ?> ? 'border-[#2b5329]' : 'border-[rgba(43,83,41,0.22)] hover:border-[rgba(43,83,41,0.45)] hover:shadow-[0_22px_44px_-16px_rgba(26,58,25,0.16)]'"
 							class="group relative bg-[#f8f3e9] border rounded-[20px] p-5 md:p-7 overflow-hidden transition-[border-color,box-shadow] duration-300 h-full">

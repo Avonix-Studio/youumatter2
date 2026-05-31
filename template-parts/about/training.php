@@ -48,16 +48,16 @@ $frameworks = array(
 <section class="relative bg-sage-light px-5 md:px-8 py-20 md:py-28 overflow-hidden">
 	<div class="relative max-w-5xl mx-auto">
 
-		<p class="text-forest tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
+		<p class="yum2-reveal text-forest tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;transition-delay:0s;">
 			<?php esc_html_e( 'Training & Practice', 'youumatter2' ); ?>
 		</p>
-		<h2 class="text-forest mb-12" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;">
+		<h2 class="yum2-reveal text-forest mb-12" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;transition-delay:0.08s;">
 			<?php esc_html_e( 'Where the work was learned.', 'youumatter2' ); ?>
 		</h2>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
 
-			<div>
+			<div class="yum2-reveal" style="transition-delay:0.18s;">
 				<div class="flex items-center gap-2.5 mb-6">
 					<span class="size-9 rounded-full bg-[#f8f3e9] flex items-center justify-center text-terracotta">
 						<?php echo yum2_icon( 'graduation-cap', array( 'size' => 16, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -83,7 +83,7 @@ $frameworks = array(
 				</ul>
 			</div>
 
-			<div>
+			<div class="yum2-reveal" style="transition-delay:0.26s;">
 				<div class="flex items-center gap-2.5 mb-6">
 					<span class="size-9 rounded-full bg-[#f8f3e9] flex items-center justify-center text-terracotta">
 						<?php echo yum2_icon( 'building-2', array( 'size' => 16, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -102,7 +102,7 @@ $frameworks = array(
 			</div>
 		</div>
 
-		<div class="mt-14 text-center">
+		<div class="yum2-reveal mt-14 text-center" style="transition-delay:0.35s;">
 			<p class="italic text-[#3d4f3e] mb-4" style="font-family:'Newsreader',serif;font-size:16px;">
 				<?php esc_html_e( 'Therapy frameworks I draw from:', 'youumatter2' ); ?>
 			</p>

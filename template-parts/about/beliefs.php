@@ -37,14 +37,14 @@ $beliefs = array(
 	<div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-20">
 
 		<div class="md:sticky md:top-[120px] md:self-start md:max-h-[calc(100vh-140px)] md:flex md:flex-col md:justify-center">
-			<p class="text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
+			<p class="yum2-reveal text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;transition-delay:0s;">
 				<?php esc_html_e( 'What I believe', 'youumatter2' ); ?>
 			</p>
-			<h2 class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(32px,4.4vw,52px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
+			<h2 class="yum2-reveal text-forest" style="font-family:'Newsreader',serif;font-size:clamp(32px,4.4vw,52px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;transition-delay:0.08s;">
 				<?php esc_html_e( 'Three things I keep', 'youumatter2' ); ?>
 				<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'coming back to.', 'youumatter2' ); ?></em>
 			</h2>
-			<p class="hidden md:block italic text-[#3d4f3e] mt-5 max-w-sm" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;">
+			<p class="yum2-reveal hidden md:block italic text-[#3d4f3e] mt-5 max-w-sm" style="font-family:'Newsreader',serif;font-size:17px;line-height:1.55;transition-delay:0.18s;">
 				<?php esc_html_e( 'Not a manifesto, just the quiet anchors I notice myself returning to, session after session.', 'youumatter2' ); ?>
 			</p>
 			<div class="hidden md:block mt-8 h-px w-16 bg-terracotta"></div>

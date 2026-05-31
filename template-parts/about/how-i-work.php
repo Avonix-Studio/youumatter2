@@ -36,21 +36,21 @@ $cards = array(
 	<div class="relative max-w-5xl mx-auto">
 
 		<div class="text-center max-w-2xl mx-auto">
-			<p class="text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
+			<p class="yum2-reveal text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;transition-delay:0s;">
 				<?php esc_html_e( 'How I work', 'youumatter2' ); ?>
 			</p>
-			<h2 class="text-forest mb-5" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
+			<h2 class="yum2-reveal text-forest mb-5" style="font-family:'Newsreader',serif;font-size:clamp(30px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;transition-delay:0.08s;">
 				<?php esc_html_e( 'Less couch and clipboard,', 'youumatter2' ); ?>
 				<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'more conversation.', 'youumatter2' ); ?></em>
 			</h2>
-			<p class="italic text-[#3d4f3e] mb-12" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="yum2-reveal italic text-[#3d4f3e] mb-12" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;transition-delay:0.18s;">
 				<?php esc_html_e( "I don't lead with method. I lead with you. These are the four threads I weave together based on what you bring.", 'youumatter2' ); ?>
 			</p>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-			<?php foreach ( $cards as $card ) : ?>
-				<div class="group bg-cream border border-forest/15 rounded-[20px] p-6 md:p-7 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_-22px_rgba(26,58,25,0.28)] hover:border-forest/25">
+			<?php foreach ( $cards as $i => $card ) : ?>
+				<div class="yum2-reveal group bg-cream border border-forest/15 rounded-[20px] p-6 md:p-7 transition-[transform,box-shadow,border-color,opacity] duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_-22px_rgba(26,58,25,0.28)] hover:border-forest/25" style="transition-delay:<?php echo esc_attr( number_format( 0.24 + $i * 0.08, 2 ) ); ?>s;">
 					<span class="relative inline-flex size-12 items-center justify-center mb-5">
 						<span class="absolute inset-0 rounded-full bg-sage-light transition-transform duration-500 group-hover:rotate-[15deg]"></span>
 						<span class="relative text-terracotta">

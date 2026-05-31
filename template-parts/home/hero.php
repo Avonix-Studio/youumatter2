@@ -16,28 +16,39 @@ $portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 ?>
 <section class="relative overflow-hidden bg-[#f2ede3]">
-	<div aria-hidden class="absolute -top-32 -right-40 w-[520px] h-[520px] rounded-full bg-[#e4efe3] opacity-70 blur-[2px]"></div>
-	<div aria-hidden class="absolute bottom-10 -left-48 w-[420px] h-[420px] rounded-full bg-[rgba(192,122,90,0.08)]"></div>
+	<div aria-hidden class="absolute -top-32 -right-40 w-[520px] h-[520px] rounded-full bg-[#e4efe3] opacity-70 blur-[2px] yum2-orb-pulse-a"></div>
+	<div aria-hidden class="absolute bottom-10 -left-48 w-[420px] h-[420px] rounded-full bg-[rgba(192,122,90,0.08)] yum2-orb-pulse-b"></div>
 
 	<div class="relative max-w-6xl mx-auto px-5 md:px-8 pt-10 md:pt-14 pb-20 md:pb-24">
-		<span class="inline-flex items-center gap-2 bg-[#d1e5d0] text-[#2b5329] rounded-full pl-3 pr-4 py-1.5 mb-8 md:mb-10" style="font-size:12px;font-weight:600;letter-spacing:1.5px;">
+		<span class="yum2-reveal inline-flex items-center gap-2 bg-[#d1e5d0] text-[#2b5329] rounded-full pl-3 pr-4 py-1.5 mb-8 md:mb-10" style="font-size:12px;font-weight:600;letter-spacing:1.5px;transition-delay:0s;">
 			<span class="size-1.5 rounded-full bg-[#2b5329]"></span>
 			<span class="uppercase"><?php echo esc_html( $c['eyebrow'] ); ?></span>
 		</span>
 
+		<?php
+		/* H1 word-by-word reveal: each word is an inline-block span so transform
+		   animates. Delays cascade at ~80ms per word. */
+		$h_words  = preg_split( '/\s+/', trim( (string) $c['heading'] ) );
+		$em_words = preg_split( '/\s+/', trim( (string) $c['heading_em'] ) );
+		$h_count  = is_array( $h_words ) ? count( $h_words ) : 0;
+		?>
 		<h1 class="text-[#1a3a19] mb-10 md:mb-14" style="font-family:'Newsreader',serif;font-size:clamp(44px,9vw,120px);line-height:0.98;letter-spacing:-0.03em;font-weight:500;text-wrap:balance;">
-			<?php echo esc_html( $c['heading'] ); ?>
+			<?php foreach ( (array) $h_words as $i => $w ) : ?>
+				<span class="yum2-reveal inline-block" style="transition-delay:<?php echo esc_attr( number_format( 0.1 + $i * 0.08, 2 ) ); ?>s;"><?php echo esc_html( $w ); ?></span>
+			<?php endforeach; ?>
 			<br>
-			<span class="italic" style="color:#c07a5a;"><?php echo esc_html( $c['heading_em'] ); ?></span>
+			<?php foreach ( (array) $em_words as $i => $w ) : ?>
+				<span class="yum2-reveal inline-block italic" style="color:#c07a5a;transition-delay:<?php echo esc_attr( number_format( 0.1 + ( $h_count + $i ) * 0.08, 2 ) ); ?>s;"><?php echo esc_html( $w ); ?></span>
+			<?php endforeach; ?>
 		</h1>
 
 		<div class="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-16 items-center">
 			<div class="order-2 md:order-1">
-				<p class="text-[#3d4f3e] max-w-lg mb-8" style="font-size:clamp(17px,1.6vw,20px);line-height:1.55;">
+				<p class="yum2-reveal text-[#3d4f3e] max-w-lg mb-8" style="font-size:clamp(17px,1.6vw,20px);line-height:1.55;transition-delay:0.55s;">
 					<?php echo esc_html( $c['body'] ); ?>
 				</p>
 
-				<div class="flex flex-wrap gap-3 mb-4">
+				<div class="yum2-reveal flex flex-wrap gap-3 mb-4" style="transition-delay:0.7s;">
 					<?php
 					get_template_part(
 						'template-parts/shared/book-button',
@@ -58,7 +69,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 					</a>
 				</div>
 
-				<p class="text-[rgba(81,99,82,0.75)]" style="font-size:13px;">
+				<p class="yum2-reveal text-[rgba(81,99,82,0.75)]" style="font-size:13px;transition-delay:0.85s;">
 					<?php
 					echo esc_html(
 						sprintf(
@@ -71,7 +82,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 				</p>
 			</div>
 
-			<div class="order-1 md:order-2 relative w-full max-w-[420px] md:max-w-[460px] mx-auto aspect-square">
+			<div class="yum2-reveal order-1 md:order-2 relative w-full max-w-[420px] md:max-w-[460px] mx-auto aspect-square" style="transition-delay:0.35s;">
 				<div aria-hidden class="absolute -inset-[6%] rounded-full bg-[#d1e5d0] yum2-circle-breathe"></div>
 				<div class="relative rounded-full overflow-hidden shadow-[0_24px_48px_-12px_rgba(19,60,20,0.22)] size-full">
 					<img

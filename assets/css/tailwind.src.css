@@ -556,6 +556,145 @@
     }
   }
 
+  /* Home hero ambient orbs: slow asymmetric breathing so the two never sync. */
+  .yum2-orb-pulse-a {
+    animation: yum2-orb-pulse-a 10s ease-in-out infinite;
+  }
+  .yum2-orb-pulse-b {
+    animation: yum2-orb-pulse-b 12s ease-in-out infinite;
+  }
+  @keyframes yum2-orb-pulse-a {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+  @keyframes yum2-orb-pulse-b {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-orb-pulse-a,
+    .yum2-orb-pulse-b {
+      animation: none;
+    }
+  }
+
+  /* How-it-works icon halo: soft radial pulse around each step icon. */
+  .yum2-pulse-ring {
+    animation: yum2-pulse-ring 4.5s ease-in-out infinite;
+  }
+  @keyframes yum2-pulse-ring {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: scale(1.25);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-pulse-ring {
+      animation: none;
+    }
+  }
+
+  /* About hero 640px ambient blob: slow X/Y drift, never sits still. */
+  .yum2-blob-drift {
+    animation: yum2-blob-drift 14s ease-in-out infinite;
+  }
+  @keyframes yum2-blob-drift {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(8px, -6px);
+    }
+    50% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(-6px, 6px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-blob-drift {
+      animation: none;
+    }
+  }
+
+  /* About hero portrait: dramatic scale-in entrance on page load. Runs once.
+     `both` keeps the start state visible until the 0.2s delay, otherwise the
+     portrait flashes full-size for a frame before scaling. */
+  .yum2-portrait-scale-in {
+    animation: yum2-portrait-scale-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s
+      both;
+  }
+  @keyframes yum2-portrait-scale-in {
+    0% {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-portrait-scale-in {
+      animation: none;
+    }
+  }
+
+  /* About hero terracotta leaf: slow rotate left-right (different from the home
+     leaf, which is faster). */
+  .yum2-leaf-rock-slow {
+    animation: yum2-leaf-rock-slow 8s ease-in-out infinite;
+    transform-origin: 50% 80%;
+  }
+  @keyframes yum2-leaf-rock-slow {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(6deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-leaf-rock-slow {
+      animation: none;
+    }
+  }
+
+  /* About hero scroll badge: circular SCROLL · DOWN text rotates around a
+     stationary arrow center. */
+  .yum2-scroll-badge {
+    animation: yum2-spin 20s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes yum2-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .yum2-scroll-badge {
+      animation: none;
+    }
+  }
+
   /* Confirmation message */
   .wpforms-container .wpforms-confirmation-container-full {
     background: theme("colors.sage-light");

@@ -41,7 +41,7 @@ $steps = $c['steps'];
 						<div class="group relative bg-[#f8f3e9] border border-[#e0d9ce] rounded-[22px] p-6 md:p-7 h-full hover:border-[rgba(43,83,41,0.35)] hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] hover:-translate-y-1.5 transition-[border-color,box-shadow,transform] duration-500">
 							<div class="flex items-center gap-3 mb-5">
 								<div class="relative shrink-0">
-									<span aria-hidden class="absolute inset-0 rounded-full bg-[#d1e5d0] animate-ping opacity-50"></span>
+									<span aria-hidden class="absolute inset-0 rounded-full bg-[#d1e5d0] yum2-pulse-ring opacity-50"></span>
 									<div class="relative size-11 rounded-full bg-[#2b5329] text-white flex items-center justify-center shadow-[0_8px_18px_rgba(26,58,25,0.22)] yum2-icon-bob<?php echo $i > 0 ? ' yum2-icon-bob--d' . $i : ''; ?>">
 										<?php echo yum2_icon( $step['icon'], array( 'size' => 18 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>

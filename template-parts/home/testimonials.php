@@ -88,14 +88,14 @@ $google_rating = (string) yum2_get_contact( 'google_rating' );
 			style="scrollbar-width:none;"
 		>
 			<?php
-			foreach ( $testimonials as $t ) :
+			foreach ( $testimonials as $i => $t ) :
 				$has_attribution = '' !== $t['attribution'];
 				$has_context     = '' !== $t['context'];
 				$show_google     = ! empty( $t['from_google'] );
 				$has_footer      = $has_attribution || $has_context || $show_google;
 				$rating          = (int) $t['rating'];
 				?>
-				<div class="snap-start shrink-0 w-full md:w-1/2 px-1 pb-2 pt-1">
+				<div class="snap-start yum2-reveal shrink-0 w-full md:w-1/2 px-1 pb-2 pt-1" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.08, 2 ) ); ?>s;">
 					<article class="relative bg-[#f8f3e9] border border-forest/15 rounded-[22px] p-7 md:p-8 h-full hover:border-forest/35 hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] transition-[border-color,box-shadow] duration-500 overflow-hidden">
 						<span aria-hidden class="absolute -top-1 -left-1 text-terracotta/15 pointer-events-none">
 							<?php echo yum2_icon( 'quote', array( 'size' => 120, 'stroke' => 1 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

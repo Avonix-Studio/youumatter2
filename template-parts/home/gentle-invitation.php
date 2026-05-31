@@ -32,20 +32,20 @@ $email         = (string) yum2_get_contact( 'email' );
 
 	<div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-start">
 		<div>
-			<p class="text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
+			<p class="yum2-reveal text-terracotta tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;transition-delay:0s;">
 				<?php echo esc_html( $c['label'] ); ?>
 			</p>
 
-			<h2 class="text-forest mb-5" style="font-family:'Newsreader',serif;font-size:clamp(34px,5.2vw,60px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
+			<h2 class="yum2-reveal text-forest mb-5" style="font-family:'Newsreader',serif;font-size:clamp(34px,5.2vw,60px);line-height:1.05;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;transition-delay:0.08s;">
 				<?php echo esc_html( $c['heading'] ); ?>
 				<em class="italic" style="color:#c07a5a;font-weight:400;"><?php echo esc_html( $c['heading_em'] ); ?></em>
 			</h2>
 
-			<p class="italic text-[#3d4f3e] max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;">
+			<p class="yum2-reveal italic text-[#3d4f3e] max-w-md mb-8" style="font-family:'Newsreader',serif;font-size:18px;line-height:1.55;transition-delay:0.18s;">
 				<?php echo esc_html( $c['body'] ); ?>
 			</p>
 
-			<div class="flex flex-wrap items-center gap-3 mb-8">
+			<div class="yum2-reveal flex flex-wrap items-center gap-3 mb-8" style="transition-delay:0.28s;">
 				<?php
 				get_template_part(
 					'template-parts/shared/book-button',
@@ -69,7 +69,7 @@ $email         = (string) yum2_get_contact( 'email' );
 			</div>
 
 			<?php if ( $accepting ) : ?>
-				<p class="inline-flex items-center gap-2 text-[#3d4f3e]" style="font-size:13px;">
+				<p class="yum2-reveal inline-flex items-center gap-2 text-[#3d4f3e]" style="font-size:13px;transition-delay:0.38s;">
 					<span class="relative flex size-2">
 						<span class="absolute inline-flex h-full w-full rounded-full bg-forest opacity-60 animate-ping"></span>
 						<span class="relative inline-flex size-2 rounded-full bg-forest"></span>
@@ -79,7 +79,7 @@ $email         = (string) yum2_get_contact( 'email' );
 			<?php endif; ?>
 		</div>
 
-		<aside class="relative bg-[#f8f3e9] border border-forest/15 rounded-[22px] p-6 md:p-7 shadow-[0_24px_60px_-30px_rgba(26,58,25,0.25)]">
+		<aside class="yum2-reveal relative bg-[#f8f3e9] border border-forest/15 rounded-[22px] p-6 md:p-7 shadow-[0_24px_60px_-30px_rgba(26,58,25,0.25)]" style="transition-delay:0.25s;">
 			<p class="text-terracotta tracking-[2px] uppercase mb-5" style="font-size:11px;font-weight:600;">
 				<?php esc_html_e( 'Practical details', 'youumatter2' ); ?>
 			</p>

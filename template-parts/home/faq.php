@@ -43,7 +43,7 @@ if ( empty( $questions ) ) {
 
 		<div class="border-t border-forest/12">
 			<?php foreach ( $questions as $i => $item ) : ?>
-				<div class="border-b border-forest/12">
+				<div class="yum2-reveal border-b border-forest/12" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.05, 2 ) ); ?>s;">
 					<button
 						type="button"
 						@click="open = open === <?php echo (int) $i; ?> ? null : <?php echo (int) $i; ?>"

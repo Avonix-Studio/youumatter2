@@ -79,7 +79,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 			style="scrollbar-width:none;"
 		>
 			<?php
-			foreach ( $tiles as $tile ) :
+			foreach ( $tiles as $i => $tile ) :
 				$has_thumb   = $is_live && ! empty( $tile['thumb'] );
 				$tile_href   = $is_live && ! empty( $tile['permalink'] ) ? $tile['permalink'] : $ig_url;
 				$badge_label = $tile['is_reel'] ? __( 'Reel', 'youumatter2' ) : __( 'Post', 'youumatter2' );
@@ -89,7 +89,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 					$badge_label
 				);
 				?>
-				<div class="shrink-0 snap-start w-[58%] sm:w-[40%] md:w-[25%] lg:w-[22%]">
+				<div class="yum2-reveal shrink-0 snap-start w-[58%] sm:w-[40%] md:w-[25%] lg:w-[22%]" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.06, 2 ) ); ?>s;">
 					<a
 						href="<?php echo esc_url( $tile_href ); ?>"
 						target="_blank" rel="noopener noreferrer"

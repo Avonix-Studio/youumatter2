@@ -40,18 +40,18 @@ if ( empty( $stats ) ) {
 ?>
 <section class="relative bg-sage-light px-5 md:px-8 py-20 md:py-40 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto text-center">
-		<p class="text-forest tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;">
+		<p class="yum2-reveal text-forest tracking-[2px] uppercase mb-5" style="font-size:12px;font-weight:600;transition-delay:0s;">
 			<?php esc_html_e( 'A quiet track record', 'youumatter2' ); ?>
 		</p>
-		<h2 class="text-forest mb-12 md:mb-16" style="font-family:'Newsreader',serif;font-size:clamp(28px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;">
+		<h2 class="yum2-reveal text-forest mb-12 md:mb-16" style="font-family:'Newsreader',serif;font-size:clamp(28px,4.4vw,48px);line-height:1.1;letter-spacing:-0.02em;font-weight:400;text-wrap:balance;transition-delay:0.08s;">
 			<?php esc_html_e( "Numbers don't tell the whole story.", 'youumatter2' ); ?>
 			<br>
 			<em class="italic" style="color:#c07a5a;"><?php esc_html_e( 'But these ones are honest.', 'youumatter2' ); ?></em>
 		</h2>
 
 		<div class="grid grid-cols-1 md:grid-cols-<?php echo (int) count( $stats ); ?> gap-12 md:gap-24 text-left md:text-center">
-			<?php foreach ( $stats as $stat ) : ?>
-				<div x-data="yum2CountUp(<?php echo (int) $stat['value']; ?>)" x-init="init()">
+			<?php foreach ( $stats as $i => $stat ) : ?>
+				<div class="yum2-reveal" style="transition-delay:<?php echo esc_attr( number_format( 0.16 + $i * 0.1, 2 ) ); ?>s;" x-data="yum2CountUp(<?php echo (int) $stat['value']; ?>)" x-init="init()">
 					<p class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(96px,11vw,140px);line-height:0.95;letter-spacing:-0.04em;font-weight:500;">
 						<span x-text="display"></span><span style="color:#c07a5a;"><?php echo esc_html( $stat['suffix'] ); ?></span>
 					</p>
@@ -63,7 +63,7 @@ if ( empty( $stats ) ) {
 		</div>
 
 		<div class="h-px bg-forest/18 max-w-md mx-auto mt-14"></div>
-		<p class="italic text-[#3d4f3e] mt-5" style="font-family:'Newsreader',serif;font-size:15px;">
+		<p class="yum2-reveal italic text-[#3d4f3e] mt-5" style="font-family:'Newsreader',serif;font-size:15px;transition-delay:0.5s;">
 			<?php esc_html_e( 'Updated honestly as the practice grows. Numbers will change. The care will not.', 'youumatter2' ); ?>
 		</p>
 	</div>
