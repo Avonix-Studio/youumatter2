@@ -10,6 +10,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Read an ACF field from the "Site Content" options page with a
+ * hardcoded fallback. The fallback keeps the design intact when ACF is
+ * inactive or the field has been left blank in the admin.
+ *
+ * @param string $key      ACF field name.
+ * @param mixed  $fallback Value to use when the field is missing/empty.
+ * @return mixed
+ */
+function yum2_field( $key, $fallback = '' ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $fallback;
+	}
+	$value = get_field( $key, 'option' );
+	if ( null === $value || false === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
+		return $fallback;
+	}
+	return $value;
+}
+
+/**
+ * Read an ACF field from a specific post (or the current one) with a
+ * hardcoded fallback. Used for per-post fields like the post_faqs repeater.
+ *
+ * @param string   $key      ACF field name.
+ * @param int|null $post_id  Post ID. null = current post.
+ * @param mixed    $fallback Value to use when the field is missing/empty.
+ * @return mixed
+ */
+function yum2_post_field( $key, $post_id = null, $fallback = '' ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $fallback;
+	}
+	$value = get_field( $key, $post_id );
+	if ( null === $value || false === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
+		return $fallback;
+	}
+	return $value;
+}
+
+/**
  * Add `has-bottom-nav` to the body so the matching CSS rule pads the
  * page enough that the fixed mobile bottom-nav doesn't cover content.
  *

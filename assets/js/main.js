@@ -33,6 +33,11 @@
       slidesPerView: 1,
       slidesPerGroup: 1,
       spaceBetween: 16,
+      // Require a clear horizontal swipe before grabbing the touch; otherwise
+      // vertical page-scroll gestures get hijacked into Swiper drags.
+      touchAngle: 30,
+      threshold: 8,
+      touchReleaseOnEdges: true,
       breakpoints: {
         // slidesPerGroup 1 (not 2) so a chip's slideTo(i) can land any card,
         // including the second of a visible pair, at the front of the view.
@@ -59,8 +64,10 @@
       on: {
         slideChange: function () {
           if (current) current.textContent = String(this.realIndex + 1);
+          // Kebab-case event name so Alpine's `@yum2:feeling-slide-change.window`
+          // listener picks it up (HTML attribute names are lowercased).
           window.dispatchEvent(
-            new CustomEvent("yum2:feelingSlideChange", {
+            new CustomEvent("yum2:feeling-slide-change", {
               detail: { index: this.realIndex },
             }),
           );

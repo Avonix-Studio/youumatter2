@@ -38,16 +38,20 @@ $class = trim(
 	$variant_class . ' ' . $args['class']
 );
 
-$onclick = '' !== $calendly
-	? sprintf( 'return yum2OpenCalendly(%s)', wp_json_encode( $calendly ) )
-	: 'return false';
+$is_disabled = '' === $calendly;
+$onclick     = $is_disabled
+	? 'return false'
+	: sprintf( 'return yum2OpenCalendly(%s)', wp_json_encode( $calendly ) );
+
+/* When Calendly is unconfigured, render the button as truly disabled so
+   screen readers and pointer styles match -- not just aria-disabled. */
 ?>
 <button
 	type="button"
-	class="<?php echo esc_attr( $class ); ?>"
+	class="<?php echo esc_attr( $class ); ?><?php echo $is_disabled ? ' opacity-60 cursor-not-allowed' : ''; ?>"
 	style="font-size:15px;font-weight:600;"
-	onclick="<?php echo esc_attr( $onclick ); ?>"
-	<?php if ( '' === $calendly ) : ?>aria-disabled="true"<?php endif; ?>
+	<?php if ( ! $is_disabled ) : ?>onclick="<?php echo esc_attr( $onclick ); ?>"<?php endif; ?>
+	<?php if ( $is_disabled ) : ?>disabled<?php endif; ?>
 >
 	<?php if ( $args['icon'] ) : ?>
 		<?php echo yum2_icon( 'calendar', array( 'size' => 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

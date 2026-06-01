@@ -14,7 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$education = array(
+/* Education timeline reads from the "Site Content" admin
+   (Settings → Site Content → About training) with these defaults as fallback.
+   Hospitals + frameworks below stay hardcoded -- credentials change rarely. */
+$education_default = array(
 	array(
 		'year'  => __( '2020 – 2022', 'youumatter2' ),
 		'label' => __( 'M.A. Clinical Psychology', 'youumatter2' ),
@@ -31,6 +34,21 @@ $education = array(
 		'place' => __( 'Peer & senior consultations, monthly', 'youumatter2' ),
 	),
 );
+
+$education_rows = yum2_field( 'about_training', array() );
+$education      = array();
+if ( ! empty( $education_rows ) && is_array( $education_rows ) ) {
+	foreach ( $education_rows as $row ) {
+		$education[] = array(
+			'year'  => isset( $row['year'] ) ? (string) $row['year'] : '',
+			'label' => isset( $row['label'] ) ? (string) $row['label'] : '',
+			'place' => isset( $row['place'] ) ? (string) $row['place'] : '',
+		);
+	}
+}
+if ( empty( $education ) ) {
+	$education = $education_default;
+}
 
 $hospitals = array(
 	array(

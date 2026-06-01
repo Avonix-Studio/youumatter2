@@ -510,3 +510,194 @@ function yum2_seo_faq_jsonld() {
 	);
 }
 add_action( 'wp_head', 'yum2_seo_faq_jsonld', 7 );
+
+/**
+ * FAQPage schema on the homepage. Mirrors the 6-item subset rendered by
+ * template-parts/home/faq.php so Google can show rich results for the
+ * homepage too. Questions remain canonical on /faq/ via their full-page
+ * counterpart; Google handles the overlap.
+ */
+function yum2_seo_home_faq_jsonld() {
+	if ( yum2_seo_should_bail() || ! is_front_page() ) {
+		return;
+	}
+	if ( ! function_exists( 'yum2_faq_homepage_items' ) ) {
+		return;
+	}
+
+	$items = yum2_faq_homepage_items( 6 );
+	if ( empty( $items ) ) {
+		return;
+	}
+
+	$entities = array();
+	foreach ( $items as $item ) {
+		if ( empty( $item['q'] ) || empty( $item['a'] ) ) {
+			continue;
+		}
+		$entities[] = array(
+			'@type'          => 'Question',
+			'name'           => wp_strip_all_tags( $item['q'] ),
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => wp_strip_all_tags( $item['a'] ),
+			),
+		);
+	}
+
+	if ( empty( $entities ) ) {
+		return;
+	}
+
+	yum2_seo_emit_jsonld(
+		array(
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => $entities,
+		)
+	);
+}
+add_action( 'wp_head', 'yum2_seo_home_faq_jsonld', 7 );
+
+/**
+ * Per-post FAQs: when an ACF post_faqs repeater is populated on a blog
+ * post, emit FAQPage JSON-LD for those rows. Markup is rendered by
+ * template-parts/post/faqs.php.
+ */
+function yum2_seo_post_faq_jsonld() {
+	if ( yum2_seo_should_bail() || ! is_singular( 'post' ) ) {
+		return;
+	}
+	if ( ! function_exists( 'get_field' ) ) {
+		return;
+	}
+
+	$rows = get_field( 'post_faqs' );
+	if ( empty( $rows ) || ! is_array( $rows ) ) {
+		return;
+	}
+
+	$entities = array();
+	foreach ( $rows as $row ) {
+		$q = isset( $row['question'] ) ? trim( wp_strip_all_tags( $row['question'] ) ) : '';
+		$a = isset( $row['answer'] ) ? trim( wp_strip_all_tags( $row['answer'] ) ) : '';
+		if ( '' === $q || '' === $a ) {
+			continue;
+		}
+		$entities[] = array(
+			'@type'          => 'Question',
+			'name'           => $q,
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => $a,
+			),
+		);
+	}
+
+	if ( empty( $entities ) ) {
+		return;
+	}
+
+	yum2_seo_emit_jsonld(
+		array(
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => $entities,
+		)
+	);
+}
+add_action( 'wp_head', 'yum2_seo_post_faq_jsonld', 7 );
+
+/**
+ * BreadcrumbList JSON-LD. Mirrors the visible breadcrumb trail from
+ * yum2_breadcrumb() so the structured data and the rendered breadcrumb
+ * stay consistent. Skipped on the front page (no trail) and on 404s.
+ */
+function yum2_seo_breadcrumb_jsonld() {
+	if ( yum2_seo_should_bail() || is_front_page() || is_404() ) {
+		return;
+	}
+	if ( ! function_exists( 'yum2_breadcrumb' ) ) {
+		return;
+	}
+
+	$crumbs = yum2_breadcrumb();
+	if ( empty( $crumbs ) || count( $crumbs ) < 2 ) {
+		return;
+	}
+
+	$items = array();
+	$pos   = 1;
+	foreach ( $crumbs as $c ) {
+		$label = isset( $c['label'] ) ? trim( wp_strip_all_tags( $c['label'] ) ) : '';
+		if ( '' === $label ) {
+			continue;
+		}
+		$entry = array(
+			'@type'    => 'ListItem',
+			'position' => $pos,
+			'name'     => $label,
+		);
+		if ( ! empty( $c['url'] ) ) {
+			$entry['item'] = $c['url'];
+		}
+		$items[] = $entry;
+		$pos++;
+	}
+
+	if ( empty( $items ) ) {
+		return;
+	}
+
+	yum2_seo_emit_jsonld(
+		array(
+			'@context'        => 'https://schema.org',
+			'@type'           => 'BreadcrumbList',
+			'itemListElement' => $items,
+		)
+	);
+}
+add_action( 'wp_head', 'yum2_seo_breadcrumb_jsonld', 7 );
+
+/**
+ * Explicit canonical URL. WordPress emits one via rel_canonical() on
+ * singular views; this fills the gap on the homepage and archives so
+ * every page has a clear canonical without relying on indirect signals.
+ */
+function yum2_seo_canonical() {
+	if ( yum2_seo_should_bail() ) {
+		return;
+	}
+
+	$canonical = '';
+	if ( is_singular() ) {
+		$canonical = wp_get_canonical_url();
+		if ( ! $canonical ) {
+			$canonical = get_permalink();
+		}
+	} elseif ( is_front_page() ) {
+		$canonical = home_url( '/' );
+	} elseif ( is_home() ) {
+		$page_for_posts = (int) get_option( 'page_for_posts' );
+		$canonical      = $page_for_posts ? get_permalink( $page_for_posts ) : home_url( '/' );
+	} elseif ( is_category() || is_tag() || is_tax() ) {
+		$term = get_queried_object();
+		if ( $term instanceof WP_Term ) {
+			$canonical = get_term_link( $term );
+		}
+	} elseif ( is_post_type_archive() ) {
+		$canonical = get_post_type_archive_link( get_query_var( 'post_type' ) );
+	}
+
+	if ( ! $canonical || is_wp_error( $canonical ) ) {
+		return;
+	}
+
+	/* Skip if WP already emitted one (rel_canonical fires on singular). */
+	if ( is_singular() ) {
+		remove_action( 'wp_head', 'rel_canonical' );
+	}
+
+	printf( '<link rel="canonical" href="%s">' . "\n", esc_url( $canonical ) );
+}
+add_action( 'wp_head', 'yum2_seo_canonical', 4 );

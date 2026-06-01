@@ -9,12 +9,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$portrait  = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
+$portrait   = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $paragraphs = array(
 	__( 'I came to therapy first as a client. What I found there, being heard without being fixed, changed how I moved through the world. I trained in psychology because I wanted to offer that same quiet to other people.', 'youumatter2' ),
 	__( "Years later, after seeing clients across hospital wards, schools, and private practice, I'm still convinced of the simplest thing: most of us aren't broken. We're just carrying patterns we didn't choose, in a body that learned to brace too early.", 'youumatter2' ),
 	__( 'My job is to sit with you while you put some of it down.', 'youumatter2' ),
 );
+
+/* When the WYSIWYG bio in Settings → Site Content is populated, it
+   replaces the hardcoded paragraphs above. */
+$bio_html = (string) yum2_field( 'about_bio_paragraph', '' );
 ?>
 <section class="relative bg-cream px-5 md:px-8 py-20 md:py-28 overflow-hidden">
 	<div class="relative max-w-6xl mx-auto">
@@ -29,11 +33,17 @@ $paragraphs = array(
 
 		<div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-start">
 			<div class="flex flex-col gap-5 order-2 md:order-1">
-				<?php foreach ( $paragraphs as $i => $p ) : ?>
-					<p class="yum2-reveal text-forest" style="font-size:17px;line-height:1.7;transition-delay:<?php echo esc_attr( number_format( 0.16 + $i * 0.08, 2 ) ); ?>s;">
-						<?php echo esc_html( $p ); ?>
-					</p>
-				<?php endforeach; ?>
+				<?php if ( '' !== $bio_html ) : ?>
+					<div class="yum2-reveal text-forest yum2-bio-prose" style="font-size:17px;line-height:1.7;transition-delay:0.16s;">
+						<?php echo wp_kses_post( $bio_html ); ?>
+					</div>
+				<?php else : ?>
+					<?php foreach ( $paragraphs as $i => $p ) : ?>
+						<p class="yum2-reveal text-forest" style="font-size:17px;line-height:1.7;transition-delay:<?php echo esc_attr( number_format( 0.16 + $i * 0.08, 2 ) ); ?>s;">
+							<?php echo esc_html( $p ); ?>
+						</p>
+					<?php endforeach; ?>
+				<?php endif; ?>
 				<p class="yum2-reveal italic text-[#3d4f3e] mt-3 flex items-center gap-2" style="font-family:'Newsreader',serif;font-size:18px;transition-delay:0.5s;">
 					<span aria-hidden class="inline-block w-6 h-px bg-terracotta"></span>
 					<?php esc_html_e( 'Sanya', 'youumatter2' ); ?>

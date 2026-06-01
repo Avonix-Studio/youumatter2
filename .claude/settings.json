@@ -74,9 +74,12 @@
       "Bash(php -r \"define\\('ABSPATH','/'\\); function get_template_directory\\(\\){return '/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme';} require 'inc/env.php'; echo 'KEY len: '.strlen\\(defined\\('YUM2_MAILERLITE_API_KEY'\\)?YUM2_MAILERLITE_API_KEY:''\\).PHP_EOL; echo 'GROUP: '.\\(defined\\('YUM2_MAILERLITE_GROUP_ID'\\)?YUM2_MAILERLITE_GROUP_ID:'\\(missing\\)'\\).PHP_EOL; echo 'getenv key starts with: '.substr\\(getenv\\('YUM2_MAILERLITE_API_KEY'\\)?:'',0,8\\).PHP_EOL;\")",
       "Bash(php -l inc/admin-newsletter.php)",
       "Bash(php -l template-parts/post/hero.php)",
-      "Bash(awk 'BEGIN{o=0;c=0} {while\\(match\\($0, /<div[^>]*>/\\)\\){o++; $0=substr\\($0, RSTART+RLENGTH\\)} while\\(match\\($0, /<\\\\/div>/\\)\\){c++; $0=substr\\($0, RSTART+RLENGTH\\)}} END{print \"opens:\", o, \"closes:\", c}' template-parts/post/hero.php)"
+      "Bash(awk 'BEGIN{o=0;c=0} {while\\(match\\($0, /<div[^>]*>/\\)\\){o++; $0=substr\\($0, RSTART+RLENGTH\\)} while\\(match\\($0, /<\\\\/div>/\\)\\){c++; $0=substr\\($0, RSTART+RLENGTH\\)}} END{print \"opens:\", o, \"closes:\", c}' template-parts/post/hero.php)",
+      "Bash(php -l inc/seo.php inc/feeling-cards.php inc/acf-fields.php inc/post-types.php inc/template-functions.php template-parts/post/faqs.php template-parts/home/you-might-be-feeling.php template-parts/home/hero.php template-parts/about/beliefs.php template-parts/about/how-i-work.php template-parts/about/training.php template-parts/about/why.php template-parts/shared/book-button.php searchform.php functions.php)"
     ],
-    "deny": ["Bash(rm -rf *)"],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts",
       "/tmp",

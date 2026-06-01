@@ -101,7 +101,7 @@ $steps = $c['steps'];
 				);
 				?>
 				<a href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
-					target="_blank" rel="noopener"
+					target="_blank" rel="noopener noreferrer"
 					class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-[rgba(43,83,41,0.25)] hover:border-[#2b5329] text-[#2b5329] rounded-full h-[52px] px-7 transition-colors"
 					style="font-size:15px;font-weight:600;">
 					<?php echo esc_html( $c['btn_whatsapp'] ); ?>

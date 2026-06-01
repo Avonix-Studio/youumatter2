@@ -11,8 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Copy reads from the "Site Content" admin (Settings → Site Content) with the
+   inc/content.php array as fallback. Markup never changes. */
 $c        = yum2_content( 'hero' );
-$portrait = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
+$c['eyebrow']     = (string) yum2_field( 'hero_eyebrow', $c['eyebrow'] );
+$c['heading']     = (string) yum2_field( 'hero_heading', $c['heading'] );
+$c['heading_em']  = (string) yum2_field( 'hero_heading_em', $c['heading_em'] );
+$c['body']        = (string) yum2_field( 'hero_subheading', $c['body'] );
+
+$portrait  = get_template_directory_uri() . '/assets/images/sanya-portrait.jpg';
 $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 ?>
 <section class="relative overflow-hidden bg-[#f2ede3]">
@@ -61,7 +68,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 					);
 					?>
 					<a href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
-						target="_blank" rel="noopener"
+						target="_blank" rel="noopener noreferrer"
 						class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-[rgba(43,83,41,0.25)] hover:border-[#2b5329] text-[#2b5329] rounded-full h-[56px] px-7 transition-colors"
 						style="font-size:16px;font-weight:600;">
 						<?php echo esc_html( $c['btn_whatsapp'] ); ?>

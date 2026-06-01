@@ -27,6 +27,8 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/post-types.php';
 require get_template_directory() . '/inc/faq.php';
 require get_template_directory() . '/inc/testimonials.php';
+require get_template_directory() . '/inc/feeling-cards.php';
+require get_template_directory() . '/inc/acf-fields.php';
 if ( is_admin() ) {
 	require get_template_directory() . '/inc/admin-newsletter.php';
 }

@@ -12,15 +12,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/* Copy lives in inc/content.php under 'feeling'. */
+/* Section chrome (label / heading / description / buttons) comes from
+   inc/content.php under 'feeling'. The 9 cards + filter chip labels come
+   from the "Reasons People Reach Out" admin (feeling_card CPT), with the
+   hardcoded array as automatic fallback. */
 $c     = yum2_content( 'feeling' );
-$chips = $c['chips'];
-$cards = $c['cards'];
+$cards = yum2_feeling_cards();
+$chips = yum2_feeling_chips();
 ?>
 <section class="relative bg-[#f2ede3] px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div aria-hidden class="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[440px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(228,239,227,0.55) 0%, rgba(242,237,227,0) 70%);"></div>
 
-	<div class="relative max-w-6xl mx-auto" x-data="{ active: 0 }">
+	<div
+		class="relative max-w-6xl mx-auto"
+		x-data="{ active: 0 }"
+		@yum2:feeling-slide-change.window="active = $event.detail.index"
+	>
 		<p class="text-[#c07a5a] tracking-[2px] uppercase mb-4" style="font-size:12px;font-weight:600;">
 			<?php echo esc_html( $c['label'] ); ?>
 		</p>
@@ -179,7 +186,7 @@ $cards = $c['cards'];
 				);
 				?>
 				<a href="<?php echo esc_url( yum2_whatsapp_url( $c['whatsapp_msg'] ) ); ?>"
-					target="_blank" rel="noopener"
+					target="_blank" rel="noopener noreferrer"
 					class="inline-flex items-center justify-center gap-2 bg-transparent border-[1.5px] border-[#2b5329] text-[#2b5329] hover:bg-[rgba(43,83,41,0.06)] rounded-full h-[52px] px-6 transition-colors w-full md:w-auto md:max-w-[320px]"
 					style="font-size:15px;font-weight:600;">
 					<?php echo yum2_icon( 'whatsapp', array( 'size' => 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

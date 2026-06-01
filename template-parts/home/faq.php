@@ -48,6 +48,7 @@ if ( empty( $questions ) ) {
 						type="button"
 						@click="open = open === <?php echo (int) $i; ?> ? null : <?php echo (int) $i; ?>"
 						:aria-expanded="open === <?php echo (int) $i; ?> ? 'true' : 'false'"
+						aria-controls="home-faq-panel-<?php echo (int) $i; ?>"
 						class="w-full flex items-center justify-between gap-6 px-5 md:px-6 py-4 md:py-5 text-left group transition-colors hover:bg-forest/[0.02]"
 					>
 						<span class="text-forest flex-1" style="font-family:'Newsreader',serif;font-size:clamp(17px,1.5vw,20px);line-height:1.3;letter-spacing:-0.01em;font-weight:500;">
@@ -61,6 +62,7 @@ if ( empty( $questions ) ) {
 						</span>
 					</button>
 					<div
+						id="home-faq-panel-<?php echo (int) $i; ?>"
 						x-show="open === <?php echo (int) $i; ?>"
 						x-cloak
 						x-transition:enter="transition ease-out duration-300"

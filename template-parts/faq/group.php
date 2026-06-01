@@ -48,6 +48,7 @@ $gid = (string) $group['id'];
 					type="button"
 					@click="toggle('<?php echo esc_js( $key ); ?>')"
 					:aria-expanded="isOpen('<?php echo esc_js( $key ); ?>') ? 'true' : 'false'"
+					aria-controls="faq-panel-<?php echo esc_attr( $gid . '-' . (int) $i ); ?>"
 					class="w-full flex items-center justify-between gap-4 px-5 md:px-6 py-4 md:py-5 text-left transition-colors hover:bg-forest/[0.02]"
 				>
 					<span class="text-forest" style="font-family:'Newsreader',serif;font-size:clamp(17px,1.8vw,20px);line-height:1.3;font-weight:500;">
@@ -61,6 +62,7 @@ $gid = (string) $group['id'];
 					</span>
 				</button>
 				<div
+					id="faq-panel-<?php echo esc_attr( $gid . '-' . (int) $i ); ?>"
 					x-show="isOpen('<?php echo esc_js( $key ); ?>')"
 					x-cloak
 					x-transition:enter="transition ease-out duration-300"

@@ -9,7 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cards = array(
+/* Cards read from the "Site Content" admin (Settings → Site Content) with the
+   launch copy as fallback. Markup is unchanged. */
+$cards_default = array(
 	array(
 		'icon'  => 'heart',
 		'title' => __( 'Warm, not casual', 'youumatter2' ),
@@ -31,6 +33,22 @@ $cards = array(
 		'body'  => __( 'Talk is the start. We translate what you notice into small, doable shifts you can carry into the rest of your week.', 'youumatter2' ),
 	),
 );
+
+$cards_rows = yum2_field( 'about_how_i_work', array() );
+$cards      = array();
+if ( ! empty( $cards_rows ) && is_array( $cards_rows ) ) {
+	foreach ( $cards_rows as $row ) {
+		$icon = isset( $row['icon'] ) ? (string) $row['icon'] : '';
+		$cards[] = array(
+			'icon'  => '' !== $icon ? $icon : 'sprout',
+			'title' => isset( $row['title'] ) ? (string) $row['title'] : '',
+			'body'  => isset( $row['body'] ) ? (string) $row['body'] : '',
+		);
+	}
+}
+if ( empty( $cards ) ) {
+	$cards = $cards_default;
+}
 ?>
 <section class="relative bg-[#f8f3e9] px-5 md:px-8 py-20 md:py-28 overflow-hidden">
 	<div class="relative max-w-5xl mx-auto">

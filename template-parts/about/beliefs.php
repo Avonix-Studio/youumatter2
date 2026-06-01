@@ -15,7 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$beliefs = array(
+/* Beliefs read from the "Site Content" admin (Settings → Site Content),
+   with the launch copy as fallback when ACF is empty or inactive. */
+$beliefs_default = array(
 	array(
 		'k' => '01',
 		't' => __( "Therapy isn't fixing.", 'youumatter2' ),
@@ -32,6 +34,23 @@ $beliefs = array(
 		's' => __( 'Insight is lovely, but practice is what reshapes a life. Tiny honest things, repeated often, beat one heroic week.', 'youumatter2' ),
 	),
 );
+
+$beliefs_rows = yum2_field( 'about_beliefs', array() );
+$beliefs      = array();
+if ( ! empty( $beliefs_rows ) && is_array( $beliefs_rows ) ) {
+	foreach ( $beliefs_rows as $i => $row ) {
+		$beliefs[] = array(
+			'k' => isset( $row['keyword'] ) && '' !== $row['keyword']
+				? (string) $row['keyword']
+				: str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ),
+			't' => isset( $row['tagline'] ) ? (string) $row['tagline'] : '',
+			's' => isset( $row['statement'] ) ? (string) $row['statement'] : '',
+		);
+	}
+}
+if ( empty( $beliefs ) ) {
+	$beliefs = $beliefs_default;
+}
 ?>
 <section class="relative bg-cream px-5 md:px-8 py-20 md:py-28">
 	<div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-20">

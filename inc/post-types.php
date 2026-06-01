@@ -166,3 +166,52 @@ function yum2_register_testimonial_cpt() {
 	);
 }
 add_action( 'init', 'yum2_register_testimonial_cpt' );
+
+/**
+ * Register the `feeling_card` post type.
+ *
+ * One card per post on the homepage "If any of these sound like you" carousel.
+ * Title = card heading (e.g. "Relationships that feel heavy"). The tagline /
+ * signs / approach / fee live in ACF fields registered in inc/feeling-cards.php.
+ *
+ * Drag-order via menu_order. Visibility hidden (public=false) so cards don't
+ * get their own URLs in the sitemap.
+ */
+function yum2_register_feeling_card_cpt() {
+	$labels = array(
+		'name'                  => _x( 'Reasons People Reach Out', 'post type general name', 'youumatter2' ),
+		'singular_name'         => _x( 'Reason', 'post type singular name', 'youumatter2' ),
+		'menu_name'             => __( 'Reasons People Reach Out', 'youumatter2' ),
+		'add_new'               => __( 'Add New', 'youumatter2' ),
+		'add_new_item'          => __( 'Add New Reason', 'youumatter2' ),
+		'edit_item'             => __( 'Edit Reason', 'youumatter2' ),
+		'new_item'              => __( 'New Reason', 'youumatter2' ),
+		'view_item'             => __( 'View Reason', 'youumatter2' ),
+		'search_items'          => __( 'Search Reasons', 'youumatter2' ),
+		'not_found'             => __( 'No reasons yet', 'youumatter2' ),
+		'not_found_in_trash'    => __( 'No reasons in Trash', 'youumatter2' ),
+		'all_items'             => __( 'All Reasons', 'youumatter2' ),
+		'item_published'        => __( 'Reason published.', 'youumatter2' ),
+		'item_updated'          => __( 'Reason updated.', 'youumatter2' ),
+	);
+
+	register_post_type(
+		'feeling_card',
+		array(
+			'labels'             => $labels,
+			'public'             => false,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'show_in_rest'       => true,
+			'menu_icon'          => 'dashicons-heart',
+			'menu_position'      => 28,
+			'supports'           => array( 'title', 'page-attributes' ),
+			'has_archive'        => false,
+			'rewrite'            => false,
+			'query_var'          => false,
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+		)
+	);
+}
+add_action( 'init', 'yum2_register_feeling_card_cpt' );

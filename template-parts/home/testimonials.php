@@ -84,7 +84,7 @@ $google_rating = (string) yum2_get_contact( 'google_rating' );
 
 		<div
 			x-ref="scroller"
-			class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-1"
+			class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-1 touch-pan-x md:touch-auto"
 			style="scrollbar-width:none;"
 		>
 			<?php
