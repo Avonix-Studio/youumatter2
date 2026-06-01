@@ -45,20 +45,10 @@ function yum2_register_feeling_card_fields() {
 					'key'          => 'field_yum2_feeling_signs',
 					'label'        => __( 'Signs this might be present', 'youumatter2' ),
 					'name'         => 'signs',
-					'type'         => 'repeater',
-					'instructions' => __( 'Two or three short bullets. Each one is a sign that this card might apply.', 'youumatter2' ),
-					'min'          => 1,
-					'max'          => 4,
-					'layout'       => 'block',
-					'button_label' => __( 'Add sign', 'youumatter2' ),
-					'sub_fields'   => array(
-						array(
-							'key'   => 'field_yum2_feeling_sign_text',
-							'label' => __( 'Sign', 'youumatter2' ),
-							'name'  => 'text',
-							'type'  => 'text',
-						),
-					),
+					'type'         => 'textarea',
+					'rows'         => 5,
+					'new_lines'    => '',
+					'instructions' => __( 'One sign per line. Two or three short bullets work best (e.g. "You have the same fight on repeat.").', 'youumatter2' ),
 				),
 				array(
 					'key'          => 'field_yum2_feeling_approach',
@@ -68,6 +58,20 @@ function yum2_register_feeling_card_fields() {
 					'rows'         => 4,
 					'new_lines'    => '',
 					'instructions' => __( 'A short paragraph describing the approach for this card.', 'youumatter2' ),
+				),
+				array(
+					'key'          => 'field_yum2_feeling_duration',
+					'label'        => __( 'Duration', 'youumatter2' ),
+					'name'         => 'duration',
+					'type'         => 'text',
+					'instructions' => __( 'Session length shown in the bottom row of the card (e.g. "60 min"). Leave blank for the default.', 'youumatter2' ),
+				),
+				array(
+					'key'          => 'field_yum2_feeling_format',
+					'label'        => __( 'Format', 'youumatter2' ),
+					'name'         => 'format',
+					'type'         => 'text',
+					'instructions' => __( 'How the session is delivered (e.g. "Online or in-person"). Leave blank for the default.', 'youumatter2' ),
 				),
 				array(
 					'key'          => 'field_yum2_feeling_fee',
@@ -137,33 +141,40 @@ function yum2_feeling_cards() {
 		$chips    = isset( $fallback['chips'] ) ? (array) $fallback['chips'] : array();
 		$out      = array();
 		foreach ( $cards as $i => $card ) {
-			$card['chip'] = isset( $chips[ $i ] ) ? $chips[ $i ] : ( $card['title'] ?? '' );
-			$out[]        = $card;
+			$card['chip']     = isset( $chips[ $i ] ) ? $chips[ $i ] : ( $card['title'] ?? '' );
+			$card['duration'] = isset( $card['duration'] ) && '' !== $card['duration'] ? $card['duration'] : __( '60 min', 'youumatter2' );
+			$card['format']   = isset( $card['format'] ) && '' !== $card['format'] ? $card['format'] : __( 'Online or in-person', 'youumatter2' );
+			$out[]            = $card;
 		}
 		return $out;
 	}
 
 	$cards = array();
 	foreach ( $posts as $post ) {
-		$signs_raw = function_exists( 'get_field' ) ? get_field( 'signs', $post->ID ) : array();
+		/* Signs is a textarea, one bullet per line. */
+		$signs_raw = function_exists( 'get_field' ) ? (string) get_field( 'signs', $post->ID ) : '';
 		$signs     = array();
-		if ( is_array( $signs_raw ) ) {
-			foreach ( $signs_raw as $row ) {
-				$text = isset( $row['text'] ) ? trim( (string) $row['text'] ) : '';
-				if ( '' !== $text ) {
-					$signs[] = $text;
+		if ( '' !== $signs_raw ) {
+			foreach ( preg_split( '/\r\n|\r|\n/', $signs_raw ) as $line ) {
+				$line = trim( (string) $line );
+				if ( '' !== $line ) {
+					$signs[] = $line;
 				}
 			}
 		}
 
 		$title      = get_the_title( $post );
 		$chip_label = function_exists( 'get_field' ) ? (string) get_field( 'chip_label', $post->ID ) : '';
+		$duration   = function_exists( 'get_field' ) ? (string) get_field( 'duration', $post->ID ) : '';
+		$format     = function_exists( 'get_field' ) ? (string) get_field( 'format', $post->ID ) : '';
 
 		$cards[] = array(
 			'title'    => $title,
 			'tagline'  => function_exists( 'get_field' ) ? (string) get_field( 'tagline', $post->ID ) : '',
 			'signs'    => $signs,
 			'approach' => function_exists( 'get_field' ) ? (string) get_field( 'approach', $post->ID ) : '',
+			'duration' => '' !== $duration ? $duration : __( '60 min', 'youumatter2' ),
+			'format'   => '' !== $format ? $format : __( 'Online or in-person', 'youumatter2' ),
 			'fee'      => function_exists( 'get_field' ) ? (string) get_field( 'fee', $post->ID ) : '',
 			'chip'     => '' !== $chip_label ? $chip_label : $title,
 		);
@@ -248,15 +259,15 @@ function yum2_seed_feeling_cards() {
 
 		$write( 'tagline', isset( $card['tagline'] ) ? (string) $card['tagline'] : '' );
 
-		$signs = array();
+		$signs_str = '';
 		if ( ! empty( $card['signs'] ) && is_array( $card['signs'] ) ) {
-			foreach ( $card['signs'] as $sign ) {
-				$signs[] = array( 'text' => (string) $sign );
-			}
+			$signs_str = implode( "\n", array_map( 'strval', $card['signs'] ) );
 		}
-		$write( 'signs', $signs );
+		$write( 'signs', $signs_str );
 
 		$write( 'approach', isset( $card['approach'] ) ? (string) $card['approach'] : '' );
+		$write( 'duration', '' );
+		$write( 'format', '' );
 		$write( 'fee', isset( $card['fee'] ) ? (string) $card['fee'] : '' );
 
 		$chip = isset( $chips[ $i ] ) ? (string) $chips[ $i ] : '';

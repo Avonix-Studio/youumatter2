@@ -114,104 +114,10 @@ function yum2_register_acf_field_groups() {
 					'media_upload' => 0,
 					'instructions' => __( 'Primary bio paragraph. Used on the About page intro.', 'youumatter2' ),
 				),
-				array(
-					'key'          => 'field_yum2_about_beliefs',
-					'label'        => __( 'Beliefs', 'youumatter2' ),
-					'name'         => 'about_beliefs',
-					'type'         => 'repeater',
-					'instructions' => __( 'Three statements on what Sanya believes about therapy.', 'youumatter2' ),
-					'min'          => 0,
-					'max'          => 6,
-					'layout'       => 'block',
-					'button_label' => __( 'Add belief', 'youumatter2' ),
-					'sub_fields'   => array(
-						array(
-							'key'   => 'field_yum2_belief_keyword',
-							'label' => __( 'Keyword', 'youumatter2' ),
-							'name'  => 'keyword',
-							'type'  => 'text',
-						),
-						array(
-							'key'   => 'field_yum2_belief_tagline',
-							'label' => __( 'Tagline', 'youumatter2' ),
-							'name'  => 'tagline',
-							'type'  => 'text',
-						),
-						array(
-							'key'   => 'field_yum2_belief_statement',
-							'label' => __( 'Statement', 'youumatter2' ),
-							'name'  => 'statement',
-							'type'  => 'textarea',
-							'rows'  => 3,
-							'new_lines' => '',
-						),
-					),
-				),
-				array(
-					'key'          => 'field_yum2_about_how_i_work',
-					'label'        => __( 'How I work cards', 'youumatter2' ),
-					'name'         => 'about_how_i_work',
-					'type'         => 'repeater',
-					'instructions' => __( 'Approach cards on the About page.', 'youumatter2' ),
-					'min'          => 0,
-					'max'          => 8,
-					'layout'       => 'block',
-					'button_label' => __( 'Add card', 'youumatter2' ),
-					'sub_fields'   => array(
-						array(
-							'key'          => 'field_yum2_how_icon',
-							'label'        => __( 'Icon slug', 'youumatter2' ),
-							'name'         => 'icon',
-							'type'         => 'text',
-							'instructions' => __( 'One of: heart, sprout, compass, shield-check, ear, anchor, gem.', 'youumatter2' ),
-						),
-						array(
-							'key'   => 'field_yum2_how_title',
-							'label' => __( 'Title', 'youumatter2' ),
-							'name'  => 'title',
-							'type'  => 'text',
-						),
-						array(
-							'key'   => 'field_yum2_how_body',
-							'label' => __( 'Body', 'youumatter2' ),
-							'name'  => 'body',
-							'type'  => 'textarea',
-							'rows'  => 3,
-							'new_lines' => '',
-						),
-					),
-				),
-				array(
-					'key'          => 'field_yum2_about_training',
-					'label'        => __( 'Training & credentials', 'youumatter2' ),
-					'name'         => 'about_training',
-					'type'         => 'repeater',
-					'instructions' => __( 'Each row is one credential. Year, label, place.', 'youumatter2' ),
-					'min'          => 0,
-					'max'          => 12,
-					'layout'       => 'block',
-					'button_label' => __( 'Add entry', 'youumatter2' ),
-					'sub_fields'   => array(
-						array(
-							'key'   => 'field_yum2_training_year',
-							'label' => __( 'Year', 'youumatter2' ),
-							'name'  => 'year',
-							'type'  => 'text',
-						),
-						array(
-							'key'   => 'field_yum2_training_label',
-							'label' => __( 'Label', 'youumatter2' ),
-							'name'  => 'label',
-							'type'  => 'text',
-						),
-						array(
-							'key'   => 'field_yum2_training_place',
-							'label' => __( 'Place', 'youumatter2' ),
-							'name'  => 'place',
-							'type'  => 'text',
-						),
-					),
-				),
+				/* Beliefs / How I work / Training rows live in code (inc/content.php
+				   + the template parts themselves). Edit them there. They were
+				   originally ACF repeaters but Repeater is an ACF Pro field, so
+				   they were silently invisible on ACF Free. */
 			),
 			'location' => array(
 				array(
@@ -227,61 +133,7 @@ function yum2_register_acf_field_groups() {
 		)
 	);
 
-	/* ---------------------------------------------------------------- */
-	/* Group: Per-post FAQs (sidebar metabox on blog posts)             */
-	/* ---------------------------------------------------------------- */
-	acf_add_local_field_group(
-		array(
-			'key'      => 'group_yum2_post_faqs',
-			'title'    => __( 'Post FAQs', 'youumatter2' ),
-			'fields'   => array(
-				array(
-					'key'          => 'field_yum2_post_faqs_intro',
-					'label'        => __( 'Intro line', 'youumatter2' ),
-					'name'         => 'post_faqs_intro',
-					'type'         => 'text',
-					'instructions' => __( 'Optional. Defaults to "Quick answers on this topic." if blank.', 'youumatter2' ),
-				),
-				array(
-					'key'          => 'field_yum2_post_faqs',
-					'label'        => __( 'Q&A pairs', 'youumatter2' ),
-					'name'         => 'post_faqs',
-					'type'         => 'repeater',
-					'instructions' => __( 'Add 2–5 question / answer pairs for this post. They render below the article and get FAQPage schema for Google rich results.', 'youumatter2' ),
-					'min'          => 0,
-					'max'          => 10,
-					'layout'       => 'block',
-					'button_label' => __( 'Add Q&A', 'youumatter2' ),
-					'sub_fields'   => array(
-						array(
-							'key'   => 'field_yum2_post_faq_q',
-							'label' => __( 'Question', 'youumatter2' ),
-							'name'  => 'question',
-							'type'  => 'text',
-						),
-						array(
-							'key'      => 'field_yum2_post_faq_a',
-							'label'    => __( 'Answer', 'youumatter2' ),
-							'name'     => 'answer',
-							'type'     => 'textarea',
-							'rows'     => 4,
-							'new_lines' => '',
-						),
-					),
-				),
-			),
-			'location' => array(
-				array(
-					array(
-						'param'    => 'post_type',
-						'operator' => '==',
-						'value'    => 'post',
-					),
-				),
-			),
-			'position' => 'normal',
-			'style'    => 'default',
-		)
-	);
+	/* Per-post FAQs (Q&A repeater on blog posts) was also a Repeater field
+	   and therefore ACF Pro-only. Removed for ACF Free. */
 }
 add_action( 'acf/init', 'yum2_register_acf_field_groups' );

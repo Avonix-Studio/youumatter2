@@ -109,8 +109,8 @@ $chips = yum2_feeling_chips();
 								<dl class="mt-5 grid grid-cols-3 gap-3">
 									<?php
 									$meta = array(
-										array( 'label' => __( 'Duration', 'youumatter2' ), 'value' => __( '60 min', 'youumatter2' ) ),
-										array( 'label' => __( 'Format', 'youumatter2' ), 'value' => __( 'Online or in-person', 'youumatter2' ) ),
+										array( 'label' => __( 'Duration', 'youumatter2' ), 'value' => isset( $card['duration'] ) && '' !== $card['duration'] ? $card['duration'] : __( '60 min', 'youumatter2' ) ),
+										array( 'label' => __( 'Format', 'youumatter2' ), 'value' => isset( $card['format'] ) && '' !== $card['format'] ? $card['format'] : __( 'Online or in-person', 'youumatter2' ) ),
 										array( 'label' => __( 'Fee', 'youumatter2' ), 'value' => $card['fee'] ),
 									);
 									foreach ( $meta as $m ) :

@@ -37,7 +37,6 @@ while ( have_posts() ) :
 					</div>
 
 					<?php get_template_part( 'template-parts/post/tags' ); ?>
-					<?php get_template_part( 'template-parts/post/faqs' ); ?>
 					<?php get_template_part( 'template-parts/post/share' ); ?>
 
 					<div class="lg:hidden mt-10">

@@ -75,8 +75,8 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 
 		<div
 			id="behold-feed"
-			class="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pr-8 md:pr-10"
-			style="scrollbar-width:none;"
+			class="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pr-8 md:pr-10 touch-pan-x md:touch-auto"
+			style="scrollbar-width:none;overscroll-behavior-x:contain;"
 		>
 			<?php
 			foreach ( $tiles as $i => $tile ) :

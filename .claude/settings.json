@@ -75,7 +75,9 @@
       "Bash(php -l inc/admin-newsletter.php)",
       "Bash(php -l template-parts/post/hero.php)",
       "Bash(awk 'BEGIN{o=0;c=0} {while\\(match\\($0, /<div[^>]*>/\\)\\){o++; $0=substr\\($0, RSTART+RLENGTH\\)} while\\(match\\($0, /<\\\\/div>/\\)\\){c++; $0=substr\\($0, RSTART+RLENGTH\\)}} END{print \"opens:\", o, \"closes:\", c}' template-parts/post/hero.php)",
-      "Bash(php -l inc/seo.php inc/feeling-cards.php inc/acf-fields.php inc/post-types.php inc/template-functions.php template-parts/post/faqs.php template-parts/home/you-might-be-feeling.php template-parts/home/hero.php template-parts/about/beliefs.php template-parts/about/how-i-work.php template-parts/about/training.php template-parts/about/why.php template-parts/shared/book-button.php searchform.php functions.php)"
+      "Bash(php -l inc/seo.php inc/feeling-cards.php inc/acf-fields.php inc/post-types.php inc/template-functions.php template-parts/post/faqs.php template-parts/home/you-might-be-feeling.php template-parts/home/hero.php template-parts/about/beliefs.php template-parts/about/how-i-work.php template-parts/about/training.php template-parts/about/why.php template-parts/shared/book-button.php searchform.php functions.php)",
+      "Bash(php -l inc/feeling-cards.php template-parts/home/you-might-be-feeling.php template-parts/home/instagram-feed.php)",
+      "Bash(php -l inc/acf-fields.php inc/seo.php inc/feeling-cards.php single.php template-parts/home/you-might-be-feeling.php)"
     ],
     "deny": [
       "Bash(rm -rf *)"

@@ -560,55 +560,6 @@ function yum2_seo_home_faq_jsonld() {
 add_action( 'wp_head', 'yum2_seo_home_faq_jsonld', 7 );
 
 /**
- * Per-post FAQs: when an ACF post_faqs repeater is populated on a blog
- * post, emit FAQPage JSON-LD for those rows. Markup is rendered by
- * template-parts/post/faqs.php.
- */
-function yum2_seo_post_faq_jsonld() {
-	if ( yum2_seo_should_bail() || ! is_singular( 'post' ) ) {
-		return;
-	}
-	if ( ! function_exists( 'get_field' ) ) {
-		return;
-	}
-
-	$rows = get_field( 'post_faqs' );
-	if ( empty( $rows ) || ! is_array( $rows ) ) {
-		return;
-	}
-
-	$entities = array();
-	foreach ( $rows as $row ) {
-		$q = isset( $row['question'] ) ? trim( wp_strip_all_tags( $row['question'] ) ) : '';
-		$a = isset( $row['answer'] ) ? trim( wp_strip_all_tags( $row['answer'] ) ) : '';
-		if ( '' === $q || '' === $a ) {
-			continue;
-		}
-		$entities[] = array(
-			'@type'          => 'Question',
-			'name'           => $q,
-			'acceptedAnswer' => array(
-				'@type' => 'Answer',
-				'text'  => $a,
-			),
-		);
-	}
-
-	if ( empty( $entities ) ) {
-		return;
-	}
-
-	yum2_seo_emit_jsonld(
-		array(
-			'@context'   => 'https://schema.org',
-			'@type'      => 'FAQPage',
-			'mainEntity' => $entities,
-		)
-	);
-}
-add_action( 'wp_head', 'yum2_seo_post_faq_jsonld', 7 );
-
-/**
  * BreadcrumbList JSON-LD. Mirrors the visible breadcrumb trail from
  * yum2_breadcrumb() so the structured data and the rendered breadcrumb
  * stay consistent. Skipped on the front page (no trail) and on 404s.
