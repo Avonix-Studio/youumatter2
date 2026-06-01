@@ -78,7 +78,9 @@
       "Bash(php -l inc/seo.php inc/feeling-cards.php inc/acf-fields.php inc/post-types.php inc/template-functions.php template-parts/post/faqs.php template-parts/home/you-might-be-feeling.php template-parts/home/hero.php template-parts/about/beliefs.php template-parts/about/how-i-work.php template-parts/about/training.php template-parts/about/why.php template-parts/shared/book-button.php searchform.php functions.php)",
       "Bash(php -l inc/feeling-cards.php template-parts/home/you-might-be-feeling.php template-parts/home/instagram-feed.php)",
       "Bash(php -l inc/acf-fields.php inc/seo.php inc/feeling-cards.php single.php template-parts/home/you-might-be-feeling.php)",
-      "Bash(php -l inc/feeling-cards.php)"
+      "Bash(php -l inc/feeling-cards.php)",
+      "Bash(grep -o '@media \\(hover:hover\\){.\\\\{0,200\\\\}' \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/css/main.css\")",
+      "Bash(awk '/@media \\\\\\(hover:hover\\\\\\)/{found=1; chars=200; while\\(chars>0 && getline line\\){ print substr\\(line, 1, 150\\); chars-=150; if\\(chars<=0\\) break } exit}' \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/css/main.css\")"
     ],
     "deny": [
       "Bash(rm -rf *)"

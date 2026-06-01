@@ -8,6 +8,13 @@ module.exports = {
     "./inc/**/*.php",
     "./assets/js/**/*.js",
   ],
+  // Touch devices have no mouseout, so `hover:` styles get stuck after a tap
+  // (the funky "sticky hover" on testimonial / blog / IG cards on mobile).
+  // This flag wraps every `hover:` utility in `@media (hover: hover)` so it
+  // only fires on hover-capable pointers.
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       colors: {
