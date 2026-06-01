@@ -151,17 +151,24 @@ function yum2_feeling_cards() {
 
 	$cards = array();
 	foreach ( $posts as $post ) {
-		/* Signs is a textarea, one bullet per line. */
-		$signs_raw = function_exists( 'get_field' ) ? (string) get_field( 'signs', $post->ID ) : '';
+		/* Signs is a textarea, one bullet per line. Defensive against legacy
+		   data from the earlier Repeater version (array of array('text' => ...)). */
+		$signs_raw = function_exists( 'get_field' ) ? get_field( 'signs', $post->ID ) : '';
 		$signs     = array();
-		if ( '' !== $signs_raw ) {
-			foreach ( preg_split( '/\r\n|\r|\n/', $signs_raw ) as $line ) {
-				$line = trim( (string) $line );
-				if ( '' !== $line ) {
-					$signs[] = $line;
+		if ( is_array( $signs_raw ) ) {
+			foreach ( $signs_raw as $item ) {
+				if ( is_array( $item ) && isset( $item['text'] ) ) {
+					$signs[] = trim( (string) $item['text'] );
+				} elseif ( is_scalar( $item ) ) {
+					$signs[] = trim( (string) $item );
 				}
 			}
+		} elseif ( is_string( $signs_raw ) && '' !== $signs_raw ) {
+			foreach ( preg_split( '/\r\n|\r|\n/', $signs_raw ) as $line ) {
+				$signs[] = trim( (string) $line );
+			}
 		}
+		$signs = array_values( array_filter( $signs, 'strlen' ) );
 
 		$title      = get_the_title( $post );
 		$chip_label = function_exists( 'get_field' ) ? (string) get_field( 'chip_label', $post->ID ) : '';
@@ -198,7 +205,69 @@ function yum2_feeling_chips() {
 }
 
 /* =========================================================================
- * 3. ONE-TIME SEEDING
+ * 3. ONE-TIME MIGRATION: signs repeater -> textarea
+ *    Earlier versions of this file registered `signs` as an ACF repeater
+ *    and the seed wrote it as an array of array('text' => '...') rows.
+ *    `signs` is now a textarea field, so the old array value fatals ACF
+ *    ("Array to string conversion") when the post edit screen loads.
+ *
+ *    This migration scans every feeling_card post once, flattens any
+ *    array-shaped signs meta into newline-separated text, and writes
+ *    back. Runs at admin_init priority 5 so it executes before ACF's
+ *    metabox renderer.
+ * ====================================================================== */
+function yum2_migrate_feeling_signs_to_textarea() {
+	if ( ! is_admin() ) {
+		return;
+	}
+	if ( get_option( 'yum2_feeling_signs_text_v1' ) ) {
+		return;
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$post_ids = get_posts(
+		array(
+			'post_type'      => 'feeling_card',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+		)
+	);
+
+	foreach ( $post_ids as $post_id ) {
+		$raw = get_post_meta( $post_id, 'signs', true );
+
+		/* Already a plain string -> nothing to do. */
+		if ( is_string( $raw ) ) {
+			continue;
+		}
+
+		$lines = array();
+		if ( is_array( $raw ) ) {
+			foreach ( $raw as $item ) {
+				if ( is_array( $item ) && isset( $item['text'] ) ) {
+					$lines[] = (string) $item['text'];
+				} elseif ( is_scalar( $item ) ) {
+					$lines[] = (string) $item;
+				}
+			}
+		}
+
+		$lines = array_filter( array_map( 'trim', $lines ), 'strlen' );
+		$str   = implode( "\n", $lines );
+
+		update_post_meta( $post_id, 'signs', $str );
+	}
+
+	update_option( 'yum2_feeling_signs_text_v1', 1 );
+}
+add_action( 'admin_init', 'yum2_migrate_feeling_signs_to_textarea', 5 );
+
+/* =========================================================================
+ * 4. ONE-TIME SEEDING
  *    Migrates the original 9 hardcoded cards from inc/content.php into the
  *    CPT the first time an admin loads wp-admin after this feature ships, so
  *    nothing is lost. Runs once, guarded by an option and an existing check.
