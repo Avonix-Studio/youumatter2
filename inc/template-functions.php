@@ -117,6 +117,91 @@ add_action( 'admin_post_yum2_subscribe', 'yum2_handle_subscribe' );
 add_action( 'admin_post_nopriv_yum2_subscribe', 'yum2_handle_subscribe' );
 
 /**
+ * Contact form handler. POST target for the contact page "Send a note" form.
+ *
+ * Validates the four-field form (name, email, phone optional, message) plus a
+ * required consent checkbox, then emails the submission to the contact email
+ * via wp_mail. Reply-to is set to the visitor so Sanya can hit reply directly.
+ *
+ * Honeypot: an empty `website` field is included in the form. Bots tend to
+ * fill every input, so if it has a value we silently bounce the submission.
+ *
+ * Redirects back to the contact page with `?contacted=1` on success or
+ * `?contacted=0` on validation failure so the page can render a notice.
+ */
+function yum2_handle_contact() {
+	$redirect_to = isset( $_POST['_yum2_redirect'] ) ? esc_url_raw( wp_unslash( $_POST['_yum2_redirect'] ) ) : home_url( '/contact/' );
+	$bounce      = static function ( $status ) use ( $redirect_to ) {
+		wp_safe_redirect( add_query_arg( 'contacted', $status, $redirect_to ) . '#contact-form' );
+		exit;
+	};
+
+	$nonce = isset( $_POST['_yum2_contact_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_yum2_contact_nonce'] ) ) : '';
+	if ( ! wp_verify_nonce( $nonce, 'yum2_contact' ) ) {
+		wp_die( esc_html__( 'Invalid request.', 'youumatter2' ), '', array( 'response' => 400 ) );
+	}
+
+	/* Honeypot. Silent success so a bot can't tell. */
+	$honey = isset( $_POST['website'] ) ? sanitize_text_field( wp_unslash( $_POST['website'] ) ) : '';
+	if ( '' !== $honey ) {
+		$bounce( '1' );
+	}
+
+	$name    = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+	$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$phone   = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+	$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+	$consent = isset( $_POST['consent'] );
+
+	if ( '' === $name || ! is_email( $email ) || '' === trim( $message ) || ! $consent ) {
+		$bounce( '0' );
+	}
+
+	$to      = (string) yum2_get_contact( 'email' );
+	if ( ! is_email( $to ) ) {
+		$to = (string) get_option( 'admin_email' );
+	}
+
+	/* translators: %s: visitor's preferred name. */
+	$subject = sprintf( __( 'New contact message from %s', 'youumatter2' ), $name );
+
+	$body_lines = array(
+		sprintf( '%s: %s', __( 'Name', 'youumatter2' ), $name ),
+		sprintf( '%s: %s', __( 'Email', 'youumatter2' ), $email ),
+	);
+	if ( '' !== $phone ) {
+		$body_lines[] = sprintf( '%s: %s', __( 'Phone / WhatsApp', 'youumatter2' ), $phone );
+	}
+	$body_lines[] = '';
+	$body_lines[] = __( 'Message:', 'youumatter2' );
+	$body_lines[] = $message;
+	$body_lines[] = '';
+	$body_lines[] = sprintf(
+		/* translators: %s: site URL. */
+		__( 'Sent from %s', 'youumatter2' ),
+		home_url( '/' )
+	);
+	$body = implode( "\n", $body_lines );
+
+	$headers = array(
+		'Reply-To: ' . $name . ' <' . $email . '>',
+	);
+
+	$sent = wp_mail( $to, $subject, $body, $headers );
+
+	if ( ! $sent ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( '[youumatter2] Contact wp_mail failed for ' . $email ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
+		$bounce( '0' );
+	}
+
+	$bounce( '1' );
+}
+add_action( 'admin_post_yum2_contact', 'yum2_handle_contact' );
+add_action( 'admin_post_nopriv_yum2_contact', 'yum2_handle_contact' );
+
+/**
  * Add (or update) a subscriber in MailerLite, assigned to the configured group.
  *
  * Uses MailerLite's create-or-update endpoint, so re-subscribing the same
