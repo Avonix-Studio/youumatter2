@@ -80,7 +80,11 @@
       "Bash(php -l inc/acf-fields.php inc/seo.php inc/feeling-cards.php single.php template-parts/home/you-might-be-feeling.php)",
       "Bash(php -l inc/feeling-cards.php)",
       "Bash(grep -o '@media \\(hover:hover\\){.\\\\{0,200\\\\}' \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/css/main.css\")",
-      "Bash(awk '/@media \\\\\\(hover:hover\\\\\\)/{found=1; chars=200; while\\(chars>0 && getline line\\){ print substr\\(line, 1, 150\\); chars-=150; if\\(chars<=0\\) break } exit}' \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/css/main.css\")"
+      "Bash(awk '/@media \\\\\\(hover:hover\\\\\\)/{found=1; chars=200; while\\(chars>0 && getline line\\){ print substr\\(line, 1, 150\\); chars-=150; if\\(chars<=0\\) break } exit}' \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/css/main.css\")",
+      "Bash(cp screenshot.png /tmp/screenshot-original.png)",
+      "Bash(sips --padToHeightWidth 900 1200 --padColor F2EDE3 screenshot.png --out /tmp/screenshot-padded.png)",
+      "Bash(sips -s format jpeg -s formatOptions 85 /tmp/screenshot-padded.png --out /tmp/screenshot-deploy.jpg)",
+      "Bash(git mv *)"
     ],
     "deny": [
       "Bash(rm -rf *)"
