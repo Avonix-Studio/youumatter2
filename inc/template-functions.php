@@ -153,6 +153,16 @@ function yum2_handle_contact() {
 	$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
 	$consent = isset( $_POST['consent'] );
 
+	/* Combine the country dial code (e.g. "+91-IN") with the typed number when
+	   one was provided. Only the leading "+digits" portion is kept; the ISO
+	   suffix exists only to disambiguate +1 US vs +1 CA in the form. */
+	if ( '' !== $phone ) {
+		$country_raw = isset( $_POST['phone_country'] ) ? sanitize_text_field( wp_unslash( $_POST['phone_country'] ) ) : '';
+		if ( preg_match( '/^\+\d{1,4}/', $country_raw, $m ) ) {
+			$phone = trim( $m[0] . ' ' . $phone );
+		}
+	}
+
 	if ( '' === $name || ! is_email( $email ) || '' === trim( $message ) || ! $consent ) {
 		$bounce( '0' );
 	}

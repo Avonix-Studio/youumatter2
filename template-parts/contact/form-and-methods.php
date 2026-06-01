@@ -16,6 +16,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $contacted = isset( $_GET['contacted'] ) ? sanitize_text_field( wp_unslash( $_GET['contacted'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $redirect  = remove_query_arg( 'contacted' );
+
+/* Country dial-code list. India first (default), then alphabetical. ISO code
+   beside the dial code keeps each option compact and scannable - "+44 GB"
+   reads cleaner than "+44 United Kingdom" in a constrained select. */
+$dial_codes = array(
+	array( '+91',  'IN', __( 'India', 'youumatter2' ) ),
+	array( '+61',  'AU', __( 'Australia', 'youumatter2' ) ),
+	array( '+1',   'CA', __( 'Canada', 'youumatter2' ) ),
+	array( '+86',  'CN', __( 'China', 'youumatter2' ) ),
+	array( '+33',  'FR', __( 'France', 'youumatter2' ) ),
+	array( '+49',  'DE', __( 'Germany', 'youumatter2' ) ),
+	array( '+852', 'HK', __( 'Hong Kong', 'youumatter2' ) ),
+	array( '+62',  'ID', __( 'Indonesia', 'youumatter2' ) ),
+	array( '+39',  'IT', __( 'Italy', 'youumatter2' ) ),
+	array( '+81',  'JP', __( 'Japan', 'youumatter2' ) ),
+	array( '+60',  'MY', __( 'Malaysia', 'youumatter2' ) ),
+	array( '+31',  'NL', __( 'Netherlands', 'youumatter2' ) ),
+	array( '+64',  'NZ', __( 'New Zealand', 'youumatter2' ) ),
+	array( '+92',  'PK', __( 'Pakistan', 'youumatter2' ) ),
+	array( '+63',  'PH', __( 'Philippines', 'youumatter2' ) ),
+	array( '+974', 'QA', __( 'Qatar', 'youumatter2' ) ),
+	array( '+966', 'SA', __( 'Saudi Arabia', 'youumatter2' ) ),
+	array( '+65',  'SG', __( 'Singapore', 'youumatter2' ) ),
+	array( '+27',  'ZA', __( 'South Africa', 'youumatter2' ) ),
+	array( '+82',  'KR', __( 'South Korea', 'youumatter2' ) ),
+	array( '+34',  'ES', __( 'Spain', 'youumatter2' ) ),
+	array( '+41',  'CH', __( 'Switzerland', 'youumatter2' ) ),
+	array( '+66',  'TH', __( 'Thailand', 'youumatter2' ) ),
+	array( '+971', 'AE', __( 'United Arab Emirates', 'youumatter2' ) ),
+	array( '+44',  'GB', __( 'United Kingdom', 'youumatter2' ) ),
+	array( '+1',   'US', __( 'United States', 'youumatter2' ) ),
+);
 ?>
 <section class="bg-cream px-5 md:px-8 py-14 md:py-20">
 	<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-14">
@@ -80,17 +112,40 @@ $redirect  = remove_query_arg( 'contacted' );
 						</label>
 					</div>
 
-					<label class="block">
-						<span class="block text-forest mb-2" style="font-size:13.5px;font-weight:500;">
+					<div>
+						<label for="yum2-phone-number" class="block text-forest mb-2" style="font-size:13.5px;font-weight:500;">
 							<?php esc_html_e( 'Phone / WhatsApp', 'youumatter2' ); ?>
-						</span>
-						<input type="tel" name="phone"
-							class="w-full bg-[#f2ede3] border border-forest/15 rounded-[14px] px-4 py-3.5 text-forest placeholder:text-[#3d4f3e]/60 outline-none focus:border-forest transition-colors"
-							placeholder="+91">
+						</label>
+						<div class="flex items-stretch bg-[#f2ede3] border border-forest/15 rounded-[14px] overflow-hidden focus-within:border-forest transition-colors">
+							<div class="relative shrink-0">
+								<label for="yum2-phone-country" class="sr-only"><?php esc_html_e( 'Country code', 'youumatter2' ); ?></label>
+								<select id="yum2-phone-country" name="phone_country"
+									class="appearance-none bg-transparent border-0 pl-4 pr-9 py-3.5 text-forest outline-none cursor-pointer"
+									style="font-size:14.5px;font-weight:500;">
+									<?php foreach ( $dial_codes as $row ) :
+										list( $code, $iso, $name ) = $row;
+										$key = $code . '-' . $iso;
+										?>
+										<option value="<?php echo esc_attr( $key ); ?>"
+											<?php selected( $key, '+91-IN' ); ?>
+											aria-label="<?php echo esc_attr( $name . ' (' . $code . ')' ); ?>">
+											<?php echo esc_html( $code . ' ' . $iso ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+								<span aria-hidden class="absolute right-2.5 top-1/2 -translate-y-1/2 text-forest/60 pointer-events-none">
+									<?php echo yum2_icon( 'chevron-down', array( 'size' => 14, 'stroke' => 2 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</span>
+							</div>
+							<span aria-hidden class="self-center w-px h-7 bg-forest/15"></span>
+							<input id="yum2-phone-number" type="tel" name="phone" autocomplete="tel-national"
+								class="flex-1 min-w-0 bg-transparent border-0 px-4 py-3.5 text-forest placeholder:text-[#3d4f3e]/60 outline-none"
+								placeholder="<?php esc_attr_e( '99538 55858', 'youumatter2' ); ?>">
+						</div>
 						<span class="block text-[#3d4f3e] mt-1.5" style="font-size:12px;">
 							<?php esc_html_e( 'Optional — only used if email bounces.', 'youumatter2' ); ?>
 						</span>
-					</label>
+					</div>
 
 					<label class="block">
 						<span class="block text-forest mb-2" style="font-size:13.5px;font-weight:500;">
