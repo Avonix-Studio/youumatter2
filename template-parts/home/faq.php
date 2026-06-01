@@ -41,23 +41,23 @@ if ( empty( $questions ) ) {
 			</p>
 		</div>
 
-		<div class="border-t border-forest/12">
+		<div class="flex flex-col gap-3">
 			<?php foreach ( $questions as $i => $item ) : ?>
-				<div class="yum2-reveal border-b border-forest/12" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.05, 2 ) ); ?>s;">
+				<div class="yum2-reveal border border-forest/15 rounded-[16px] overflow-hidden" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.05, 2 ) ); ?>s;">
 					<button
 						type="button"
 						@click="open = open === <?php echo (int) $i; ?> ? null : <?php echo (int) $i; ?>"
 						:aria-expanded="open === <?php echo (int) $i; ?> ? 'true' : 'false'"
-						class="w-full flex items-center justify-between gap-6 py-5 md:py-6 text-left group"
+						class="w-full flex items-center justify-between gap-6 px-5 md:px-6 py-4 md:py-5 text-left group transition-colors hover:bg-forest/[0.02]"
 					>
-						<span class="text-forest flex-1" style="font-family:'Newsreader',serif;font-size:clamp(18px,1.7vw,22px);line-height:1.25;letter-spacing:-0.01em;font-weight:500;">
+						<span class="text-forest flex-1" style="font-family:'Newsreader',serif;font-size:clamp(17px,1.5vw,20px);line-height:1.3;letter-spacing:-0.01em;font-weight:500;">
 							<?php echo esc_html( $item['q'] ); ?>
 						</span>
 						<span
-							class="shrink-0 size-9 rounded-full border border-forest/20 flex items-center justify-center text-forest transition-all duration-300 group-hover:border-forest group-hover:bg-forest/5"
+							class="shrink-0 size-8 rounded-full border border-forest/20 flex items-center justify-center text-forest transition-all duration-300 group-hover:border-forest"
 							:style="open === <?php echo (int) $i; ?> ? 'transform: rotate(45deg)' : 'transform: rotate(0deg)'"
 						>
-							<?php echo yum2_icon( 'plus', array( 'size' => 16, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo yum2_icon( 'plus', array( 'size' => 14, 'stroke' => 1.8 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</span>
 					</button>
 					<div
@@ -66,11 +66,13 @@ if ( empty( $questions ) ) {
 						x-transition:enter="transition ease-out duration-300"
 						x-transition:enter-start="opacity-0 -translate-y-1"
 						x-transition:enter-end="opacity-100 translate-y-0"
-						class="overflow-hidden"
+						class="overflow-hidden px-5 md:px-6"
 					>
-						<p class="text-[#3d4f3e] pb-6 pr-12" style="font-size:16px;line-height:1.65;">
-							<?php echo esc_html( $item['a'] ); ?>
-						</p>
+						<div class="pt-1 pb-5 border-t border-forest/10">
+							<p class="text-[#3d4f3e] pt-4" style="font-size:15.5px;line-height:1.65;">
+								<?php echo esc_html( $item['a'] ); ?>
+							</p>
+						</div>
 					</div>
 				</div>
 			<?php endforeach; ?>

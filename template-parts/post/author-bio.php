@@ -36,7 +36,7 @@ if ( '' === $initials ) {
 	$initials = 'SO';
 }
 ?>
-<aside class="not-prose bg-[#f8f3e9] border border-forest/15 rounded-[18px] <?php echo $compact ? 'p-5' : 'p-6 md:p-7'; ?>">
+<aside class="not-prose border border-forest/15 rounded-[18px] <?php echo $compact ? 'p-5' : 'p-6 md:p-7'; ?>">
 	<div class="flex items-start gap-4">
 		<div aria-hidden class="shrink-0 size-12 rounded-full flex items-center justify-center text-cream bg-forest" style="font-family:'Newsreader',serif;font-size:16px;font-weight:600;">
 			<?php echo esc_html( $initials ); ?>
