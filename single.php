@@ -21,12 +21,13 @@ while ( have_posts() ) :
 	<main id="primary" class="site-main">
 
 		<?php get_template_part( 'template-parts/post/hero' ); ?>
-		<?php get_template_part( 'template-parts/post/featured-image' ); ?>
 
-		<section class="relative px-5 md:px-8 pt-10 md:pt-14 pb-12 md:pb-16 border-t border-forest/10 bg-white">
+		<section class="relative px-5 md:px-8 pt-10 md:pt-14 pb-12 md:pb-16 bg-white">
 			<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_320px] gap-10 lg:gap-14">
 
 				<article <?php post_class( 'min-w-0 max-w-[680px] mx-auto lg:mx-0 w-full' ); ?>>
+					<?php get_template_part( 'template-parts/post/featured-image' ); ?>
+
 					<div class="lg:hidden mb-7">
 						<?php get_template_part( 'template-parts/post/toc', null, array( 'variant' => 'mobile' ) ); ?>
 					</div>

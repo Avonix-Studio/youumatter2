@@ -32,12 +32,10 @@ if ( '' === $initials ) {
 }
 $excerpt = get_the_excerpt();
 ?>
-<section class="relative px-5 md:px-8 pt-6 md:pt-10 bg-cream">
-	<div class="max-w-6xl mx-auto">
-		<div class="relative bg-sage-light rounded-[28px] md:rounded-[40px] px-6 md:px-14 pt-7 md:pt-10 pb-9 md:pb-12 overflow-hidden">
-			<div aria-hidden class="absolute -top-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(228,239,227,0.7) 0%, rgba(200,220,199,0) 65%);"></div>
-
-			<div class="relative max-w-3xl">
+<section class="relative px-5 md:px-8 pt-6 md:pt-10 pb-10 md:pb-14 overflow-hidden" style="background:#c8dcc7;">
+	<div aria-hidden class="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full pointer-events-none" style="background:radial-gradient(circle at center, rgba(228,239,227,0.7) 0%, rgba(200,220,199,0) 65%);"></div>
+	<div class="relative max-w-6xl mx-auto">
+		<div class="relative max-w-3xl">
 				<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'youumatter2' ); ?>" class="flex items-center flex-wrap gap-1.5 text-[#3d4f3e]" style="font-size:12.5px;">
 					<?php $count = count( $crumbs ); foreach ( $crumbs as $i => $c ) : ?>
 						<?php if ( '' !== $c['url'] ) : ?>
@@ -102,5 +100,4 @@ $excerpt = get_the_excerpt();
 				</div>
 			</div>
 		</div>
-	</div>
 </section>
