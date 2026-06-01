@@ -160,10 +160,45 @@
     };
   };
 
+  /**
+   * Stop horizontal-scroll carousels (IG feed, testimonials, blog row) from
+   * stealing vertical wheel/trackpad input. Some browsers (Safari most
+   * notably) translate vertical wheel deltas into horizontal carousel scroll
+   * whenever the cursor is over a horizontally-scrollable element — which
+   * makes the page feel "stuck" when the user is trying to scroll past one
+   * of these sections.
+   *
+   * Strategy: capture wheel events. If the user's intent is dominantly
+   * vertical (|deltaY| > |deltaX|), prevent the default carousel scroll and
+   * forward the delta to the document. Horizontal intent (shift-wheel,
+   * trackpad sideways) falls through to the carousel's native behaviour.
+   *
+   * Marker: any element with `data-yum2-h-scroll`.
+   */
+  function initHorizontalScrollPassThrough() {
+    var scrollers = document.querySelectorAll("[data-yum2-h-scroll]");
+    if (!scrollers.length) return;
+    scrollers.forEach(function (el) {
+      el.addEventListener(
+        "wheel",
+        function (e) {
+          var absY = Math.abs(e.deltaY);
+          var absX = Math.abs(e.deltaX);
+          if (absY > absX) {
+            e.preventDefault();
+            window.scrollBy({ top: e.deltaY, left: 0, behavior: "auto" });
+          }
+        },
+        { passive: false },
+      );
+    });
+  }
+
   function start() {
     startAlpine();
     initFeelingSwiper();
     initScrollProgress();
+    initHorizontalScrollPassThrough();
   }
 
   if (document.readyState === "loading") {

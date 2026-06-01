@@ -84,7 +84,10 @@
       "Bash(cp screenshot.png /tmp/screenshot-original.png)",
       "Bash(sips --padToHeightWidth 900 1200 --padColor F2EDE3 screenshot.png --out /tmp/screenshot-padded.png)",
       "Bash(sips -s format jpeg -s formatOptions 85 /tmp/screenshot-padded.png --out /tmp/screenshot-deploy.jpg)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(node -e \"require\\('fs'\\).readFileSync\\('./assets/js/main.js','utf8'\\)\")",
+      "Bash(php -l template-parts/home/instagram-feed.php template-parts/home/testimonials.php template-parts/home/from-the-blog.php)",
+      "Bash(node --check \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/js/main.js\")"
     ],
     "deny": [
       "Bash(rm -rf *)"
