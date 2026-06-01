@@ -76,7 +76,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 		<div
 			id="behold-feed"
 			data-yum2-h-scroll
-			class="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pr-8 md:pr-10 touch-pan-x md:touch-auto"
+			class="flex md:grid md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pr-8 md:pr-0 touch-pan-x md:touch-auto"
 			style="scrollbar-width:none;overscroll-behavior-x:contain;"
 		>
 			<?php
@@ -90,7 +90,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 					$badge_label
 				);
 				?>
-				<div class="yum2-reveal shrink-0 snap-start w-[58%] sm:w-[40%] md:w-[25%] lg:w-[22%]" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.06, 2 ) ); ?>s;">
+				<div class="yum2-reveal shrink-0 md:shrink snap-start md:snap-align-none w-[58%] sm:w-[40%] md:w-auto" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.06, 2 ) ); ?>s;">
 					<a
 						href="<?php echo esc_url( $tile_href ); ?>"
 						target="_blank" rel="noopener noreferrer"
