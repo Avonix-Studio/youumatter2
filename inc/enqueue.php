@@ -82,8 +82,37 @@ function yum2_assets() {
 			'whatsapp'      => yum2_get_contact( 'whatsapp' ),
 		)
 	);
+
+	wp_add_inline_script( 'yum2-main', yum2_calendly_tracking_js(), 'after' );
 }
 add_action( 'wp_enqueue_scripts', 'yum2_assets' );
+
+/**
+ * Inline listener that watches for Calendly booking completions and pushes a
+ * generate_lead event into the dataLayer. GTM (container loaded inline in
+ * header.php) forwards it to GA4, where it can be marked as a Key Event.
+ *
+ * Calendly posts a window message with e.data.event === 'calendly.event_scheduled'
+ * when a booking is confirmed. The origin guard makes sure we only react to
+ * messages from Calendly itself.
+ *
+ * @return string JS to be appended after the yum2-main script.
+ */
+function yum2_calendly_tracking_js() {
+	return <<<JS
+(function () {
+	window.addEventListener('message', function (e) {
+		if (!e || e.origin !== 'https://calendly.com') { return; }
+		if (!e.data || e.data.event !== 'calendly.event_scheduled') { return; }
+		window.dataLayer = window.dataLayer || [];
+		window.dataLayer.push({
+			event: 'generate_lead',
+			method: 'calendly'
+		});
+	}, false);
+})();
+JS;
+}
 
 /**
  * Strip Gutenberg block-library CSS on the front-end. Classic theme; no core
