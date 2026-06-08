@@ -90,9 +90,11 @@ $frameworks = array(
 ?>
 <section class="relative bg-[#1a3a19] px-5 md:px-8 py-20 md:py-28 overflow-hidden">
 
-	<?php /* Decorative giant italic word, very faint, centered behind the content. */ ?>
-	<div aria-hidden class="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
-		<span style="font-family:'Newsreader',serif;font-size:clamp(96px,24vw,320px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.045);letter-spacing:-0.04em;white-space:nowrap;">
+	<?php /* Desktop watermark: giant italic word, centered behind the two-column content.
+	   Hidden on mobile because the stacked cards cover it; mobile gets its own copy
+	   between the Education and Clinical Training blocks (see further down). */ ?>
+	<div aria-hidden class="absolute inset-0 hidden lg:flex items-center justify-center select-none pointer-events-none">
+		<span style="font-family:'Newsreader',serif;font-size:clamp(180px,22vw,320px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.045);letter-spacing:-0.04em;white-space:nowrap;">
 			<?php esc_html_e( 'Training', 'youumatter2' ); ?>
 		</span>
 	</div>
@@ -138,6 +140,14 @@ $frameworks = array(
 						<?php endforeach; ?>
 					</ul>
 				</div>
+			</div>
+
+			<?php /* Mobile-only watermark, sits in the gap between Education and Clinical Training.
+			   Hidden on lg+ because the absolute desktop watermark handles centering there. */ ?>
+			<div aria-hidden class="lg:hidden relative flex items-center justify-center select-none pointer-events-none -my-4 overflow-hidden">
+				<span style="font-family:'Newsreader',serif;font-size:clamp(110px,40vw,260px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.06);letter-spacing:-0.04em;white-space:nowrap;">
+					<?php esc_html_e( 'Training', 'youumatter2' ); ?>
+				</span>
 			</div>
 
 			<?php /* Clinical Training cards */ ?>
