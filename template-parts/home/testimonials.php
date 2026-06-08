@@ -96,7 +96,7 @@ $google_rating = (string) yum2_get_contact( 'google_rating' );
 				$has_footer      = $has_attribution || $has_context || $show_google;
 				$rating          = (int) $t['rating'];
 				?>
-				<div class="snap-start yum2-reveal shrink-0 w-full md:w-1/2 px-1 pb-2 pt-1" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.08, 2 ) ); ?>s;">
+				<div class="snap-start shrink-0 w-full md:w-1/2 px-1 pb-2 pt-1">
 					<article class="relative bg-[#f8f3e9] border border-forest/15 rounded-[22px] p-7 md:p-8 h-full hover:border-forest/35 hover:shadow-[0_22px_44px_-18px_rgba(26,58,25,0.16)] transition-[border-color,box-shadow] duration-500 overflow-hidden">
 						<span aria-hidden class="absolute -top-1 -left-1 text-terracotta/15 pointer-events-none">
 							<?php echo yum2_icon( 'quote', array( 'size' => 120, 'stroke' => 1 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -111,40 +111,37 @@ $google_rating = (string) yum2_get_contact( 'google_rating' );
 								<?php endfor; ?>
 							</div>
 
-							<div
-								class="mb-6"
-								x-data="{ open: false, overflows: false }"
-								x-init="
-									const measure = () => {
-										if (!$refs.quote) return;
-										overflows = $refs.quote.scrollHeight - $refs.quote.clientHeight > 2;
-									};
-									$nextTick(measure);
-									window.addEventListener('resize', measure);
-								"
-							>
-								<p
-									x-ref="quote"
-									:class="open ? '' : 'line-clamp-5'"
-									class="italic text-forest"
-									style="font-family:'Newsreader',serif;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:400;"
-								>
+							<?php
+							/* Server-side: render the inline Read-more toggle only for quotes
+							   that would actually clip the 5-line cap. Threshold ~30 words
+							   matches roughly 5 lines at the card's font-size/line-height. */
+							$is_long = str_word_count( $t['quote'] ) > 30;
+							?>
+							<?php if ( $is_long ) : ?>
+								<div class="mb-6" x-data="{ open: false }">
+									<p
+										:class="open ? '' : 'line-clamp-5'"
+										class="italic text-forest"
+										style="font-family:'Newsreader',serif;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:400;"
+									>
+										&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;
+									</p>
+									<button
+										type="button"
+										@click="open = !open"
+										:aria-expanded="open ? 'true' : 'false'"
+										class="mt-3 inline-flex items-center gap-1 text-terracotta hover:text-forest tracking-[0.14em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/40 focus-visible:rounded"
+										style="font-size:10.5px;font-weight:700;"
+									>
+										<span x-text="open ? '<?php echo esc_js( __( 'Show less', 'youumatter2' ) ); ?>' : '<?php echo esc_js( __( 'Read more', 'youumatter2' ) ); ?>'"></span>
+										<span aria-hidden x-text="open ? '↑' : '↓'" class="ml-0.5"></span>
+									</button>
+								</div>
+							<?php else : ?>
+								<p class="italic text-forest mb-6" style="font-family:'Newsreader',serif;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:400;">
 									&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;
 								</p>
-								<button
-									type="button"
-									x-show="overflows"
-									x-cloak
-									@click="open = !open"
-									:aria-expanded="open ? 'true' : 'false'"
-									class="mt-3 inline-flex items-center gap-1 text-terracotta hover:text-forest tracking-[0.14em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/40 focus-visible:rounded"
-									style="font-size:10.5px;font-weight:700;"
-								>
-									<span x-show="!open"><?php esc_html_e( 'Read more', 'youumatter2' ); ?></span>
-									<span x-show="open" x-cloak><?php esc_html_e( 'Show less', 'youumatter2' ); ?></span>
-									<span aria-hidden x-text="open ? '↑' : '↓'" class="ml-0.5"></span>
-								</button>
-							</div>
+							<?php endif; ?>
 
 							<?php if ( $has_footer ) : ?>
 								<div class="pt-4 border-t border-forest/10 flex items-end justify-between gap-3">

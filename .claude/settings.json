@@ -91,7 +91,8 @@
       "Bash(grep -rEn \"\\\\\\\\+91[ -]?[0-9]{4,}|9[0-9]{9}|\\\\\\\\+1[ -]?[0-9]{3}\" --include=\"*.php\")",
       "Bash(php -l inc/enqueue.php)",
       "Bash(php -l \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts/about/training.php\")",
-      "Bash(php -l template-parts/home/testimonials.php)"
+      "Bash(php -l template-parts/home/testimonials.php)",
+      "Bash(php -l template-parts/home/testimonials.php template-parts/home/instagram-feed.php template-parts/home/from-the-blog.php template-parts/home/you-might-be-feeling.php)"
     ],
     "deny": [
       "Bash(rm -rf *)"

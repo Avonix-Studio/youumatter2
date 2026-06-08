@@ -57,7 +57,7 @@ if ( ! $blog_url ) {
 
 		<div data-yum2-h-scroll class="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pr-8 md:pr-0 touch-pan-x md:touch-auto" style="scrollbar-width:none;">
 			<?php while ( $q->have_posts() ) : $q->the_post(); ?>
-				<div class="shrink-0 snap-start w-[85%] md:w-auto yum2-reveal">
+				<div class="shrink-0 snap-start w-[85%] md:w-auto">
 					<?php get_template_part( 'template-parts/blog/card' ); ?>
 				</div>
 			<?php endwhile; ?>

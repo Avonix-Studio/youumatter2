@@ -90,7 +90,7 @@ $tiles      = $is_live ? $live_posts : $c['tiles'];
 					$badge_label
 				);
 				?>
-				<div class="yum2-reveal shrink-0 md:shrink snap-start md:snap-align-none w-[58%] sm:w-[40%] md:w-auto" style="transition-delay:<?php echo esc_attr( number_format( $i * 0.06, 2 ) ); ?>s;">
+				<div class="shrink-0 md:shrink snap-start md:snap-align-none w-[58%] sm:w-[40%] md:w-auto">
 					<a
 						href="<?php echo esc_url( $tile_href ); ?>"
 						target="_blank" rel="noopener noreferrer"
