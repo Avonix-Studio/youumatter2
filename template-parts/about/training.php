@@ -142,10 +142,11 @@ $frameworks = array(
 				</div>
 			</div>
 
-			<?php /* Mobile-only watermark, sits in the gap between Education and Clinical Training.
-			   Hidden on lg+ because the absolute desktop watermark handles centering there. */ ?>
-			<div aria-hidden class="lg:hidden relative flex items-center justify-center select-none pointer-events-none -my-4 overflow-hidden">
-				<span style="font-family:'Newsreader',serif;font-size:clamp(110px,40vw,260px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.06);letter-spacing:-0.04em;white-space:nowrap;">
+			<?php /* Mobile-only watermark: a small, faint italic word that sits as a
+			   background decoration in the gap between Education and Clinical Training.
+			   Hidden on lg+ where the absolute centered desktop watermark takes over. */ ?>
+			<div aria-hidden class="lg:hidden flex items-center justify-center select-none pointer-events-none -my-2">
+				<span style="font-family:'Newsreader',serif;font-size:clamp(42px,11vw,72px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.08);letter-spacing:-0.02em;">
 					<?php esc_html_e( 'Training', 'youumatter2' ); ?>
 				</span>
 			</div>
