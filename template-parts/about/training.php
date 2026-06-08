@@ -90,10 +90,11 @@ $frameworks = array(
 ?>
 <section class="relative bg-[#1a3a19] px-5 md:px-8 py-20 md:py-28 overflow-hidden">
 
-	<?php /* Decorative giant italic word, very faint, right-anchored. */ ?>
-	<div aria-hidden class="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none overflow-hidden"
-		style="font-family:'Newsreader',serif;font-size:clamp(160px,22vw,320px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.03);letter-spacing:-0.04em;white-space:nowrap;">
-		<?php esc_html_e( 'Training', 'youumatter2' ); ?>
+	<?php /* Decorative giant italic word, very faint, centered behind the content. */ ?>
+	<div aria-hidden class="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
+		<span style="font-family:'Newsreader',serif;font-size:clamp(96px,24vw,320px);font-weight:400;font-style:italic;line-height:1;color:rgba(255,255,255,0.045);letter-spacing:-0.04em;white-space:nowrap;">
+			<?php esc_html_e( 'Training', 'youumatter2' ); ?>
+		</span>
 	</div>
 
 	<div class="relative max-w-5xl mx-auto">
