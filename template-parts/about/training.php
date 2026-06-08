@@ -67,10 +67,6 @@ $hospitals = array(
 		'name' => __( 'Kochhar Psychiatry Center', 'youumatter2' ),
 		'dept' => '',
 	),
-	array(
-		'name' => __( 'Sukoon Health Care', 'youumatter2' ),
-		'dept' => '',
-	),
 );
 
 $frameworks = array(
