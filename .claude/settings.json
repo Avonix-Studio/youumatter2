@@ -90,7 +90,8 @@
       "Bash(node --check \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/assets/js/main.js\")",
       "Bash(grep -rEn \"\\\\\\\\+91[ -]?[0-9]{4,}|9[0-9]{9}|\\\\\\\\+1[ -]?[0-9]{3}\" --include=\"*.php\")",
       "Bash(php -l inc/enqueue.php)",
-      "Bash(php -l \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts/about/training.php\")"
+      "Bash(php -l \"/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts/about/training.php\")",
+      "Bash(php -l template-parts/home/testimonials.php)"
     ],
     "deny": [
       "Bash(rm -rf *)"

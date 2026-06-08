@@ -111,9 +111,40 @@ $google_rating = (string) yum2_get_contact( 'google_rating' );
 								<?php endfor; ?>
 							</div>
 
-							<p class="italic text-forest mb-6" style="font-family:'Newsreader',serif;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:400;">
-								&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;
-							</p>
+							<div
+								class="mb-6"
+								x-data="{ open: false, overflows: false }"
+								x-init="
+									const measure = () => {
+										if (!$refs.quote) return;
+										overflows = $refs.quote.scrollHeight - $refs.quote.clientHeight > 2;
+									};
+									$nextTick(measure);
+									window.addEventListener('resize', measure);
+								"
+							>
+								<p
+									x-ref="quote"
+									:class="open ? '' : 'line-clamp-5'"
+									class="italic text-forest"
+									style="font-family:'Newsreader',serif;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:400;"
+								>
+									&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;
+								</p>
+								<button
+									type="button"
+									x-show="overflows"
+									x-cloak
+									@click="open = !open"
+									:aria-expanded="open ? 'true' : 'false'"
+									class="mt-3 inline-flex items-center gap-1 text-terracotta hover:text-forest tracking-[0.14em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/40 focus-visible:rounded"
+									style="font-size:10.5px;font-weight:700;"
+								>
+									<span x-show="!open"><?php esc_html_e( 'Read more', 'youumatter2' ); ?></span>
+									<span x-show="open" x-cloak><?php esc_html_e( 'Show less', 'youumatter2' ); ?></span>
+									<span aria-hidden x-text="open ? '↑' : '↓'" class="ml-0.5"></span>
+								</button>
+							</div>
 
 							<?php if ( $has_footer ) : ?>
 								<div class="pt-4 border-t border-forest/10 flex items-end justify-between gap-3">
