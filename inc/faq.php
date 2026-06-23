@@ -475,7 +475,7 @@ function yum2_faq_seed_data() {
 				),
 				array(
 					'q' => __( 'Where is the in-person clinic?', 'youumatter2' ),
-					'a' => __( "Pitampura, New Delhi. The exact address is shared once we've confirmed a first session.", 'youumatter2' ),
+					'a' => __( "Mahendru Enclave, New Delhi. The exact address is shared once we've confirmed a first session.", 'youumatter2' ),
 				),
 				array(
 					'q' => __( 'Can I switch between online and in-person?', 'youumatter2' ),

@@ -19,7 +19,7 @@ $items = array(
 	__( 'Evidence-based', 'youumatter2' ),
 	__( 'Person-first', 'youumatter2' ),
 	__( 'Online & In-person', 'youumatter2' ),
-	__( 'Pitampura, New Delhi', 'youumatter2' ),
+	__( 'Mahendru Enclave, New Delhi', 'youumatter2' ),
 	__( 'English', 'youumatter2' ),
 	__( 'Hindi', 'youumatter2' ),
 );

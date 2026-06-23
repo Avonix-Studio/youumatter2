@@ -94,7 +94,7 @@ Fill every field that has a real value. The site reads through `yum2_get_contact
 | Instagram handle                | `@youumatter2withsanya`                           |
 | LinkedIn URL                    | `https://www.linkedin.com/in/sanya-oberoi-...`    |
 | YouTube / Facebook / X URL      | (only fill if the account exists)                 |
-| Clinic address                  | `Pitampura, New Delhi`                            |
+| Clinic address                  | `Mahendru Enclave, New Delhi`                     |
 | Clinic hours                    | `Mon to Sat · 10:00 AM to 7:00 PM`                |
 | Currently accepting new clients | checked                                           |
 

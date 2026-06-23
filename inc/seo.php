@@ -97,10 +97,10 @@ function yum2_seo_template_description() {
 		$template = (string) get_page_template_slug( $post );
 
 		if ( 'about' === $slug || 'page-about.php' === $template ) {
-			return __( 'Sanya Oberoi is a Counselling Psychologist (M.A. Clinical Psychology) in Pitampura, New Delhi. Warm, integrative therapy for relationships, anxiety, and emotional well-being. Online and in-person.', 'youumatter2' );
+			return __( 'Sanya Oberoi is a Counselling Psychologist (M.A. Clinical Psychology) in Mahendru Enclave, New Delhi. Warm, integrative therapy for relationships, anxiety, and emotional well-being. Online and in-person.', 'youumatter2' );
 		}
 		if ( 'contact' === $slug || 'page-contact.php' === $template ) {
-			return __( 'Get in touch to book a therapy session with Sanya Oberoi. Online and in-person at the Pitampura clinic in New Delhi. Reply within 24 hours on weekdays.', 'youumatter2' );
+			return __( 'Get in touch to book a therapy session with Sanya Oberoi. Online and in-person at the Mahendru Enclave clinic in New Delhi. Reply within 24 hours on weekdays.', 'youumatter2' );
 		}
 		if ( 'faq' === $slug || 'page-faq.php' === $template ) {
 			return __( 'Answers to the questions people most often ask before starting therapy with Sanya Oberoi. Sessions, fees, confidentiality, and more.', 'youumatter2' );
@@ -266,8 +266,9 @@ function yum2_seo_jsonld() {
 		'address'                 => array(
 			'@type'           => 'PostalAddress',
 			'streetAddress'   => yum2_get_contact( 'clinic_address' ),
-			'addressLocality' => 'Pitampura',
+			'addressLocality' => 'Mahendru Enclave',
 			'addressRegion'   => 'Delhi',
+			'postalCode'      => '110033',
 			'addressCountry'  => 'IN',
 		),
 		'openingHoursSpecification' => yum2_seo_parse_hours( yum2_get_contact( 'clinic_hours' ) ),
@@ -364,7 +365,7 @@ function yum2_seo_person_jsonld() {
 		'email'       => yum2_get_contact( 'email' ),
 		'address'     => array(
 			'@type'           => 'PostalAddress',
-			'addressLocality' => 'Pitampura',
+			'addressLocality' => 'Mahendru Enclave',
 			'addressRegion'   => 'Delhi',
 			'addressCountry'  => 'IN',
 		),

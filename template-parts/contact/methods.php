@@ -34,7 +34,7 @@ $cards = array(
 	array(
 		'icon'  => 'map-pin',
 		'label' => __( 'In-person', 'youumatter2' ),
-		'value' => '' !== $clinic ? $clinic : __( 'Pitampura, New Delhi', 'youumatter2' ),
+		'value' => '' !== $clinic ? $clinic : __( 'Mahendru Enclave, New Delhi', 'youumatter2' ),
 		'sub'   => __( 'Exact address shared on booking.', 'youumatter2' ),
 		'href'  => '',
 	),

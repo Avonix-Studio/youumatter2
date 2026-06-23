@@ -432,7 +432,7 @@ function yum2_build_content() {
 
 			/* Floating stats card (bottom-left of portrait). */
 			'stat_rows' => array(
-				array( 'label' => __( 'Based in', 'youumatter2' ),  'value' => __( 'Pitampura, Delhi', 'youumatter2' ) ),
+				array( 'label' => __( 'Based in', 'youumatter2' ),  'value' => __( 'Mahendru Enclave, Delhi', 'youumatter2' ) ),
 				array( 'label' => __( 'Sessions', 'youumatter2' ),  'value' => __( 'Online · In-person', 'youumatter2' ) ),
 				array( 'label' => __( 'Languages', 'youumatter2' ), 'value' => __( 'English · Hindi', 'youumatter2' ) ),
 			),

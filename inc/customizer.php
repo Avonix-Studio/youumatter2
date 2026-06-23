@@ -109,6 +109,12 @@ function yum2_customize_register( $wp_customize ) {
 			'type'     => 'text',
 			'sanitize' => 'sanitize_text_field',
 		),
+		'clinic_map_embed' => array(
+			'label'    => __( 'Contact page map URL', 'youumatter2' ),
+			'desc'     => __( 'The map shown on the Contact page. In Google Maps, find the location, click Share > Embed a map, copy the link inside src="..." and paste it here. Leave blank to use the default Mahendru Enclave map.', 'youumatter2' ),
+			'type'     => 'url',
+			'sanitize' => 'esc_url_raw',
+		),
 	);
 
 	foreach ( $fields as $key => $args ) {

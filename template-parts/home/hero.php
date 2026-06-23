@@ -80,7 +80,7 @@ $accepting = (bool) yum2_get_contact( 'accepting_clients' );
 					<?php
 					echo esc_html(
 						sprintf(
-							/* translators: %s: clinic location e.g. "Pitampura, New Delhi" */
+							/* translators: %s: clinic location e.g. "Mahendru Enclave, New Delhi" */
 							__( '%s · Online &amp; In-Person', 'youumatter2' ),
 							yum2_get_contact( 'clinic_address' )
 						)

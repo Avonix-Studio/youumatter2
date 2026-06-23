@@ -24,8 +24,9 @@ function yum2_contact_defaults() {
 		'phone_display'     => '+91 99538 55858',
 		'whatsapp'          => '919953855858',
 		'email'             => 'youumatter2@gmail.com',
-		'clinic_address'    => 'Pitampura, New Delhi',
+		'clinic_address'    => 'Mahendru Enclave, New Delhi',
 		'clinic_hours'      => 'Mon to Sat · 10:00 AM to 7:00 PM',
+		'clinic_map_embed'  => 'https://www.google.com/maps?q=Mahendru+Enclave,+GT+Karnal+Road,+Delhi+110033&hl=en&z=15&output=embed',
 		'instagram'         => 'https://www.instagram.com/youumatter2withsanya/',
 		'instagram_handle'  => '@youumatter2withsanya',
 		'behold_feed_url'   => 'https://feeds.behold.so/GN2nUABNN8oVhsf6RPwl',
@@ -36,7 +37,7 @@ function yum2_contact_defaults() {
 		'calendly_url'        => '',
 		'calendly_color'      => '1a4d2e',
 		'accepting_clients'   => true,
-		'google_business_url' => 'https://share.google/4ecvdeKonstjs1YRz',
+		'google_business_url' => 'https://share.google/Vt121dQVDJIrrNBcd',
 		'google_rating'       => '5.0',
 	);
 }

@@ -20,7 +20,7 @@ $name      = $author ? $author->display_name : __( 'Sanya Oberoi', 'youumatter2'
 $bio       = $author ? trim( (string) get_the_author_meta( 'description', $author_id ) ) : '';
 
 if ( '' === $bio ) {
-	$bio = __( 'Counselling Psychologist (M.A. Clinical Psychology). Works with individuals and couples on anxiety, relationships, and emotional well-being. Online and in Pitampura, New Delhi.', 'youumatter2' );
+	$bio = __( 'Counselling Psychologist (M.A. Clinical Psychology). Works with individuals and couples on anxiety, relationships, and emotional well-being. Online and in Mahendru Enclave, New Delhi.', 'youumatter2' );
 }
 
 $initials = '';
