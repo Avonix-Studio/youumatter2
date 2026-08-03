@@ -103,9 +103,7 @@
       "Bash(php -l template-parts/contact/map.php)",
       "Bash(php -l inc/customizer.php)"
     ],
-    "deny": [
-      "Bash(rm -rf *)"
-    ],
+    "deny": ["Bash(rm -rf *)"],
     "additionalDirectories": [
       "/Users/krishnaaggarwal/Downloads/Avonix Studio/Clients - Move to Cloud/01_Avonix/YouuMater/YouuMatter2_Wp_Theme/template-parts",
       "/tmp",

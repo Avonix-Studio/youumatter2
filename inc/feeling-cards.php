@@ -6,6 +6,8 @@
  *   - ACF field group with tagline / signs / approach / fee / chip_label.
  *   - yum2_feeling_cards() : ordered cards array, used by the home carousel.
  *   - yum2_feeling_chips() : derived filter chip labels, kept in sync with cards.
+ *   - Fee Display screen   : one checkbox that hides the fee on every card at
+ *                            once (Reasons People Reach Out > Fee Display).
  *   - One-time seed        : migrates the original 9 hardcoded cards from
  *                            inc/content.php into the CPT on first admin load.
  *
@@ -78,7 +80,11 @@ function yum2_register_feeling_card_fields() {
 					'label'        => __( 'Fee', 'youumatter2' ),
 					'name'         => 'fee',
 					'type'         => 'text',
-					'instructions' => __( 'Display price for this card (e.g. ₹2,500 or ₹2,500 / person).', 'youumatter2' ),
+					/* Reminds the editor when fees are switched off site-wide, so a
+					   saved price that is not showing on the site never looks broken. */
+					'instructions' => yum2_feeling_hide_fees()
+						? __( 'Display price for this card (e.g. ₹2,500 or ₹2,500 / person). Fees are currently hidden on all cards - see Reasons People Reach Out > Fee Display.', 'youumatter2' )
+						: __( 'Display price for this card (e.g. ₹2,500 or ₹2,500 / person).', 'youumatter2' ),
 				),
 				array(
 					'key'          => 'field_yum2_feeling_chip',
@@ -205,7 +211,108 @@ function yum2_feeling_chips() {
 }
 
 /* =========================================================================
- * 3. ONE-TIME MIGRATION: signs repeater -> textarea
+ * 3. GLOBAL FEE VISIBILITY SWITCH
+ *    One checkbox that hides the "Fee" line on EVERY reasons card at once,
+ *    without touching the fee values saved on each card. Turn it back off
+ *    and every fee reappears exactly as it was.
+ *
+ *    Where to find it in wp-admin:
+ *      Reasons People Reach Out > Fee Display
+ *
+ *    Stored as a plain WordPress option (not an ACF field) so the switch
+ *    keeps working even if ACF is deactivated or running the free edition,
+ *    which has no options pages.
+ * ====================================================================== */
+
+/**
+ * Is the fee hidden on every reasons card?
+ *
+ * @return bool True when fees should not render.
+ */
+function yum2_feeling_hide_fees() {
+	return (bool) get_option( 'yum2_feeling_hide_fees', false );
+}
+
+/**
+ * Add the "Fee Display" screen under the Reasons People Reach Out menu.
+ */
+function yum2_feeling_fees_menu() {
+	add_submenu_page(
+		'edit.php?post_type=feeling_card',
+		__( 'Fee Display', 'youumatter2' ),
+		__( 'Fee Display', 'youumatter2' ),
+		'edit_theme_options',
+		'yum2-feeling-fees',
+		'yum2_feeling_fees_page'
+	);
+}
+add_action( 'admin_menu', 'yum2_feeling_fees_menu' );
+
+/**
+ * Render (and save) the "Fee Display" screen.
+ *
+ * Change the wording shown to the client on this screen here.
+ */
+function yum2_feeling_fees_page() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+
+	$saved = false;
+
+	if ( isset( $_POST['yum2_feeling_fees_nonce'] ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['yum2_feeling_fees_nonce'] ) ), 'yum2_feeling_fees' ) ) {
+			wp_die( esc_html__( 'Invalid request', 'youumatter2' ) );
+		}
+		update_option( 'yum2_feeling_hide_fees', isset( $_POST['yum2_feeling_hide_fees'] ) ? 1 : 0 );
+		$saved = true;
+	}
+
+	$hidden = yum2_feeling_hide_fees();
+	?>
+	<div class="wrap">
+		<h1><?php esc_html_e( 'Fee Display', 'youumatter2' ); ?></h1>
+
+		<?php if ( $saved ) : ?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Saved.', 'youumatter2' ); ?></p>
+			</div>
+		<?php endif; ?>
+
+		<p class="description" style="max-width:640px;">
+			<?php esc_html_e( 'Controls the "Fee" line at the bottom of every card in the "Reasons People Reach Out" section on the homepage. Hiding fees is a single switch, so you never have to clear them card by card. The prices you have saved stay saved and come straight back when you switch it off.', 'youumatter2' ); ?>
+		</p>
+
+		<form method="post">
+			<?php wp_nonce_field( 'yum2_feeling_fees', 'yum2_feeling_fees_nonce' ); ?>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Fees on cards', 'youumatter2' ); ?></th>
+					<td>
+						<label for="yum2_feeling_hide_fees">
+							<input
+								type="checkbox"
+								name="yum2_feeling_hide_fees"
+								id="yum2_feeling_hide_fees"
+								value="1"
+								<?php checked( $hidden ); ?>
+							>
+							<?php esc_html_e( 'Hide the fee on all cards', 'youumatter2' ); ?>
+						</label>
+						<p class="description">
+							<?php esc_html_e( 'When ticked, each card shows only Duration and Format. Leave unticked to show the fee saved on each card.', 'youumatter2' ); ?>
+						</p>
+					</td>
+				</tr>
+			</table>
+			<?php submit_button( __( 'Save changes', 'youumatter2' ) ); ?>
+		</form>
+	</div>
+	<?php
+}
+
+/* =========================================================================
+ * 4. ONE-TIME MIGRATION: signs repeater -> textarea
  *    Earlier versions of this file registered `signs` as an ACF repeater
  *    and the seed wrote it as an array of array('text' => '...') rows.
  *    `signs` is now a textarea field, so the old array value fatals ACF
@@ -267,7 +374,7 @@ function yum2_migrate_feeling_signs_to_textarea() {
 add_action( 'admin_init', 'yum2_migrate_feeling_signs_to_textarea', 5 );
 
 /* =========================================================================
- * 4. ONE-TIME SEEDING
+ * 5. ONE-TIME SEEDING
  *    Migrates the original 9 hardcoded cards from inc/content.php into the
  *    CPT the first time an admin loads wp-admin after this feature ships, so
  *    nothing is lost. Runs once, guarded by an option and an existing check.

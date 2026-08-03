@@ -19,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 $c     = yum2_content( 'feeling' );
 $cards = yum2_feeling_cards();
 $chips = yum2_feeling_chips();
+
+/* Fees on the cards are controlled by one switch for the whole section:
+   wp-admin > Reasons People Reach Out > Fee Display. When it is on, the
+   Fee column drops off every card and the meta row falls back to two
+   columns (Duration / Format). Saved prices are untouched. */
+$hide_fees = yum2_feeling_hide_fees();
 ?>
 <section class="relative bg-[#f2ede3] px-5 md:px-8 pt-14 md:pt-20 pb-14 md:pb-20 overflow-hidden">
 	<div aria-hidden class="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[440px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(228,239,227,0.55) 0%, rgba(242,237,227,0) 70%);"></div>
@@ -106,13 +112,20 @@ $chips = yum2_feeling_chips();
 
 								<div class="mt-6 h-px bg-[rgba(26,58,25,0.12)]"></div>
 
-								<dl class="mt-5 grid grid-cols-3 gap-3">
+								<?php
+								/* Card meta row: Duration / Format / Fee. Fee is skipped when
+								   the global switch is on, or when that card has no fee saved. */
+								$meta = array(
+									array( 'label' => __( 'Duration', 'youumatter2' ), 'value' => isset( $card['duration'] ) && '' !== $card['duration'] ? $card['duration'] : __( '60 min', 'youumatter2' ) ),
+									array( 'label' => __( 'Format', 'youumatter2' ), 'value' => isset( $card['format'] ) && '' !== $card['format'] ? $card['format'] : __( 'Online or in-person', 'youumatter2' ) ),
+								);
+								$card_fee = isset( $card['fee'] ) ? trim( (string) $card['fee'] ) : '';
+								if ( ! $hide_fees && '' !== $card_fee ) {
+									$meta[] = array( 'label' => __( 'Fee', 'youumatter2' ), 'value' => $card_fee );
+								}
+								?>
+								<dl class="mt-5 grid <?php echo count( $meta ) > 2 ? 'grid-cols-3' : 'grid-cols-2'; ?> gap-3">
 									<?php
-									$meta = array(
-										array( 'label' => __( 'Duration', 'youumatter2' ), 'value' => isset( $card['duration'] ) && '' !== $card['duration'] ? $card['duration'] : __( '60 min', 'youumatter2' ) ),
-										array( 'label' => __( 'Format', 'youumatter2' ), 'value' => isset( $card['format'] ) && '' !== $card['format'] ? $card['format'] : __( 'Online or in-person', 'youumatter2' ) ),
-										array( 'label' => __( 'Fee', 'youumatter2' ), 'value' => $card['fee'] ),
-									);
 									foreach ( $meta as $m ) :
 										?>
 										<div class="min-w-0">
